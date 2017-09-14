@@ -32,11 +32,11 @@ import {
   MdTabsModule,
   MdToolbarModule,
   MdTooltipModule,
-} from '@angular/material';
+} from '@metaclinic/material';
 import {
   CdkTableModule,
   DataSource
-} from '@angular/cdk/table';
+} from '@metaclinic/cdk/table';
 
 import 'rxjs/add/observable/of';
 

@@ -5,8 +5,8 @@ import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MdStepperNext, MdStepperPrevious} from './stepper-button';
-import {dispatchKeyboardEvent} from '@angular/cdk/testing';
-import {ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE} from '@angular/cdk/keycodes';
+import {dispatchKeyboardEvent} from '@metaclinic/cdk/testing';
+import {ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE} from '@metaclinic/cdk/keycodes';
 import {MdStepper, MdHorizontalStepper, MdVerticalStepper} from './stepper';
 import {Directionality} from '../core';
 

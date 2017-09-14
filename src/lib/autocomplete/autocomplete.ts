@@ -22,7 +22,7 @@ import {
   Output,
 } from '@angular/core';
 import {MdOption, MdOptgroup} from '../core';
-import {ActiveDescendantKeyManager} from '@angular/cdk/a11y';
+import {ActiveDescendantKeyManager} from '@metaclinic/cdk/a11y';
 
 
 /**

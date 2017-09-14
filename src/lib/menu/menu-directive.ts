@@ -27,15 +27,15 @@ import {AnimationEvent} from '@angular/animations';
 import {MenuPositionX, MenuPositionY} from './menu-positions';
 import {throwMdMenuInvalidPositionX, throwMdMenuInvalidPositionY} from './menu-errors';
 import {MdMenuItem} from './menu-item';
-import {FocusKeyManager} from '@angular/cdk/a11y';
+import {FocusKeyManager} from '@metaclinic/cdk/a11y';
 import {MdMenuPanel} from './menu-panel';
 import {Subscription} from 'rxjs/Subscription';
 import {transformMenu, fadeInItems} from './menu-animations';
 import {ESCAPE, LEFT_ARROW, RIGHT_ARROW} from '../core/keyboard/keycodes';
 import {merge} from 'rxjs/observable/merge';
 import {Observable} from 'rxjs/Observable';
-import {Direction} from '@angular/cdk/bidi';
-import {RxChain, startWith, switchMap} from '@angular/cdk/rxjs';
+import {Direction} from '@metaclinic/cdk/bidi';
+import {RxChain, startWith, switchMap} from '@metaclinic/cdk/rxjs';
 
 /** Default `md-menu` options that can be overridden. */
 export interface MdMenuDefaultOptions {

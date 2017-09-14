@@ -38,7 +38,7 @@ import {
   PlaceholderOptions
 } from '../core/placeholder/placeholder-options';
 
-import { startWith, first } from '@angular/cdk/rxjs';
+import { startWith, first } from '@metaclinic/cdk/rxjs';
 import { MdError } from './error';
 import { MdFormFieldControl } from './form-field-control';
 import { MdHint } from './hint';

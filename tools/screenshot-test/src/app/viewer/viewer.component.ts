@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MdSnackBar} from '@angular/material';
+import {MdSnackBar} from '@metaclinic/material';
 import {FirebaseService} from '../firebase.service';
 
 /**

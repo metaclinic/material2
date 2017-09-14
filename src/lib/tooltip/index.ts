@@ -8,11 +8,11 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {PlatformModule} from '@angular/cdk/platform';
+import {OverlayModule} from '@metaclinic/cdk/overlay';
+import {PlatformModule} from '@metaclinic/cdk/platform';
 import {MdCommonModule} from '../core';
 import {MdTooltip, TooltipComponent, MD_TOOLTIP_SCROLL_STRATEGY_PROVIDER} from './tooltip';
-import {A11yModule, ARIA_DESCRIBER_PROVIDER} from '@angular/cdk/a11y';
+import {A11yModule, ARIA_DESCRIBER_PROVIDER} from '@metaclinic/cdk/a11y';
 
 
 @NgModule({

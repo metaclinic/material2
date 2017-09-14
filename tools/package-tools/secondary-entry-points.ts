@@ -32,7 +32,7 @@ export function getSecondaryEntryPointsForPackage(pkg: BuildPackage) {
   }, new Map<string, BuildNode>());
 
   // Regex used to extract entry-point name from an import statement referencing that entry-point.
-  // E.g., extract "portal" from "from '@angular/cdk/portal';".
+  // E.g., extract "portal" from "from '@metaclinic/cdk/portal';".
   const importRegex = new RegExp(`${packageName}/(.+)';`);
 
   // Update the deps for each node to point to the appropriate BuildNodes.
@@ -92,12 +92,12 @@ function buildPackageImportStatementFindCommand(searchDirectory: string, package
   if (platform() === 'win32') {
     return {
       binary: 'findstr',
-      args: ['/r', `from.'@angular/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
+      args: ['/r', `from.'@metaclinic/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
     };
   } else {
     return {
       binary: 'grep',
-      args: ['-Eroh', '--include', '*.ts', `from '@angular/${packageName}/.+';`, searchDirectory]
+      args: ['-Eroh', '--include', '*.ts', `from '@metaclinic/${packageName}/.+';`, searchDirectory]
     };
   }
 }

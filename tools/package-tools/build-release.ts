@@ -28,8 +28,8 @@ export function composeRelease(buildPackage: BuildPackage) {
 
   copyFiles(packageOut, '**/*.+(d.ts|metadata.json)', join(releasePath, 'typings'));
   copyFiles(bundlesDir, `${packageName}?(-*).umd?(.min).js?(.map)`, join(releasePath, 'bundles'));
-  copyFiles(bundlesDir, `${packageName}?(.es5).js?(.map)`, join(releasePath, '@angular'));
-  copyFiles(join(bundlesDir, packageName), '**', join(releasePath, '@angular', packageName));
+  copyFiles(bundlesDir, `${packageName}?(.es5).js?(.map)`, join(releasePath, '@metaclinic'));
+  copyFiles(join(bundlesDir, packageName), '**', join(releasePath, '@metaclinic', packageName));
   copyFiles(projectDir, 'LICENSE', releasePath);
   copyFiles(packagesDir, 'README.md', releasePath);
   copyFiles(packageRoot, 'package.json', releasePath);

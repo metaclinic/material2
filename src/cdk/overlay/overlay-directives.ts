@@ -22,10 +22,10 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import {Direction, Directionality} from '@angular/cdk/bidi';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {ESCAPE} from '@angular/cdk/keycodes';
-import {TemplatePortal} from '@angular/cdk/portal';
+import {Direction, Directionality} from '@metaclinic/cdk/bidi';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
+import {TemplatePortal} from '@metaclinic/cdk/portal';
 import {Overlay} from './overlay';
 import {OverlayRef} from './overlay-ref';
 import {OverlayState} from './overlay-state';

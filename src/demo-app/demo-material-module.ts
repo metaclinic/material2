@@ -34,13 +34,13 @@ import {
   StyleModule,
   MdStepperModule,
 } from '@metaclinic/material';
-import {CdkTableModule} from '@angular/cdk/table';
-import {A11yModule} from '@angular/cdk/a11y';
-import {BidiModule} from '@angular/cdk/bidi';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {PlatformModule} from '@angular/cdk/platform';
-import {ObserversModule} from '@angular/cdk/observers';
-import {PortalModule} from '@angular/cdk/portal';
+import {CdkTableModule} from '@metaclinic/cdk/table';
+import {A11yModule} from '@metaclinic/cdk/a11y';
+import {BidiModule} from '@metaclinic/cdk/bidi';
+import {OverlayModule} from '@metaclinic/cdk/overlay';
+import {PlatformModule} from '@metaclinic/cdk/platform';
+import {ObserversModule} from '@metaclinic/cdk/observers';
+import {PortalModule} from '@metaclinic/cdk/portal';
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.

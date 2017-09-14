@@ -8,9 +8,9 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {PortalModule} from '@angular/cdk/portal';
-import {LIVE_ANNOUNCER_PROVIDER} from '@angular/cdk/a11y';
+import {OverlayModule} from '@metaclinic/cdk/overlay';
+import {PortalModule} from '@metaclinic/cdk/portal';
+import {LIVE_ANNOUNCER_PROVIDER} from '@metaclinic/cdk/a11y';
 import {MdCommonModule} from '../core';
 import {MdSnackBar} from './snack-bar';
 import {MdSnackBarContainer} from './snack-bar-container';

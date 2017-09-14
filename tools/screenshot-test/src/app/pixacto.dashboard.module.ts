@@ -8,7 +8,7 @@ import {routing} from './routes';
 import {
   MdToolbarModule, MdButtonModule, MdCardModule, MdButtonToggleModule, MdIconModule,
   MdSnackBarModule, MdTooltipModule
-} from '@angular/material';
+} from '@metaclinic/material';
 
 import {PixactoDashboardComponent} from './pixacto.dashboard.component';
 import {ViewerComponent} from './viewer/viewer.component';

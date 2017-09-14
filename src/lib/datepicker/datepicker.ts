@@ -24,8 +24,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {first} from '@angular/cdk/rxjs';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {first} from '@metaclinic/cdk/rxjs';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {
   Overlay,
   OverlayRef,
@@ -36,10 +36,10 @@ import {
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
-import {Directionality} from '@angular/cdk/bidi';
-import {ESCAPE} from '@angular/cdk/keycodes';
+} from '@metaclinic/cdk/overlay';
+import {ComponentPortal} from '@metaclinic/cdk/portal';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
 import {MdDialog} from '../dialog/dialog';
 import {MdDialogRef} from '../dialog/dialog-ref';
 import {MdDatepickerInput} from './datepicker-input';

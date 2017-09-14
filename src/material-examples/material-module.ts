@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTableModule} from '@metaclinic/cdk/table';
 import {
   MdAutocompleteModule, MdButtonModule, MdButtonToggleModule, MdPaginatorModule,
   MdCardModule, MdCheckboxModule, MdChipsModule, MdDatepickerModule,
@@ -9,7 +9,7 @@ import {
   MdRadioModule, MdSelectModule, MdSidenavModule, MdSliderModule, MdSortModule,
   MdSlideToggleModule, MdSnackBarModule, MdTableModule, MdTabsModule, MdToolbarModule,
   MdTooltipModule, MdFormFieldModule, MdExpansionModule, MdStepperModule
-} from '@angular/material';
+} from '@metaclinic/material';
 
 @NgModule({
   exports: [

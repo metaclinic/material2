@@ -3,10 +3,10 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDrawer, MdSidenavModule, MdDrawerContainer} from './index';
-import {A11yModule} from '@angular/cdk/a11y';
-import {PlatformModule} from '@angular/cdk/platform';
-import {ESCAPE} from '@angular/cdk/keycodes';
-import {dispatchKeyboardEvent} from '@angular/cdk/testing';
+import {A11yModule} from '@metaclinic/cdk/a11y';
+import {PlatformModule} from '@metaclinic/cdk/platform';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
+import {dispatchKeyboardEvent} from '@metaclinic/cdk/testing';
 
 
 describe('MdDrawer', () => {

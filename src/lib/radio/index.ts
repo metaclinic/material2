@@ -8,7 +8,7 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {VIEWPORT_RULER_PROVIDER} from '@angular/cdk/overlay';
+import {VIEWPORT_RULER_PROVIDER} from '@metaclinic/cdk/overlay';
 import {
   MdRippleModule,
   MdCommonModule,

@@ -6,4 +6,4 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export {FocusKeyManager, FocusableOption} from '@angular/cdk/a11y';
+export {FocusKeyManager, FocusableOption} from '@metaclinic/cdk/a11y';

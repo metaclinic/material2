@@ -2,7 +2,7 @@ import {async, TestBed, ComponentFixture, inject} from '@angular/core/testing';
 import {Component, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {MdSelectionList, MdListOption, MdListModule} from './index';
-import {createKeyboardEvent} from '@angular/cdk/testing';
+import {createKeyboardEvent} from '@metaclinic/cdk/testing';
 import {UP_ARROW, DOWN_ARROW, SPACE} from '../core/keyboard/keycodes';
 import {Platform} from '../core/platform/index';
 

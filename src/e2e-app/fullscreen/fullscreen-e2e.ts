@@ -1,5 +1,5 @@
 import {Component, ElementRef, Output, EventEmitter} from '@angular/core';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,

@@ -14,7 +14,7 @@ import {
   Optional,
   ViewEncapsulation
 } from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {
   trigger,
   state,
@@ -22,7 +22,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import {CdkColumnDef} from '@angular/cdk/table';
+import {CdkColumnDef} from '@metaclinic/cdk/table';
 import {Subscription} from 'rxjs/Subscription';
 import {merge} from 'rxjs/observable/merge';
 import {MdSort, MdSortable} from './sort';

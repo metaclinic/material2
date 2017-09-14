@@ -1,5 +1,5 @@
 import {Component, ViewChild, TemplateRef} from '@angular/core';
-import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogRef, MdDialogConfig} from '@metaclinic/material';
 
 @Component({
   selector: 'dialog-e2e',

@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MdDialog, MD_DIALOG_DATA} from '@angular/material';
+import {MdDialog, MD_DIALOG_DATA} from '@metaclinic/material';
 
 /**
  * @title Injecting data when opening a dialog

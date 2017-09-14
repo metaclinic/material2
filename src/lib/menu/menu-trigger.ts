@@ -20,10 +20,10 @@ import {
   Self,
   ViewContainerRef,
 } from '@angular/core';
-import {Direction, Directionality} from '@angular/cdk/bidi';
-import {isFakeMousedownFromScreenReader} from '@angular/cdk/a11y';
-import {TemplatePortal} from '@angular/cdk/portal';
-import {LEFT_ARROW, RIGHT_ARROW} from '@angular/cdk/keycodes';
+import {Direction, Directionality} from '@metaclinic/cdk/bidi';
+import {isFakeMousedownFromScreenReader} from '@metaclinic/cdk/a11y';
+import {TemplatePortal} from '@metaclinic/cdk/portal';
+import {LEFT_ARROW, RIGHT_ARROW} from '@metaclinic/cdk/keycodes';
 import {
   ConnectedPositionStrategy,
   HorizontalConnectionPos,
@@ -36,8 +36,8 @@ import {
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {filter, RxChain} from '@angular/cdk/rxjs';
+} from '@metaclinic/cdk/overlay';
+import {filter, RxChain} from '@metaclinic/cdk/rxjs';
 import {MdMenu} from './menu-directive';
 import {MdMenuItem} from './menu-item';
 import {MdMenuPanel} from './menu-panel';

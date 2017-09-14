@@ -23,9 +23,9 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Location} from '@angular/common';
 import {SpyLocation} from '@angular/common/testing';
 import {MdDialogContainer} from './dialog-container';
-import {OverlayContainer} from '@angular/cdk/overlay';
-import {ESCAPE} from '@angular/cdk/keycodes';
-import {dispatchKeyboardEvent} from '@angular/cdk/testing';
+import {OverlayContainer} from '@metaclinic/cdk/overlay';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
+import {dispatchKeyboardEvent} from '@metaclinic/cdk/testing';
 import {MdDialogModule, MdDialogRef, MdDialog, MD_DIALOG_DATA} from './index';
 
 

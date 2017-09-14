@@ -62,7 +62,7 @@ To access the data in your component, you have to use the `MD_SNACK_BAR_DATA` in
 
 ```ts
 import {Component, Inject} from '@angular/core';
-import {MD_SNACK_BAR_DATA} from '@angular/material';
+import {MD_SNACK_BAR_DATA} from '@metaclinic/material';
 
 @Component({
   selector: 'your-snack-bar',

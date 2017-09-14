@@ -11,7 +11,7 @@ export {
   FocusTrapFactory,
   FocusTrapDeprecatedDirective,
   FocusTrapDirective
-} from '@angular/cdk/a11y';
+} from '@metaclinic/cdk/a11y';
 
 
 

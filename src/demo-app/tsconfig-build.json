@@ -22,8 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@metaclinic/material": ["../../dist/packages/material/public_api"],
-      "@angular/cdk/*": ["../../dist/packages/cdk/*"],
-      "@angular/material-moment-adapter": ["../../dist/packages/material-moment-adapter"]
+      "@metaclinic/cdk/*": ["../../dist/packages/cdk/*"],
+      "@metaclinic/material-moment-adapter": ["../../dist/packages/material-moment-adapter"]
     }
   },
   "files": [

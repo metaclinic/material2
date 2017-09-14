@@ -44,4 +44,4 @@ export {
   debounceTime,
   auditTime,
   takeUntil,
-} from '@angular/cdk/rxjs';
+} from '@metaclinic/cdk/rxjs';

@@ -1,7 +1,7 @@
 import {async, inject, TestBed} from '@angular/core/testing';
 import {Component, NgModule} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {ComponentPortal, PortalModule} from '@angular/cdk/portal';
+import {ComponentPortal, PortalModule} from '@metaclinic/cdk/portal';
 import {
   Overlay,
   OverlayContainer,

@@ -10,9 +10,9 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import {Direction, Directionality} from '@angular/cdk/bidi';
-import {OverlayContainer} from '@angular/cdk/overlay';
-import {ESCAPE, LEFT_ARROW, RIGHT_ARROW} from '@angular/cdk/keycodes';
+import {Direction, Directionality} from '@metaclinic/cdk/bidi';
+import {OverlayContainer} from '@metaclinic/cdk/overlay';
+import {ESCAPE, LEFT_ARROW, RIGHT_ARROW} from '@metaclinic/cdk/keycodes';
 import {
   MD_MENU_DEFAULT_OPTIONS,
   MdMenu,
@@ -30,7 +30,7 @@ import {
   dispatchEvent,
   createKeyboardEvent,
   createMouseEvent,
-} from '@angular/cdk/testing';
+} from '@metaclinic/cdk/testing';
 
 
 describe('MdMenu', () => {

@@ -25,8 +25,8 @@ import {
   ComponentPortal,
   PortalHostDirective,
   TemplatePortal
-} from '@angular/cdk/portal';
-import {FocusTrap, FocusTrapFactory} from '@angular/cdk/a11y';
+} from '@metaclinic/cdk/portal';
+import {FocusTrap, FocusTrapFactory} from '@metaclinic/cdk/a11y';
 import {MdDialogConfig} from './dialog-config';
 
 

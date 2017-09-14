@@ -82,7 +82,7 @@ let apiDocsPackage = new DgeniPackage('material2-api-docs', dgeniPackageDeps)
   // Entry points for docs generation. All publically exported symbols found through these
   // files will have docs generated.
   readTypeScriptModules.sourceFiles = [
-    // @angular/cdk
+    // @metaclinic/cdk
     'cdk/a11y/index.ts',
     'cdk/bidi/index.ts',
     'cdk/coercion/index.ts',
@@ -95,7 +95,7 @@ let apiDocsPackage = new DgeniPackage('material2-api-docs', dgeniPackageDeps)
     'cdk/scrolling/index.ts',
     'cdk/table/index.ts',
 
-    // @angular/material
+    // @metaclinic/material
     'lib/autocomplete/index.ts',
     'lib/button/index.ts',
     'lib/button-toggle/index.ts',

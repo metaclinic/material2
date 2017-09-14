@@ -7,7 +7,7 @@
  */
 
 import {Directive, TemplateRef} from '@angular/core';
-import {CdkStepLabel} from '@angular/cdk/stepper';
+import {CdkStepLabel} from '@metaclinic/cdk/stepper';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _MdStepLabel = CdkStepLabel;

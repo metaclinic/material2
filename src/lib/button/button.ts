@@ -19,7 +19,7 @@ import {
   ViewEncapsulation,
   Inject,
 } from '@angular/core';
-import {Platform} from '@angular/cdk/platform';
+import {Platform} from '@metaclinic/cdk/platform';
 import {FocusOriginMonitor} from '../core';
 import {mixinDisabled, CanDisable} from '../core/common-behaviors/disabled';
 import {CanColor, mixinColor} from '../core/common-behaviors/color';

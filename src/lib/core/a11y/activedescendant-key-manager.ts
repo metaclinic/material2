@@ -6,4 +6,4 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export {ActiveDescendantKeyManager, Highlightable} from '@angular/cdk/a11y';
+export {ActiveDescendantKeyManager, Highlightable} from '@metaclinic/cdk/a11y';

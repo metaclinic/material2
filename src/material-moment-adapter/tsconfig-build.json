@@ -23,7 +23,7 @@
     "skipLibCheck": true,
     "types": [],
     "paths": {
-      "@angular/material": ["../../dist/packages/material/public_api"]
+      "@metaclinic/material": ["../../dist/packages/material/public_api"]
     }
   },
   "files": [
@@ -33,7 +33,7 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular/material-moment-adapter",
+    "flatModuleId": "@metaclinic/material-moment-adapter",
     "skipTemplateCodegen": true
   }
 }

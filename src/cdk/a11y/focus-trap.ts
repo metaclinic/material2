@@ -15,9 +15,9 @@ import {
   AfterContentInit,
   Injectable,
 } from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {Platform} from '@angular/cdk/platform';
-import {first} from '@angular/cdk/rxjs';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
+import {Platform} from '@metaclinic/cdk/platform';
+import {first} from '@metaclinic/cdk/rxjs';
 import {InteractivityChecker} from './interactivity-checker';
 
 

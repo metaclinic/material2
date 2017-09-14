@@ -17,7 +17,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import {Location} from '@angular/common';
-import {ComponentPortal, ComponentType, TemplatePortal} from '@angular/cdk/portal';
+import {ComponentPortal, ComponentType, TemplatePortal} from '@metaclinic/cdk/portal';
 import {
   BlockScrollStrategy,
   Overlay,
@@ -27,9 +27,9 @@ import {
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {ESCAPE} from '@angular/cdk/keycodes';
-import {startWith} from '@angular/cdk/rxjs';
+} from '@metaclinic/cdk/overlay';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
+import {startWith} from '@metaclinic/cdk/rxjs';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {defer} from 'rxjs/observable/defer';

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MdSnackBar} from '@metaclinic/material';
 
 /**
  * @title Basic snack-bar

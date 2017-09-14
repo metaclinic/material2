@@ -8,7 +8,7 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ObserversModule} from '@angular/cdk/observers';
+import {ObserversModule} from '@metaclinic/cdk/observers';
 import {MdRippleModule, MdCommonModule, FocusOriginMonitor} from '../core';
 import {MdCheckbox} from './checkbox';
 import {MdCheckboxRequiredValidator} from './checkbox-required-validator';

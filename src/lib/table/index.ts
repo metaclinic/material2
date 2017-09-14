@@ -8,7 +8,7 @@
 
 import {NgModule} from '@angular/core';
 import {MdTable} from './table';
-import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTableModule} from '@metaclinic/cdk/table';
 import {MdCell, MdHeaderCell, MdCellDef, MdHeaderCellDef, MdColumnDef} from './cell';
 import {MdHeaderRow, MdRow, MdHeaderRowDef, MdRowDef, MatHeaderRowDef, MatRowDef} from './row';
 import {CommonModule} from '@angular/common';

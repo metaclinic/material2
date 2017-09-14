@@ -26,7 +26,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {UniqueSelectionDispatcher, FocusOriginMonitor} from '../core';
 import {CanDisable, mixinDisabled} from '../core/common-behaviors/disabled';
 

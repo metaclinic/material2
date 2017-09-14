@@ -6,7 +6,7 @@ For existing apps, follow these steps to begin using Angular Material.
 ### Step 1: Install Angular Material and Angular CDK
 
 ```bash
-npm install --save @angular/material @angular/cdk
+npm install --save @metaclinic/material @metaclinic/cdk
 ```
 
 A snapshot build with the latest changes from master is also available. Note that this snapshot
@@ -55,7 +55,7 @@ export class PizzaPartyAppModule { }
 Import the NgModule for each component you want to use: 
 
 ```ts
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule} from '@metaclinic/material';
 
 @NgModule({
   ...
@@ -70,7 +70,7 @@ Angular Material components that you will use in your application. You can then
 include this module wherever you'd like to use the components.
 
 ```ts
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule} from '@metaclinic/material';
 
 @NgModule({
   imports: [MdButtonModule, MdCheckboxModule],
@@ -89,7 +89,7 @@ Including a theme is **required** to apply all of the core and theme styles to y
 To get started with a prebuilt theme, include one of Angular Material's prebuilt themes globally
 in your application. If you're using the Angular CLI, you can add this to your `styles.css`:
 ```css
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@metaclinic/material/prebuilt-themes/indigo-pink.css";
 ```
 
 If you are not using the Angular CLI, you can include a prebuilt theme via a `<link>` element in
@@ -135,14 +135,14 @@ Note that `md-icon` supports any font or svg icons; using Material Icons is one 
 
 ### Appendix: Configuring SystemJS
 
-If your project is using SystemJS for module loading, you will need to add `@angular/material` and
-`@angular/cdk` to the SystemJS configuration.
+If your project is using SystemJS for module loading, you will need to add `@metaclinic/material` and
+`@metaclinic/cdk` to the SystemJS configuration.
 
-The `@angular/cdk` package is organized of multiple entry-points. 
+The `@metaclinic/cdk` package is organized of multiple entry-points. 
 Each of these entry-points must be registered individually with SystemJS.
 
-Here is a example configuration where `@angular/material`, `@angular/cdk/platform` and 
-`@angular/cdk/a11y` are used:
+Here is a example configuration where `@metaclinic/material`, `@metaclinic/cdk/platform` and 
+`@metaclinic/cdk/a11y` are used:
 
 
 ```js
@@ -150,11 +150,11 @@ System.config({
   // Existing configuration options
   map: {
     // ...
-    '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+    '@metaclinic/material': 'npm:@metaclinic/material/bundles/material.umd.js',
     
     // CDK individual packages
-    '@angular/cdk/platform': 'npm:@angular/cdk/bundles/cdk-platform.umd.js',
-    '@angular/cdk/a11y': 'npm:@angular/cdk/bundles/cdk-a11y.umd.js',
+    '@metaclinic/cdk/platform': 'npm:@metaclinic/cdk/bundles/cdk-platform.umd.js',
+    '@metaclinic/cdk/a11y': 'npm:@metaclinic/cdk/bundles/cdk-a11y.umd.js',
     // ...
   }
 });

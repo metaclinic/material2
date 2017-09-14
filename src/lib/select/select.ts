@@ -32,11 +32,11 @@ import {
   isDevMode,
 } from '@angular/core';
 import {ControlValueAccessor, FormGroupDirective, NgControl, NgForm} from '@angular/forms';
-import {DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW} from '@angular/cdk/keycodes';
-import {FocusKeyManager} from '@angular/cdk/a11y';
-import {Directionality} from '@angular/cdk/bidi';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {filter, startWith} from '@angular/cdk/rxjs';
+import {DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW} from '@metaclinic/cdk/keycodes';
+import {FocusKeyManager} from '@metaclinic/cdk/a11y';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
+import {filter, startWith} from '@metaclinic/cdk/rxjs';
 import {
   ConnectedOverlayDirective,
   Overlay,
@@ -46,12 +46,12 @@ import {
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
   ViewportRuler
-} from '@angular/cdk/overlay';
+} from '@metaclinic/cdk/overlay';
 import {merge} from 'rxjs/observable/merge';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {fadeInContent, transformPanel, transformPlaceholder} from './select-animations';
-import {SelectionModel} from '@angular/cdk/collections';
+import {SelectionModel} from '@metaclinic/cdk/collections';
 import {
   getMdSelectDynamicMultipleError,
   getMdSelectNonArrayValueError,
@@ -65,7 +65,7 @@ import {
   MD_PLACEHOLDER_GLOBAL_OPTIONS,
   PlaceholderOptions
 } from '../core/placeholder/placeholder-options';
-import {Platform} from '@angular/cdk/platform';
+import {Platform} from '@metaclinic/cdk/platform';
 import {HasTabIndex, mixinTabIndex} from '../core/common-behaviors/tabindex';
 
 /**

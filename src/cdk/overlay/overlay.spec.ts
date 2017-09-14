@@ -5,7 +5,7 @@ import {
   PortalModule,
   TemplatePortal,
   TemplatePortalDirective
-} from '@angular/cdk/portal';
+} from '@metaclinic/cdk/portal';
 import {
   Overlay,
   OverlayContainer,

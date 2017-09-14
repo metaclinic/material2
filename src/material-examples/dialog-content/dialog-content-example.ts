@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MdDialog} from '@metaclinic/material';
 
 /**
  * @title Dialog with header, scrollable content and actions

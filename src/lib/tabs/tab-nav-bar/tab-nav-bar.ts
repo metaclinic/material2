@@ -25,15 +25,15 @@ import {
   QueryList,
   forwardRef,
 } from '@angular/core';
-import {ViewportRuler} from '@angular/cdk/scrolling';
-import {Directionality} from '@angular/cdk/bidi';
-import {Platform} from '@angular/cdk/platform';
-import {takeUntil} from '@angular/cdk/rxjs';
+import {ViewportRuler} from '@metaclinic/cdk/scrolling';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {Platform} from '@metaclinic/cdk/platform';
+import {takeUntil} from '@metaclinic/cdk/rxjs';
 import {Subject} from 'rxjs/Subject';
 import {of as observableOf} from 'rxjs/observable/of';
 import {merge} from 'rxjs/observable/merge';
 import {CanDisableRipple, mixinDisableRipple} from '../../core/common-behaviors/disable-ripple';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {CanDisable, mixinDisabled} from '../../core/common-behaviors/disabled';
 import {MD_RIPPLE_GLOBAL_OPTIONS, MdRipple, RippleGlobalOptions} from '../../core';
 import {CanColor, mixinColor, ThemePalette} from '../../core/common-behaviors/color';

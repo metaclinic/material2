@@ -8,9 +8,9 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PortalModule} from '@angular/cdk/portal';
-import {ObserversModule} from '@angular/cdk/observers';
-import {ScrollDispatchModule, VIEWPORT_RULER_PROVIDER} from '@angular/cdk/scrolling';
+import {PortalModule} from '@metaclinic/cdk/portal';
+import {ObserversModule} from '@metaclinic/cdk/observers';
+import {ScrollDispatchModule, VIEWPORT_RULER_PROVIDER} from '@metaclinic/cdk/scrolling';
 import {MdCommonModule, MdRippleModule} from '../core';
 import {MdTab} from './tab';
 import {MdTabGroup} from './tab-group';

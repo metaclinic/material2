@@ -15,7 +15,7 @@ import { MdInputModule } from './index';
 import { MdInput } from './input';
 import { Platform } from '../core/platform/platform';
 import { PlatformModule } from '../core/platform/index';
-import { wrappedErrorMessage, dispatchFakeEvent, createFakeEvent } from '@angular/cdk/testing';
+import { wrappedErrorMessage, dispatchFakeEvent, createFakeEvent } from '@metaclinic/cdk/testing';
 import {
   MdFormField,
   MdFormFieldModule,

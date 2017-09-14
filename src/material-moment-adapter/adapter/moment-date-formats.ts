@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {MdDateFormats} from '@angular/material';
+import {MdDateFormats} from '@metaclinic/material';
 
 
 export const MD_MOMENT_DATE_FORMATS: MdDateFormats = {

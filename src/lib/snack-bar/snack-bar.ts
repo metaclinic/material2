@@ -7,9 +7,9 @@
  */
 
 import {ComponentRef, Injectable, Injector, Optional, SkipSelf } from '@angular/core';
-import {Overlay, OverlayRef, OverlayState} from '@angular/cdk/overlay';
-import {ComponentPortal, ComponentType} from '@angular/cdk/portal';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {Overlay, OverlayRef, OverlayState} from '@metaclinic/cdk/overlay';
+import {ComponentPortal, ComponentType} from '@metaclinic/cdk/portal';
+import {LiveAnnouncer} from '@metaclinic/cdk/a11y';
 import {PortalInjector} from '../core/portal/portal-injector';
 import {extendObject} from '../core/util/object-extend';
 import {MD_SNACK_BAR_DATA, MdSnackBarConfig} from './snack-bar-config';

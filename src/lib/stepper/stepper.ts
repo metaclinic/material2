@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {CdkStep, CdkStepper} from '@angular/cdk/stepper';
+import {CdkStep, CdkStepper} from '@metaclinic/cdk/stepper';
 import {
   Component,
   ContentChild,

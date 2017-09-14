@@ -8,8 +8,8 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {A11yModule} from '@angular/cdk/a11y';
-import {OverlayModule} from '@angular/cdk/overlay';
+import {A11yModule} from '@metaclinic/cdk/a11y';
+import {OverlayModule} from '@metaclinic/cdk/overlay';
 import {MdCommonModule} from '../core';
 import {MdDrawer, MdDrawerContainer} from './drawer';
 import {MdSidenav, MdSidenavContainer} from './sidenav';

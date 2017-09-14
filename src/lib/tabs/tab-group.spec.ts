@@ -2,7 +2,7 @@ import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/t
 import {Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {By} from '@angular/platform-browser';
-import {dispatchFakeEvent} from '@angular/cdk/testing';
+import {dispatchFakeEvent} from '@metaclinic/cdk/testing';
 import {Observable} from 'rxjs/Observable';
 import {MdTab, MdTabGroup, MdTabHeaderPosition, MdTabsModule} from './index';
 

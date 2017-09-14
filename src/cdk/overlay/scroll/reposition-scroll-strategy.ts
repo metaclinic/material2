@@ -9,7 +9,7 @@
 import {Subscription} from 'rxjs/Subscription';
 import {ScrollStrategy, getMdScrollStrategyAlreadyAttachedError} from './scroll-strategy';
 import {OverlayRef} from '../overlay-ref';
-import {ScrollDispatcher} from '@angular/cdk/scrolling';
+import {ScrollDispatcher} from '@metaclinic/cdk/scrolling';
 
 /**
  * Config options for the RepositionScrollStrategy.

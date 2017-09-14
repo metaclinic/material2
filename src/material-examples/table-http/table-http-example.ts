@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
-import {DataSource} from '@angular/cdk/collections';
-import {MdPaginator, MdSort} from '@angular/material';
+import {DataSource} from '@metaclinic/cdk/collections';
+import {MdPaginator, MdSort} from '@metaclinic/material';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';

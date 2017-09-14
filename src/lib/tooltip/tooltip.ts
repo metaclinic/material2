@@ -23,13 +23,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
-import {ComponentPortal} from '@angular/cdk/portal';
-import {ScrollDispatcher} from '@angular/cdk/scrolling';
+import {ComponentPortal} from '@metaclinic/cdk/portal';
+import {ScrollDispatcher} from '@metaclinic/cdk/scrolling';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Directionality} from '@angular/cdk/bidi';
-import {Platform} from '@angular/cdk/platform';
-import {first} from '@angular/cdk/rxjs';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {Platform} from '@metaclinic/cdk/platform';
+import {first} from '@metaclinic/cdk/rxjs';
 import {
   OriginConnectionPosition,
   Overlay,
@@ -41,10 +41,10 @@ import {
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {ESCAPE} from '@angular/cdk/keycodes';
-import {AriaDescriber} from '@angular/cdk/a11y';
+} from '@metaclinic/cdk/overlay';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
+import {ESCAPE} from '@metaclinic/cdk/keycodes';
+import {AriaDescriber} from '@metaclinic/cdk/a11y';
 
 
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';

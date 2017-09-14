@@ -22,8 +22,8 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {DOCUMENT} from '@angular/platform-browser';
-import {Directionality} from '@angular/cdk/bidi';
-import {filter, first, map, RxChain, switchMap} from '@angular/cdk/rxjs';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {filter, first, map, RxChain, switchMap} from '@metaclinic/cdk/rxjs';
 import {
   ConnectedPositionStrategy,
   Overlay,
@@ -35,9 +35,9 @@ import {
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
   // tslint:disable-next-line:no-unused-variable
   ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {TemplatePortal} from '@angular/cdk/portal';
-import {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} from '@angular/cdk/keycodes';
+} from '@metaclinic/cdk/overlay';
+import {TemplatePortal} from '@metaclinic/cdk/portal';
+import {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} from '@metaclinic/cdk/keycodes';
 import {Observable} from 'rxjs/Observable';
 import {MdFormField} from '../form-field/index';
 import {Subscription} from 'rxjs/Subscription';

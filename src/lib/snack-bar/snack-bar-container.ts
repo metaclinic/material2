@@ -31,8 +31,8 @@ import {
   BasePortalHost,
   ComponentPortal,
   PortalHostDirective,
-} from '@angular/cdk/portal';
-import {first} from '@angular/cdk/rxjs';
+} from '@metaclinic/cdk/portal';
+import {first} from '@metaclinic/cdk/rxjs';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {MdSnackBarConfig} from './snack-bar-config';

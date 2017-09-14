@@ -22,8 +22,8 @@ import {
   ViewChild, OnInit,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
-import {Directionality} from '@angular/cdk/bidi';
+import {coerceBooleanProperty, coerceNumberProperty} from '@metaclinic/cdk/coercion';
+import {Directionality} from '@metaclinic/cdk/bidi';
 import {
   DOWN_ARROW,
   END,
@@ -33,7 +33,7 @@ import {
   PAGE_UP,
   RIGHT_ARROW,
   UP_ARROW,
-} from '@angular/cdk/keycodes';
+} from '@metaclinic/cdk/keycodes';
 import {HammerInput} from '../core';
 import {FocusOrigin, FocusOriginMonitor} from '../core/style/focus-origin-monitor';
 import {CanDisable, mixinDisabled} from '../core/common-behaviors/disabled';

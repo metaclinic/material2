@@ -7,7 +7,7 @@
  */
 
 import {Component, Input, ViewEncapsulation} from '@angular/core';
-import {coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty, coerceNumberProperty} from '@metaclinic/cdk/coercion';
 import {MdStepLabel} from './step-label';
 import {MATERIAL_COMPATIBILITY_MODE} from '../core/compatibility/compatibility';
 

@@ -24,4 +24,4 @@ export {
   DELETE,
   A,
   Z,
-} from '@angular/cdk/keycodes';
+} from '@metaclinic/cdk/keycodes';

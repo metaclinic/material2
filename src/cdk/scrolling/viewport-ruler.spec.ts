@@ -1,7 +1,7 @@
 import {TestBed, inject, fakeAsync, tick} from '@angular/core/testing';
 import {ScrollDispatchModule} from './public_api';
 import {ViewportRuler, VIEWPORT_RULER_PROVIDER} from './viewport-ruler';
-import {dispatchFakeEvent} from '@angular/cdk/testing';
+import {dispatchFakeEvent} from '@metaclinic/cdk/testing';
 
 
 // For all tests, we assume the browser window is 1024x786 (outerWidth x outerHeight).

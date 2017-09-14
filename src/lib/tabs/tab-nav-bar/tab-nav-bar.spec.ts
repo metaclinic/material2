@@ -1,8 +1,8 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Component, ViewChild} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {dispatchFakeEvent, dispatchMouseEvent} from '@angular/cdk/testing';
-import {Direction, Directionality} from '@angular/cdk/bidi';
+import {dispatchFakeEvent, dispatchMouseEvent} from '@metaclinic/cdk/testing';
+import {Direction, Directionality} from '@metaclinic/cdk/bidi';
 import {Subject} from 'rxjs/Subject';
 import {MdTabNav, MdTabsModule, MdTabLink} from '../index';
 

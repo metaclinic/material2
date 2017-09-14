@@ -7,7 +7,7 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular/cdk/portal",
+    "flatModuleId": "@metaclinic/cdk/portal",
     "skipTemplateCodegen": true
   }
 }

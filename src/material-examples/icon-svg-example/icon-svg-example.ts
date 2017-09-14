@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdIconRegistry} from '@angular/material';
+import {MdIconRegistry} from '@metaclinic/material';
 
 /**
  * @title SVG icons

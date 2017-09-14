@@ -16,7 +16,7 @@ import {
   UP_ARROW,
   BACKSPACE
 } from '../core/keyboard/keycodes';
-import {dispatchFakeEvent, dispatchKeyboardEvent, dispatchMouseEvent} from '@angular/cdk/testing';
+import {dispatchFakeEvent, dispatchKeyboardEvent, dispatchMouseEvent} from '@metaclinic/cdk/testing';
 
 describe('MdSlider without forms', () => {
   let gestureConfig: TestGestureConfig;

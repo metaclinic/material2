@@ -8,7 +8,7 @@
 
 import {NgModule, InjectionToken, Optional, Inject, isDevMode} from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {BidiModule} from '@angular/cdk/bidi';
+import {BidiModule} from '@metaclinic/cdk/bidi';
 import {CompatibilityModule} from '../compatibility/compatibility';
 
 

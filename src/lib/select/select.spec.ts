@@ -20,11 +20,11 @@ import {
 import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
-import {Directionality} from '@angular/cdk/bidi';
-import {DOWN_ARROW, END, ENTER, HOME, SPACE, TAB, UP_ARROW} from '@angular/cdk/keycodes';
-import {ScrollDispatcher, ViewportRuler} from '@angular/cdk/scrolling';
-import {OverlayContainer} from '@angular/cdk/overlay';
-import {dispatchFakeEvent, dispatchKeyboardEvent, wrappedErrorMessage} from '@angular/cdk/testing';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {DOWN_ARROW, END, ENTER, HOME, SPACE, TAB, UP_ARROW} from '@metaclinic/cdk/keycodes';
+import {ScrollDispatcher, ViewportRuler} from '@metaclinic/cdk/scrolling';
+import {OverlayContainer} from '@metaclinic/cdk/overlay';
+import {dispatchFakeEvent, dispatchKeyboardEvent, wrappedErrorMessage} from '@metaclinic/cdk/testing';
 import {Subject} from 'rxjs/Subject';
 import {map} from 'rxjs/operator/map';
 import {MdSelectModule} from './index';

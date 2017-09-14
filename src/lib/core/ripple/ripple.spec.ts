@@ -1,8 +1,8 @@
 import {TestBed, ComponentFixture, fakeAsync, tick, inject} from '@angular/core/testing';
 import {Component, ViewChild} from '@angular/core';
-import {Platform} from '@angular/cdk/platform';
-import {ViewportRuler} from '@angular/cdk/scrolling';
-import {dispatchMouseEvent} from '@angular/cdk/testing';
+import {Platform} from '@metaclinic/cdk/platform';
+import {ViewportRuler} from '@metaclinic/cdk/scrolling';
+import {dispatchMouseEvent} from '@metaclinic/cdk/testing';
 import {RIPPLE_FADE_OUT_DURATION, RIPPLE_FADE_IN_DURATION} from './ripple-renderer';
 import {
   MdRipple, MdRippleModule, MD_RIPPLE_GLOBAL_OPTIONS, RippleState, RippleGlobalOptions

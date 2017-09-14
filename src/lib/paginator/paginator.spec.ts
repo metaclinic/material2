@@ -4,7 +4,7 @@ import {MdPaginator, PageEvent} from './paginator';
 import {Component, ViewChild} from '@angular/core';
 import {MdPaginatorIntl} from './paginator-intl';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {dispatchMouseEvent} from '@angular/cdk/testing';
+import {dispatchMouseEvent} from '@metaclinic/cdk/testing';
 
 
 describe('MdPaginator', () => {

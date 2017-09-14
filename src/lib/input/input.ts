@@ -18,9 +18,9 @@ import {
   Renderer2,
   Self,
 } from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {FormControl, FormGroupDirective, NgControl, NgForm} from '@angular/forms';
-import {Platform, getSupportedInputTypes} from '@angular/cdk/platform';
+import {Platform, getSupportedInputTypes} from '@metaclinic/cdk/platform';
 import {getMdInputUnsupportedTypeError} from './input-errors';
 import {
   defaultErrorStateMatcher,

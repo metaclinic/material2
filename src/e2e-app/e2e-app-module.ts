@@ -37,9 +37,9 @@ import {
   MdSlideToggleModule,
   MdStepperModule,
   MdTabsModule,
-} from '@angular/material';
-import {FullscreenOverlayContainer, OverlayContainer} from '@angular/cdk/overlay';
-import {ExampleModule} from '@angular/material-examples';
+} from '@metaclinic/material';
+import {FullscreenOverlayContainer, OverlayContainer} from '@metaclinic/cdk/overlay';
+import {ExampleModule} from '@metaclinic/material-examples';
 import {ReactiveFormsModule} from '@angular/forms';
 
 /**

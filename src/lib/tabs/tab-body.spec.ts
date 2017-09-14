@@ -1,6 +1,6 @@
 import {Component, ViewChild, TemplateRef, ViewContainerRef} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PortalModule} from '@angular/cdk/portal';
+import {PortalModule} from '@metaclinic/cdk/portal';
 import {async, ComponentFixture, TestBed, flushMicrotasks, fakeAsync} from '@angular/core/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Direction, Directionality} from '../core/bidi/index';

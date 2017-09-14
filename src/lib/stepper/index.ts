@@ -8,10 +8,10 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PortalModule} from '@angular/cdk/portal';
+import {PortalModule} from '@metaclinic/cdk/portal';
 import {MdButtonModule} from '../button/index';
 import {MdStep, MdStepper, MdHorizontalStepper, MdVerticalStepper} from './stepper';
-import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkStepperModule} from '@metaclinic/cdk/stepper';
 import {MdCommonModule} from '../core';
 import {MdStepLabel} from './step-label';
 import {MdStepperNext, MdStepperPrevious} from './stepper-button';

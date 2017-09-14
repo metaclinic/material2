@@ -13,4 +13,4 @@ export {
   Direction,
   Dir,
   BidiModule,
-} from '@angular/cdk/bidi';
+} from '@metaclinic/cdk/bidi';

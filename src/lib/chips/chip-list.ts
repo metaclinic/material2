@@ -21,11 +21,11 @@ import {
 } from '@angular/core';
 
 import {MdChip} from './chip';
-import {FocusKeyManager} from '@angular/cdk/a11y';
+import {FocusKeyManager} from '@metaclinic/cdk/a11y';
 import {BACKSPACE, DELETE, LEFT_ARROW, RIGHT_ARROW, UP_ARROW} from '../core/keyboard/keycodes';
-import {Directionality} from '@angular/cdk/bidi';
+import {Directionality} from '@metaclinic/cdk/bidi';
 import {Subscription} from 'rxjs/Subscription';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 
 /**
  * A material design chips component (named ChipList for it's similarity to the List component).

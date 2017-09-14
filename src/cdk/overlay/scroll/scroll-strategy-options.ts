@@ -10,8 +10,8 @@ import {Injectable} from '@angular/core';
 import {CloseScrollStrategy} from './close-scroll-strategy';
 import {NoopScrollStrategy} from './noop-scroll-strategy';
 import {BlockScrollStrategy} from './block-scroll-strategy';
-import {ScrollDispatcher} from '@angular/cdk/scrolling';
-import {ViewportRuler} from '@angular/cdk/scrolling';
+import {ScrollDispatcher} from '@metaclinic/cdk/scrolling';
+import {ViewportRuler} from '@metaclinic/cdk/scrolling';
 import {
   RepositionScrollStrategy,
   RepositionScrollStrategyConfig,

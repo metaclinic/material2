@@ -12,4 +12,4 @@ export {
   Directionality,
   DIRECTIONALITY_PROVIDER_FACTORY,
   DIRECTIONALITY_PROVIDER,
-} from '@angular/cdk/bidi';
+} from '@metaclinic/cdk/bidi';

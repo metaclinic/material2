@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Overlay, ScrollStrategy} from '@angular/cdk/overlay';
+import {Overlay, ScrollStrategy} from '@metaclinic/cdk/overlay';
 
 @Component({
   moduleId: module.id,

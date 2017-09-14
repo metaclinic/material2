@@ -7,7 +7,7 @@
  */
 
 import {Directive, Input} from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 
 /** MdAccordion's display modes. */
 export type MdAccordionDisplayMode = 'default' | 'flat';

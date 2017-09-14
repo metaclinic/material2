@@ -12,4 +12,4 @@ export {
   BasePortalHost,
   ComponentPortal,
   TemplatePortal
-} from '@angular/cdk/portal';
+} from '@metaclinic/cdk/portal';

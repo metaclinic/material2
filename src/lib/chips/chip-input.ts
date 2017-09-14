@@ -7,7 +7,7 @@
  */
 
 import {Directive, Output, EventEmitter, ElementRef, Input} from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {ENTER} from '../core/keyboard/keycodes';
 import {MdChipList} from './chip-list';
 

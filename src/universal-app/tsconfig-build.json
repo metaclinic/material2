@@ -18,8 +18,8 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@angular/material": ["./material"],
-      "@angular/cdk/*": ["./cdk/*"]
+      "@metaclinic/material": ["./material"],
+      "@metaclinic/cdk/*": ["./cdk/*"]
     }
   },
   "files": [

@@ -4,7 +4,7 @@ import {Component, DebugElement} from '@angular/core';
 import {MdChipInput, MdChipInputEvent} from './chip-input';
 import {By} from '@angular/platform-browser';
 import {Directionality} from '../core';
-import {createKeyboardEvent} from '@angular/cdk/testing';
+import {createKeyboardEvent} from '@metaclinic/cdk/testing';
 
 import {ENTER} from '../core/keyboard/keycodes';
 

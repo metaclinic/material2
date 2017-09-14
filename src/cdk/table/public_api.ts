@@ -17,7 +17,7 @@ export * from './cell';
 export * from './row';
 
 /** Re-export DataSource for a more intuitive experience for users of just the table. */
-export {DataSource} from '@angular/cdk/collections';
+export {DataSource} from '@metaclinic/cdk/collections';
 
 const EXPORTED_DECLARATIONS = [
   CdkTable,

@@ -7,7 +7,7 @@
  */
 
 import {Directive, ElementRef, Input, AfterViewInit, DoCheck} from '@angular/core';
-import {Platform} from '@angular/cdk/platform';
+import {Platform} from '@metaclinic/cdk/platform';
 
 
 /**

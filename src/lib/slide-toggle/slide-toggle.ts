@@ -22,8 +22,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {Platform} from '@angular/cdk/platform';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {Platform} from '@metaclinic/cdk/platform';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {
   applyCssTransform,
   FocusOrigin,

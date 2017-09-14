@@ -6,5 +6,5 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export {Dir} from '@angular/cdk/bidi';
+export {Dir} from '@metaclinic/cdk/bidi';
 

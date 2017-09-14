@@ -6,9 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import {NgModule, Provider} from '@angular/core';
-import {PortalModule} from '@angular/cdk/portal';
+import {PortalModule} from '@metaclinic/cdk/portal';
 import {Overlay} from './overlay';
-import {ScrollDispatchModule, VIEWPORT_RULER_PROVIDER} from '@angular/cdk/scrolling';
+import {ScrollDispatchModule, VIEWPORT_RULER_PROVIDER} from '@metaclinic/cdk/scrolling';
 import {
   ConnectedOverlayDirective,
   MD_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER,
@@ -42,8 +42,8 @@ export {FullscreenOverlayContainer} from './fullscreen-overlay-container';
 export {OverlayRef} from './overlay-ref';
 export {OverlayState} from './overlay-state';
 export {ConnectedOverlayDirective, OverlayOrigin} from './overlay-directives';
-export {ViewportRuler} from '@angular/cdk/scrolling';
-export {ComponentType} from '@angular/cdk/portal';
+export {ViewportRuler} from '@metaclinic/cdk/scrolling';
+export {ComponentType} from '@metaclinic/cdk/portal';
 
 export * from './position/connected-position';
 export * from './scroll/index';
@@ -52,4 +52,4 @@ export * from './scroll/index';
 export {PositionStrategy} from './position/position-strategy';
 export {GlobalPositionStrategy} from './position/global-position-strategy';
 export {ConnectedPositionStrategy} from './position/connected-position-strategy';
-export {VIEWPORT_RULER_PROVIDER} from '@angular/cdk/scrolling';
+export {VIEWPORT_RULER_PROVIDER} from '@metaclinic/cdk/scrolling';

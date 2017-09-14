@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {MdPaginator} from '@angular/material';
+import {DataSource} from '@metaclinic/cdk/collections';
+import {MdPaginator} from '@metaclinic/material';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';

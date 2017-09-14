@@ -7,7 +7,7 @@
  */
 
 import {Injectable, Optional, SkipSelf, NgZone, OnDestroy} from '@angular/core';
-import {Platform} from '@angular/cdk/platform';
+import {Platform} from '@metaclinic/cdk/platform';
 import {ScrollDispatcher} from './scroll-dispatcher';
 import {Observable} from 'rxjs/Observable';
 import {fromEvent} from 'rxjs/observable/fromEvent';

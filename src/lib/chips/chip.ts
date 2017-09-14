@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {FocusableOption} from '../core/a11y/focus-key-manager';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {CanColor, mixinColor} from '../core/common-behaviors/color';
 import {CanDisable, mixinDisabled} from '../core/common-behaviors/disabled';
 import {SPACE, BACKSPACE, DELETE} from '../core/keyboard/keycodes';

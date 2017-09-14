@@ -24,16 +24,16 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
-import {Directionality, Direction} from '@angular/cdk/bidi';
-import {RIGHT_ARROW, LEFT_ARROW, ENTER, SPACE} from '@angular/cdk/keycodes';
-import {startWith} from '@angular/cdk/rxjs';
+import {Directionality, Direction} from '@metaclinic/cdk/bidi';
+import {RIGHT_ARROW, LEFT_ARROW, ENTER, SPACE} from '@metaclinic/cdk/keycodes';
+import {startWith} from '@metaclinic/cdk/rxjs';
 import {Subscription} from 'rxjs/Subscription';
 import {of as observableOf} from 'rxjs/observable/of';
 import {merge} from 'rxjs/observable/merge';
 import {MdTabLabelWrapper} from './tab-label-wrapper';
 import {MdInkBar} from './ink-bar';
 import {CanDisableRipple, mixinDisableRipple} from '../core/common-behaviors/disable-ripple';
-import {ViewportRuler} from '@angular/cdk/scrolling';
+import {ViewportRuler} from '@metaclinic/cdk/scrolling';
 
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'

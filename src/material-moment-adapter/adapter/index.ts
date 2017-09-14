@@ -12,7 +12,7 @@ import {
   MAT_DATE_LOCALE,
   MAT_DATE_LOCALE_PROVIDER,
   MD_DATE_FORMATS
-} from '@angular/material';
+} from '@metaclinic/material';
 import {MomentDateAdapter} from './moment-date-adapter';
 import {MD_MOMENT_DATE_FORMATS} from './moment-date-formats';
 

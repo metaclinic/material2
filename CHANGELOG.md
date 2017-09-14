@@ -7,7 +7,7 @@
   * Nested menus
     * Nested menus!
 * Autocomplete supports `md-optgroup`
-* `Overlay` moved to `@angular/cdk`
+* `Overlay` moved to `@metaclinic/cdk`
 * New component `MdSelectionList`
 * `md-input-container` renamed to `md-form-field` (while still being backwards compatible)
 * Almost all components now use `OnPush` change detection (dialog being the exception)
@@ -18,31 +18,31 @@ split views. While there are no differences introduced between the two in this r
 releases will see different features added to each
 
 ### Breaking changes
-* Imports from `@angular/cdk` are now scoped to a specific sub-package. For example, if you
+* Imports from `@metaclinic/cdk` are now scoped to a specific sub-package. For example, if you
 previously had:
 ```ts
-import {LiveAnnouncer, Overlay, Directionality} from '@angular/cdk';
+import {LiveAnnouncer, Overlay, Directionality} from '@metaclinic/cdk';
 ```
 You will now need to write:
 ```ts
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {Directionality} from '@angular/cdk/bidi';
-import {Overlay} from '@angular/cdk/overlay';
+import {LiveAnnouncer} from '@metaclinic/cdk/a11y';
+import {Directionality} from '@metaclinic/cdk/bidi';
+import {Overlay} from '@metaclinic/cdk/overlay';
 ```
 
 This helps ensure you're only pulling in the pieces of the cdk being used as well as providing more
 context about what an imported symbol is being used for.
 
-The current set of public `@angular/cdk` subpackages are:
+The current set of public `@metaclinic/cdk` subpackages are:
 a11y, bidi, coercion, collections, keycodes, observers, overlay, platform, portal, rxjs,
 scrolling, table.
 
 If you are using SystemJS, each package you use must be added to the SystemJS configuration. 
-* All `Overlay` code has been moved from `@angular/material` to `@angular/cdk`. The symbols are
-still re-exported through `@angular/material`, but these re-exports will be removed in a
+* All `Overlay` code has been moved from `@metaclinic/material` to `@metaclinic/cdk`. The symbols are
+still re-exported through `@metaclinic/material`, but these re-exports will be removed in a
 subsequent release.
 * `cdkScrollable`, `ScrollDispatcher`, and `ViewportRuler` have been moved from overlay into its
-own `scrolling` subpackage in `@angular/cdk`. 
+own `scrolling` subpackage in `@metaclinic/cdk`. 
 * **input:** Inputs have a width of `200px` by default (similar to native input elements). The
 width can be overridden by via the `mat-form-field` css class.
 * **input:** CSS classes have changed from `mat-input-container-` to `mat-form-field-`. 
@@ -103,7 +103,7 @@ such that both select and input share the same features and appearance.
 unchanged. The unprefixed inputs will be removed in a subsequent release. Affected directives are
 `cdkPortalHost`, `cdkConnectedOverlay`, `mdTooltip`, `mdTextareaAutosize`, and `mdMenuTriggerFor`.
 * `MdCoreModule` is deprecated and will be removed in a subsequent release now that most of its
-functionality has been moved to `@angular/cdk`
+functionality has been moved to `@metaclinic/cdk`
 * Reminder that `MaterialModule` is deprecated and will be removed in a subsequent release (see
 changelog from beta.3 for more information).
 
@@ -316,10 +316,10 @@ changelog from beta.3 for more information).
 
 
 ### Highlights
-* This version marks the release of `@angular/cdk` (component dev kit)! This package contains
+* This version marks the release of `@metaclinic/cdk` (component dev kit)! This package contains
 general building blocks for UI components decoupled from the visuals of Material Design. In the
 initial release, code from Angular Material's `core/` have been moved for `a11y/`, `bidi/`,
-`coercion/`, `observe-content/`, `platform/`, `portal/`. The `@angular/material` package now
+`coercion/`, `observe-content/`, `platform/`, `portal/`. The `@metaclinic/material` package now
 re-exports these symbols, marked as deprecated. The re-exports will be removed in a subsequent
 release.
 * Initial version of data-table component. There is both a `<cdk-table>` (the core) and the
@@ -327,11 +327,11 @@ release.
 information.
 * Initial version of `<md-paginator>` and `<md-sort-header>` components, which can be used either
 with `<md-table>` or any other table.
-* Both `@angular/material` and `@angular/cdk` are now strict null compliant.
+* Both `@metaclinic/material` and `@metaclinic/cdk` are now strict null compliant.
 
 
 ### Breaking changes
-* `@angular/material` now depends on `@angular/cdk` as a peer dependency.
+* `@metaclinic/material` now depends on `@metaclinic/cdk` as a peer dependency.
 * Some types have expanded to include `| null` or `| undefined` for strict null compatibility. If
 your application uses strict null checks, you may have to update the types in your app to match up
 with the more accurate types coming from Angular Material.
@@ -643,19 +643,19 @@ a few bugs, but things should mostly work.
 #### Package structure
 The package structure for Angular Material has changed to match that of Angular itself. This has
 a few ramifications on applications consuming Angular Material:
-* Deep imports will no longer work, e.g., `@angular/material/core/a11y`. All public symbols
-should be imported directly from `@angular/material`. Deep imports have always been an anti-pattern,
+* Deep imports will no longer work, e.g., `@metaclinic/material/core/a11y`. All public symbols
+should be imported directly from `@metaclinic/material`. Deep imports have always been an anti-pattern,
 but our previous package structure inadvertently allowed them.
 * The imports for theming have changed.
 ** For prebuilt themes, you can now find the CSS files in the `prebuilt-themes/` directory in the
 package root. For angular-cli projects, this will look something like
 ```scss
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@metaclinic/material/prebuilt-themes/deeppurple-amber.css';
 ```
 ** For custom themes, you can now import `theming.scss` directly from the package root. Again, with
 angular-cli, this will look something like:
 ```scss
-@import '~@angular/material/theming';
+@import '~@metaclinic/material/theming';
 ```
 
 #### Removal of deprecated symbols
@@ -679,7 +679,7 @@ imports only the set of components actually used in the application.
 
 #### Angular 4
 * Angular Material now depends on Angular 4.
-* Now that animations have been refactored into a separate package, users of `@angular/material`
+* Now that animations have been refactored into a separate package, users of `@metaclinic/material`
 need to explicitly import `BrowserAnimationsModule` (or `NoopAnimationsModule`) from
 `@angular/platform-browser/animations` as well as installing `@angular/animations`.
 
@@ -1078,7 +1078,7 @@ should no longer throw an error if it is missing.
 # [2.0.0-alpha.11 polyester-golem](https://github.com/angular/material2/compare/2.0.0-alpha.9...2.0.0-alpha.11) (2016-12-08)
 
 
-**NOTE:** Be sure to delete your previous install of `@angular/material` and install it fresh, as
+**NOTE:** Be sure to delete your previous install of `@metaclinic/material` and install it fresh, as
 `npm` sometimes doesn't see that there is a more recent alpha release.
 
 ### Bug Fixes
@@ -1262,7 +1262,7 @@ should no longer throw an error if it is missing.
 ## Breaking Changes
 
 Angular Material has changed from `@angular2-material/...` packages to a single package under
-`@angular/material`. Along with this change, there is a new NgModule, `MaterialModule`, that
+`@metaclinic/material`. Along with this change, there is a new NgModule, `MaterialModule`, that
 contains all of the components. Build tools such as [`rollup.js`](http://rollupjs.org/) can perform
 tree-shaking to eliminate the code for components that you aren't using.
 

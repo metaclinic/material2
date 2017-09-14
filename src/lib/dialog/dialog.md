@@ -52,7 +52,7 @@ To access the data in your dialog component, you have to use the MD_DIALOG_DATA 
 
 ```ts
 import {Component, Inject} from '@angular/core';
-import {MD_DIALOG_DATA} from '@angular/material';
+import {MD_DIALOG_DATA} from '@metaclinic/material';
 
 @Component({
   selector: 'your-dialog',

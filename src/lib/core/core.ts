@@ -7,11 +7,11 @@
  */
 
 import {NgModule} from '@angular/core';
-import {A11yModule} from '@angular/cdk/a11y';
-import {BidiModule} from '@angular/cdk/bidi';
-import {ObserversModule} from '@angular/cdk/observers';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {PortalModule} from '@angular/cdk/portal';
+import {A11yModule} from '@metaclinic/cdk/a11y';
+import {BidiModule} from '@metaclinic/cdk/bidi';
+import {ObserversModule} from '@metaclinic/cdk/observers';
+import {OverlayModule} from '@metaclinic/cdk/overlay';
+import {PortalModule} from '@metaclinic/cdk/portal';
 import {MdLineModule} from './line/line';
 import {MdOptionModule} from './option/index';
 import {MdPseudoCheckboxModule} from './selection/index';
@@ -21,16 +21,16 @@ import {MdRippleModule} from './ripple/index';
 export {
   coerceBooleanProperty,
   coerceNumberProperty,
-} from '@angular/cdk/coercion';
+} from '@metaclinic/cdk/coercion';
 
 export {
   ObserversModule,
   ObserveContent,
-} from '@angular/cdk/observers';
+} from '@metaclinic/cdk/observers';
 
 export {
   SelectionModel
-} from '@angular/cdk/collections';
+} from '@metaclinic/cdk/collections';
 
 // RTL
 export {Dir, Direction, Directionality, BidiModule} from './bidi/index';
@@ -53,10 +53,10 @@ export {
 export {DomPortalHost} from './portal/dom-portal-host';
 
 // Platform
-export * from '@angular/cdk/platform';
+export * from '@metaclinic/cdk/platform';
 
 // Overlay
-export * from '@angular/cdk/overlay';
+export * from '@metaclinic/cdk/overlay';
 
 // Gestures
 export {GestureConfig} from './gestures/gesture-config';
@@ -80,7 +80,7 @@ export {
   FocusTrapDirective,
   isFakeMousedownFromScreenReader,
   A11yModule,
-} from '@angular/cdk/a11y';
+} from '@metaclinic/cdk/a11y';
 
 export {
   UniqueSelectionDispatcher,

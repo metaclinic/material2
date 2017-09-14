@@ -16,10 +16,10 @@ import {
 import {AnimationEvent} from '@angular/animations';
 import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {Direction, Directionality} from '@angular/cdk/bidi';
-import {OverlayContainer, OverlayModule, Scrollable} from '@angular/cdk/overlay';
-import {Platform} from '@angular/cdk/platform';
-import {dispatchFakeEvent} from '@angular/cdk/testing';
+import {Direction, Directionality} from '@metaclinic/cdk/bidi';
+import {OverlayContainer, OverlayModule, Scrollable} from '@metaclinic/cdk/overlay';
+import {Platform} from '@metaclinic/cdk/platform';
+import {dispatchFakeEvent} from '@metaclinic/cdk/testing';
 import {
   MdTooltip,
   MdTooltipModule,

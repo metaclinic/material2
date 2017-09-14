@@ -24,7 +24,7 @@ import {
   OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
 import {Subscription} from 'rxjs/Subscription';
 import {MdTab} from './tab';
 import {merge} from 'rxjs/observable/merge';

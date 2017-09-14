@@ -10,7 +10,7 @@ const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDi
 
 /** Object with all CDK entry points in the format of Rollup globals. */
 const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
-  globals[`@angular/cdk/${entryPoint}`] = `ng.cdk.${dashCaseToCamelCase(entryPoint)}`;
+  globals[`@metaclinic/cdk/${entryPoint}`] = `ng.cdk.${dashCaseToCamelCase(entryPoint)}`;
   return globals;
 }, {});
 
@@ -18,7 +18,6 @@ const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entry
 export const rollupGlobals = {
   'tslib': 'tslib',
   'moment': 'moment',
-
   '@angular/animations': 'ng.animations',
   '@angular/core': 'ng.core',
   '@angular/common': 'ng.common',
@@ -32,19 +31,14 @@ export const rollupGlobals = {
   '@angular/core/testing': 'ng.core.testing',
   '@angular/common/testing': 'ng.common.testing',
   '@angular/http/testing': 'ng.http.testing',
-
-
-  '@angular/material': 'ng.material',
-  '@angular/cdk': 'ng.cdk',
-
+  '@metaclinic/material': 'ng.material',
+  '@metaclinic/cdk': 'ng.cdk',
   // Include secondary entry-points of the CDK package
   ...rollupCdkEntryPoints,
-
   // Some packages are not really needed for the UMD bundles, but for the missingRollupGlobals rule.
   // TODO(devversion): remove by adding minimatch and better globbing to rules
-  '@angular/cdk/testing': 'ng.cdk.testing',
-  '@angular/material-examples': 'ng.materialExamples',
-
+  '@metaclinic/cdk/testing': 'ng.cdk.testing',
+  '@metaclinic/material-examples': 'ng.materialExamples',
   'rxjs/BehaviorSubject': 'Rx',
   'rxjs/Observable': 'Rx',
   'rxjs/Subject': 'Rx',
@@ -72,7 +66,6 @@ export const rollupGlobals = {
   'rxjs/operator/switchMap': 'Rx.Observable.prototype',
   'rxjs/operator/takeUntil': 'Rx.Observable.prototype',
   'rxjs/operator/toPromise': 'Rx.Observable.prototype',
-
   'rxjs/add/observable/merge': 'Rx.Observable',
   'rxjs/add/observable/fromEvent': 'Rx.Observable',
   'rxjs/add/observable/of': 'Rx.Observable',
