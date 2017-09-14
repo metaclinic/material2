@@ -1,5 +1,6 @@
 @import '../core/style/variables';
 @import '../core/style/vendor-prefixes';
+
 // The Input element proper.
 .mat-input-element {
   // Font needs to be inherited, because by default <input> has a system font.
@@ -9,9 +10,8 @@
   font-size: 13px;
   height: 30px;
   line-height: 30px;
-  background: transparent;
-  // color: currentColor; // By default, <input> has a padding, border, outline and a default width.
-  color: #2d3d53;
+  color: currentColor;
+  background: transparent; // color: currentColor; // By default, <input> has a padding, border, outline and a default width.
   border: none;
   outline: none;
   padding: 0;

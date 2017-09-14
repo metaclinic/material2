@@ -1,13 +1,11 @@
 @import 'palette';
 
-
 // For a given hue in a palette, return the contrast color from the map of contrast palettes.
 // @param $color-map
 // @param $hue
 @function mat-contrast($palette, $hue) {
   @return map-get(map-get($palette, contrast), $hue);
 }
-
 
 // Creates a map of hues to colors for a theme. This is used to define a theme palette in terms
 // of the Material Design hues.
@@ -35,7 +33,6 @@
   @return $result;
 }
 
-
 // Gets a color from a theme palette (the output of mat-palette).
 // The hue can be one of the standard values (500, A400, etc.), one of the three preconfigured
 // hues (default, lighter, darker), or any of the aforementioned prefixed with "-contrast".
@@ -56,7 +53,6 @@
 
   @return rgba($color, $opacity);
 }
-
 
 // Creates a container object for a light theme to be given to individual component theme mixins.
 @function mat-light-theme($primary, $accent, $warn: mat-palette($mat-red)) {

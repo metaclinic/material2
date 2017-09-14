@@ -7,8 +7,8 @@
 $mat-button-padding: 0 16px !default;
 $mat-button-min-width: 88px !default;
 $mat-button-margin: 0 !default;
-$mat-button-line-height: 36px !default;
-$mat-button-border-radius: 2px !default;
+$mat-button-line-height: 38px !default;
+$mat-button-border-radius: 3px !default;
 $mat-button-focus-transition: opacity 200ms $swift-ease-in-out-timing-function,
                               background-color 200ms $swift-ease-in-out-timing-function !default;
 
@@ -39,6 +39,7 @@ $mat-mini-fab-padding: 8px !default;
   text-decoration: none;
   vertical-align: baseline;
   text-align: center;
+  letter-spacing:.04em;
 
   // Sizing.
   margin: $mat-button-margin;
@@ -66,7 +67,12 @@ $mat-mini-fab-padding: 8px !default;
 %mat-raised-button {
   @extend %mat-button-base;
 
-  @include mat-elevation(2);
+  @include mat-elevation(.5);
+
+  font-size:11px;
+  line-height: 38px;
+  
+  font-weight:200;
 
   // Force hardware acceleration.
   transform: translate3d(0, 0, 0);

@@ -17,19 +17,20 @@ import {
   Optional,
   Renderer2,
   Self,
+  forwardRef
 } from '@angular/core';
-import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
-import {FormControl, FormGroupDirective, NgControl, NgForm} from '@angular/forms';
-import {Platform, getSupportedInputTypes} from '@metaclinic/cdk/platform';
-import {getMdInputUnsupportedTypeError} from './input-errors';
+import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
+import { FormControl, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { Platform, getSupportedInputTypes } from '@metaclinic/cdk/platform';
+import { getMdInputUnsupportedTypeError } from './input-errors';
 import {
   defaultErrorStateMatcher,
   ErrorOptions,
   ErrorStateMatcher,
   MD_ERROR_GLOBAL_OPTIONS
 } from '../core/error/error-options';
-import {Subject} from 'rxjs/Subject';
-import {MdFormFieldControl} from '../form-field/index';
+import { Subject } from 'rxjs/Subject';
+import { MdFormFieldControl } from '../form-field/index';
 
 // Invalid input type. Using one of these will throw an MdInputUnsupportedTypeError.
 const MD_INPUT_INVALID_TYPES = [
@@ -47,14 +48,11 @@ const MD_INPUT_INVALID_TYPES = [
 
 let nextUniqueId = 0;
 
-
 /** Directive that allows a native input to work inside a `MdFormField`. */
 @Directive({
   selector: `input[mdInput], textarea[mdInput], input[matInput], textarea[matInput]`,
   host: {
     'class': 'mat-input-element',
-    // Native input properties that are overwritten by Angular inputs need to be synced with
-    // the native input element. Otherwise property bindings for those don't work.
     '[id]': 'id',
     '[placeholder]': 'placeholder',
     '[disabled]': 'disabled',
@@ -65,7 +63,7 @@ let nextUniqueId = 0;
     '(focus)': '_focusChanged(true)',
     '(input)': '_onInput()',
   },
-  providers: [{provide: MdFormFieldControl, useExisting: MdInput}],
+  providers: [{ provide: MdFormFieldControl, useExisting: MdInput }],
 })
 export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, DoCheck {
   /** Variables used as cache for getters and setters. */
@@ -148,12 +146,12 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   ].filter(t => getSupportedInputTypes().has(t));
 
   constructor(private _elementRef: ElementRef,
-              private _renderer: Renderer2,
-              private _platform: Platform,
-              @Optional() @Self() public ngControl: NgControl,
-              @Optional() private _parentForm: NgForm,
-              @Optional() private _parentFormGroup: FormGroupDirective,
-              @Optional() @Inject(MD_ERROR_GLOBAL_OPTIONS) errorOptions: ErrorOptions) {
+    private _renderer: Renderer2,
+    private _platform: Platform,
+    @Optional() @Self() public ngControl: NgControl,
+    @Optional() private _parentForm: NgForm,
+    @Optional() private _parentFormGroup: FormGroupDirective,
+    @Optional() @Inject(MD_ERROR_GLOBAL_OPTIONS) errorOptions: ErrorOptions) {
 
     // Force setter to be called in case id was not specified.
     this.id = this.id;
@@ -272,11 +270,11 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   // Implemented as part of MdFormFieldControl.
   get empty(): boolean {
     return !this._isNeverEmpty() &&
-        (this.value == null || this.value === '') &&
-        // Check if the input contains bad input. If so, we know that it only appears empty because
-        // the value failed to parse. From the user's perspective it is not empty.
-        // TODO(mmalerba): Add e2e test for bad input case.
-        !this._isBadInput();
+      (this.value == null || this.value === '') &&
+      // Check if the input contains bad input. If so, we know that it only appears empty because
+      // the value failed to parse. From the user's perspective it is not empty.
+      // TODO(mmalerba): Add e2e test for bad input case.
+      !this._isBadInput();
   }
 
   // Implemented as part of MdFormFieldControl.
@@ -285,3 +283,4 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   // Implemented as part of MdFormFieldControl.
   focus() { this._elementRef.nativeElement.focus(); }
 }
+

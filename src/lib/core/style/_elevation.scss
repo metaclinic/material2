@@ -37,6 +37,7 @@ $_ambient-color: rgba(black, 0.12);
 
 $_umbra-elevation-map: (
   0: '0px 0px 0px 0px #{$_umbra-color}',
+  .5: '0px 1px 1px -1px #{$_umbra-color}',
   1: '0px 2px 1px -1px #{$_umbra-color}',
   2: '0px 3px 1px -2px #{$_umbra-color}',
   3: '0px 3px 3px -2px #{$_umbra-color}',
@@ -65,6 +66,7 @@ $_umbra-elevation-map: (
 
 $_penumbra-elevation-map: (
   0: '0px 0px 0px 0px #{$_penumbra-color}',
+  .5: '0px 1px 1px 0px #{$_penumbra-color}',
   1: '0px 1px 1px 0px #{$_penumbra-color}',
   2: '0px 2px 2px 0px #{$_penumbra-color}',
   3: '0px 3px 4px 0px #{$_penumbra-color}',
@@ -93,6 +95,7 @@ $_penumbra-elevation-map: (
 
 $_ambient-elevation-map: (
   0: '0px 0px 0px 0px #{$_ambient-color}',
+  .5: '0px 1px 2px 1px #{$_ambient-color}',
   1: '0px 1px 3px 0px #{$_ambient-color}',
   2: '0px 1px 5px 0px #{$_ambient-color}',
   3: '0px 1px 8px 0px #{$_ambient-color}',

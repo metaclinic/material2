@@ -30,8 +30,7 @@
   $body-2:        mat-typography-level(14px, 24px, 500),
   $body-1:        mat-typography-level(14px, 20px, 400),
   $caption:       mat-typography-level(12px, 20px, 400),
-  $button:        mat-typography-level(11px, 38px, 200),
-  // Line-height must be unit-less fraction of the font-size.
+  $button:        mat-typography-level(14px, 38px, 400),
   $input:         mat-typography-level(13px, 1.175, 300)
 ) {
 

@@ -4,6 +4,7 @@
 $mat-form-field-hint-min-space: 1em !default;
 // The height of the underline.
 $mat-form-field-underline-height: 1px !default;
+$mat-form-field-label-font-size: 15px !default;
 .mat-form-field {
   display: inline-block;
   position: relative; // To avoid problems with text-align.
@@ -69,7 +70,7 @@ $mat-form-field-underline-height: 1px !default;
 // determining overflow.
 .mat-form-field-label-wrapper {
   font-weight: 200;
-  font-size: 15px;
+  font-size: $mat-form-field-label-font-size;
   position: absolute;
   left: 0;
   box-sizing: content-box;
@@ -92,16 +93,9 @@ $mat-form-field-underline-height: 1px !default;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; // The perspective helps smooth out animations on Chrome and Firefox but isn't needed on IE.
-  transform: perspective(100px);
-  -ms-transform: none;
-  transform-origin: 0 0;
-  transition: transform $swift-ease-out-duration $swift-ease-out-timing-function, color $swift-ease-out-duration $swift-ease-out-timing-function, width $swift-ease-out-duration $swift-ease-out-timing-function; // Hide the placeholder initially, and only show it when it's floating or the control is empty.
-  display: none;
-  &.mat-form-field-empty,
-  &.mat-form-field-float:not(.mat-form-field-empty),
-  .mat-focused &.mat-form-field-float {
-    display: block;
-  }
+  // top: $mat-form-field-label-font-size;
+  top: 4px;
+  display: block;
   [dir='rtl'] & {
     transform-origin: 100% 0;
     left: auto;
@@ -136,7 +130,7 @@ $mat-form-field-underline-height: 1px !default;
 .mat-form-field-placeholder-wrapper {
   font-style: italic;
   font-weight: 100;
-  font-size: 13px; 
+  font-size: 13px;
   line-height: 30px;
   position: absolute;
   left: 0;
@@ -153,7 +147,7 @@ $mat-form-field-underline-height: 1px !default;
 .mat-form-field-placeholder {
   position: absolute;
   left: 0; // font: inherit;
-  pointer-events: none; 
+  pointer-events: none;
   width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;

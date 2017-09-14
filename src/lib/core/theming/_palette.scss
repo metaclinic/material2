@@ -8,13 +8,19 @@
 
 $black-87-opacity: rgba(black, 0.87);
 $white-87-opacity: rgba(white, 0.87);
+$black-50-opacity: rgba(black, 0.50);
+$white-50-opacity: rgba(white, 0.50);
 $black-12-opacity: rgba(black, 0.12);
-$lighter-grey: #CBCFD3;
-$light-grey: #AFB5BC;
-$dark-grey-blue: #2d3d53;
 $white-12-opacity: rgba(white, 0.12);
 $black-6-opacity: rgba(black, 0.06);
 $white-6-opacity: rgba(white, 0.06);
+
+$lighter-grey: #CBCFD3;
+$light-grey: #AFB5BC;
+$dark-grey-blue: #2d3d53;
+$blue-grey: #879bb6;
+$pale-salmon: #ffa1a1;
+$deep-sky-blue: #217df2;
 
 $mat-red: (
   50: #ffebee,
@@ -147,7 +153,6 @@ $mat-deep-purple: (
     A700: $white-87-opacity,
   )
 );
-
 $mat-indigo: (
   50: #e8eaf6,
   100: #c5cae9,
@@ -709,6 +714,72 @@ $mat-meta-grey: (
   )
 );
 
+$mat-meta-bluegrey: (
+  50: #9fafc5,
+  100: #99aac1,
+  200: #93a5bd,
+  300: #8da0ba,
+  400: #899db7,
+  500: #879bb6,
+  600: #8093ad,
+  700: #798ba3,
+  800: #73849b,
+  900: #6c7c92,
+  A100: #9fafc5,
+  A200: #93a5bd,
+  A400: #879bb6,
+  A700: #6c7c92,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: white,
+    500: white,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: white,
+    A700: $white-87-opacity,
+  )
+);
+
+$mat-meta-palesalmon: (
+  50: #ffb4b4,
+  100: #ffafaf,
+  200: #ffabab,
+  300: #ffa6a6,
+  400: #ffa3a3,
+  500: #ffa1a1,
+  600: #f29999,
+  700: #e59191,
+  800: #d98989,
+  900: #cc8181,
+  A100: #ffb4b4,
+  A200: #ffabab,
+  A400: #ffa1a1,
+  A700: #cc8181,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: white,
+    500: white,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: white,
+    A700: $white-87-opacity,
+  )
+);
+
 
 
 // Background palette for light themes.
@@ -752,13 +823,14 @@ $mat-light-theme-foreground: (
   base:              black,
   divider:           $lighter-grey,
   dividers:          $lighter-grey,
+  focused-dividers:  $deep-sky-blue,
   disabled:          rgba(black, 0.38),
   disabled-button:   rgba(black, 0.38),
   disabled-text:     rgba(black, 0.38),
   hint-text:         rgba(black, 0.38),
   secondary-text:    $light-grey,
-  icon:              rgba(black, 0.54),
-  icons:             rgba(black, 0.54),
+  icon:              $deep-sky-blue,
+  icons:             $deep-sky-blue,
   text:              $dark-grey-blue,
   slider-min:        rgba(black, 0.87),
   slider-off:        rgba(black, 0.26),
@@ -768,13 +840,14 @@ $mat-light-theme-foreground: (
 // Foreground palette for dark themes.
 $mat-dark-theme-foreground: (
   base:              white,
-  divider:           $white-12-opacity,
-  dividers:          $white-12-opacity,
+  divider:           $white-6-opacity,
+  dividers:          $white-6-opacity,
+  focused-dividers:  white,
   disabled:          rgba(white, 0.3),
   disabled-button:   rgba(white, 0.3),
   disabled-text:     rgba(white, 0.3),
   hint-text:         rgba(white, 0.3),
-  secondary-text:    rgba(white, 0.7),
+  secondary-text:    $white-50-opacity,
   icon:              white,
   icons:             white,
   text:              white,
