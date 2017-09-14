@@ -3,51 +3,54 @@
   <md-card-content>
     <form>
       <md-form-field class="demo-full-width">
-        <input mdInput placeholder="Company (disabled)" disabled value="Google">
+        <input mdInput placeholder="Company name" disabled value="Google" label="Company (disabled)">
       </md-form-field>
 
-      <table style="width: 100%" cellspacing="0"><tr>
-        <td>
-          <md-form-field style="width: 100%" floatPlaceholder="never">
-            <input mdInput placeholder="First name">
-          </md-form-field>
-        </td>
-        <td>
-          <md-form-field style="width: 100%">
-            <input mdInput placeholder="Long Last Name That Will Be Truncated">
-          </md-form-field>
-        </td>
-      </tr></table>
+      <table style="width: 100%" cellspacing="0">
+        <tr>
+          <td>
+            <md-form-field style="width: 100%" floatPlaceholder="never">
+              <input mdInput placeholder="placeholder" label="A label goes here">
+            </md-form-field>
+          </td>
+          <td>
+            <md-form-field style="width: 100%">
+              <input mdInput placeholder="Long Last Name That Will Be Truncated" label="Last name">
+            </md-form-field>
+          </td>
+        </tr>
+      </table>
       <p>
         <md-form-field class="demo-full-width">
-          <textarea mdInput placeholder="Address">1600 Amphitheatre Pkway</textarea>
+          <textarea mdInput placeholder="Address" label="Address">1600 Amphitheatre Pkway</textarea>
         </md-form-field>
         <md-form-field class="demo-full-width">
-          <textarea mdInput placeholder="Address 2"></textarea>
+          <textarea mdInput placeholder="Address 2" label="Address 2"></textarea>
         </md-form-field>
       </p>
-      <table style="width: 100%" cellspacing="0"><tr>
-        <td>
-          <md-form-field class="demo-full-width">
-            <input mdInput placeholder="City" value="Mountain View">
-          </md-form-field>
-        </td>
-        <td>
-          <md-form-field class="demo-full-width">
-            <input mdInput placeholder="State" maxLength="2" value="CA">
-          </md-form-field>
-        </td>
-        <td>
-          <md-form-field class="demo-full-width">
-            <input mdInput #postalCode maxLength="5" placeholder="Postal Code" value="94043"
-                   pattern="[0-9]{5}">
-            <md-hint align="end">
-              <md-icon>mode_edit</md-icon>
-              <span aria-live="polite">{{postalCode.value.length}} / 5</span>
-            </md-hint>
-          </md-form-field>
-        </td>
-      </tr></table>
+      <table style="width: 100%" cellspacing="0">
+        <tr>
+          <td>
+            <md-form-field class="demo-full-width">
+              <input mdInput placeholder="City" value="Mountain View" label="City">
+            </md-form-field>
+          </td>
+          <td>
+            <md-form-field class="demo-full-width">
+              <input mdInput placeholder="State" maxLength="2" value="CA" label="State">
+            </md-form-field>
+          </td>
+          <td>
+            <md-form-field class="demo-full-width">
+              <input mdInput #postalCode maxLength="5" placeholder="Postal Code" value="94043" pattern="[0-9]{5}" label="Postal Code">
+              <md-hint align="end">
+                <md-icon>mode_edit</md-icon>
+                <span aria-live="polite">{{postalCode.value.length}} / 5</span>
+              </md-hint>
+            </md-form-field>
+          </td>
+        </tr>
+      </table>
     </form>
   </md-card-content>
 </md-card>
@@ -59,12 +62,12 @@
 
     <p>
       <md-form-field>
-        <input mdInput placeholder="example" [(ngModel)]="errorMessageExample1" required>
+        <input mdInput placeholder="example" [(ngModel)]="errorMessageExample1" required label="Example">
         <md-error>This field is required</md-error>
       </md-form-field>
 
       <md-form-field>
-        <input mdInput placeholder="email" [formControl]="emailFormControl">
+        <input mdInput placeholder="email" [formControl]="emailFormControl" label="Email">
         <md-error *ngIf="emailFormControl.hasError('required')">
           This field is required
         </md-error>
@@ -77,7 +80,7 @@
     <h4>With hint</h4>
 
     <md-form-field>
-      <input mdInput placeholder="example" [(ngModel)]="errorMessageExample2" required>
+      <input mdInput placeholder="example" [(ngModel)]="errorMessageExample2" required label="Example">
       <md-error>This field is required</md-error>
       <md-hint>Please type something here</md-hint>
     </md-form-field>
@@ -87,8 +90,7 @@
       <h4>Inside a form</h4>
 
       <md-form-field>
-        <input mdInput name="example" placeholder="example"
-          [(ngModel)]="errorMessageExample3" required>
+        <input mdInput name="example" placeholder="example" [(ngModel)]="errorMessageExample3" required>
         <md-error>This field is required</md-error>
       </md-form-field>
 
@@ -97,11 +99,7 @@
 
     <h4>With a custom error function</h4>
     <md-form-field>
-      <input mdInput
-        placeholder="example"
-        [(ngModel)]="errorMessageExample4"
-        [errorStateMatcher]="customErrorStateMatcher"
-        required>
+      <input mdInput placeholder="example" [(ngModel)]="errorMessageExample4" [errorStateMatcher]="customErrorStateMatcher" required>
       <md-error>This field is required</md-error>
     </md-form-field>
 
@@ -138,7 +136,7 @@
   <md-toolbar color="primary">Divider Colors</md-toolbar>
   <md-card-content>
     <h4>Input</h4>
-    <md-form-field color="primary" >
+    <md-form-field color="primary">
       <input mdInput placeholder="Default Color" value="example">
     </md-form-field>
     <md-form-field color="accent">
@@ -160,7 +158,7 @@
     </md-form-field>
 
     <h4>With error</h4>
-    <md-form-field color="primary" >
+    <md-form-field color="primary">
       <input mdInput placeholder="Default Color" [(ngModel)]="dividerColorExample1" required>
       <md-error>This field is required</md-error>
     </md-form-field>
@@ -181,11 +179,7 @@
     <h4>Input</h4>
     <p>
       <md-form-field class="demo-full-width">
-        <input mdInput
-               #characterCountInputHintExample
-               placeholder="Character count (100 max)"
-               maxLength="100"
-               value="Hello world. How are you?">
+        <input mdInput #characterCountInputHintExample placeholder="Character count (100 max)" maxLength="100" value="Hello world. How are you?">
         <md-hint align="end" aria-live="polite">
           {{characterCountInputHintExample.value.length}} / 100
         </md-hint>
@@ -195,10 +189,7 @@
     <h4>Textarea</h4>
     <p>
       <md-form-field class="demo-full-width">
-        <textarea mdInput
-                  #characterCountTextareaHintExample
-                  placeholder="Character count (100 max)"
-                  maxLength="100">Hello world. How are you?</textarea>
+        <textarea mdInput #characterCountTextareaHintExample placeholder="Character count (100 max)" maxLength="100">Hello world. How are you?</textarea>
         <md-hint align="end" aria-live="polite">
           {{characterCountTextareaHintExample.value.length}} / 100
         </md-hint>
@@ -247,10 +238,12 @@
       <md-form-field>
         <input mdInput>
         <md-placeholder>
-          I <md-icon>favorite</md-icon> <b>bold</b> placeholder
+          I
+          <md-icon>favorite</md-icon> <b>bold</b> placeholder
         </md-placeholder>
         <md-hint>
-          I also <md-icon>home</md-icon> <i>italic</i> hint labels
+          I also
+          <md-icon>home</md-icon> <i>italic</i> hint labels
         </md-hint>
       </md-form-field>
     </p>
@@ -264,8 +257,7 @@
       <md-form-field style="margin-bottom: 4em">
         <textarea mdInput #longHint placeholder="Enter text to count"></textarea>
         <md-hint>
-          Enter some text to count how many characters are in it. The character count is shown on
-          the right.
+          Enter some text to count how many characters are in it. The character count is shown on the right.
         </md-hint>
         <md-hint align="end" style="white-space: nowrap" aria-live="polite">
           Length: {{longHint.value.length}}
@@ -281,17 +273,13 @@
     <p>
       <md-checkbox [(ngModel)]="requiredField"> Check to make required:</md-checkbox>
       <md-form-field>
-        <input mdInput
-               [required]="requiredField"
-               [placeholder]="requiredField ? 'Required field' : 'Not required field'">
+        <input mdInput [required]="requiredField" [placeholder]="requiredField ? 'Required field' : 'Not required field'">
       </md-form-field>
     </p>
     <p>
       <md-checkbox [(ngModel)]="hideRequiredMarker">Check to hide the required marker:</md-checkbox>
       <md-form-field [hideRequiredMarker]="hideRequiredMarker" style="width: 300px">
-        <input mdInput
-               required
-               [placeholder]="hideRequiredMarker ?
+        <input mdInput required [placeholder]="hideRequiredMarker ?
                    'Required Without Marker' : 'Required With Marker'">
       </md-form-field>
     </p>
@@ -318,8 +306,7 @@
         <input mdInput placeholder="Suffixed" value="123">
         <span mdSuffix>.00 €</span>
       </md-form-field>
-      <br/>
-      Both:
+      <br/> Both:
       <md-form-field class="demo-text-align-end">
         <input mdInput #email placeholder="Email Address" value="angular-core">
         <span mdPrefix><md-icon [class.primary]="email.focused">email</md-icon>&nbsp;</span>
@@ -328,7 +315,8 @@
     </p>
 
     <p>
-      Empty: <md-form-field><input mdInput></md-form-field>
+      Empty:
+      <md-form-field><input mdInput></md-form-field>
       <label>Label: <md-form-field><input mdInput></md-form-field></label>
     </p>
   </md-card-content>
@@ -339,23 +327,19 @@
   <md-card-content>
     <table width="100%">
       <thead>
-      <td>Table</td>
-      <td colspan="3">
-        <button (click)="addABunch(5)">Add 5</button>
-        <button (click)="addABunch(10)">Add 10</button>
-        <button (click)="addABunch(100)">Add 100</button>
-        <button (click)="addABunch(1000)">Add 1000</button>
-      </td>
+        <td>Table</td>
+        <td colspan="3">
+          <button (click)="addABunch(5)">Add 5</button>
+          <button (click)="addABunch(10)">Add 10</button>
+          <button (click)="addABunch(100)">Add 100</button>
+          <button (click)="addABunch(1000)">Add 1000</button>
+        </td>
       </thead>
       <tr *ngFor="let item of items; let i = index">
         <td>{{i+1}}</td>
         <td>
           <md-form-field>
-            <input mdInput
-                   type="number"
-                   placeholder="value"
-                   aria-label="hello"
-                   [(ngModel)]="items[i].value">
+            <input mdInput type="number" placeholder="value" aria-label="hello" [(ngModel)]="items[i].value">
           </md-form-field>
         </td>
         <td>
@@ -375,8 +359,7 @@
     <md-form-field>
       <input mdInput placeholder="template" [(ngModel)]="model" required [disabled]="ctrlDisabled">
     </md-form-field>
-    <button md-raised-button color="primary"
-            (click)="formControl.enabled ? formControl.disable() : formControl.enable()">
+    <button md-raised-button color="primary" (click)="formControl.enabled ? formControl.disable() : formControl.enable()">
       DISABLE REACTIVE CTRL
     </button>
     <button md-raised-button color="primary" (click)="ctrlDisabled = !ctrlDisabled">
@@ -384,7 +367,7 @@
     </button>
     <div>
       <md-form-field>
-          <input mdInput placeholder="delayed value" [formControl]="delayedFormControl">
+        <input mdInput placeholder="delayed value" [formControl]="delayedFormControl">
       </md-form-field>
     </div>
   </md-card-content>
@@ -399,10 +382,7 @@
     <h3>&lt;textarea&gt; with md-form-field</h3>
     <div>
       <md-form-field>
-        <textarea mdInput
-                  mdTextareaAutosize
-                  mdAutosizeMaxRows="10"
-                  placeholder="Autosized textarea"></textarea>
+        <textarea mdInput mdTextareaAutosize mdAutosizeMaxRows="10" placeholder="Autosized textarea"></textarea>
       </md-form-field>
     </div>
 

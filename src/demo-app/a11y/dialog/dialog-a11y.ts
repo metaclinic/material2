@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MdDialog} from '@metaclinic/material';
 
 
 @Component({

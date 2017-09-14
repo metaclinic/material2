@@ -1,4 +1,5 @@
 /* stylelint-disable material/no-prefixes */
+
 @mixin user-select($value) {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -10,16 +11,28 @@
   &::placeholder {
     @content;
   }
-
   &::-moz-placeholder {
     @content;
   }
-
   &::-webkit-input-placeholder {
     @content;
   }
-
   &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin input-label {
+  &::label {
+    @content;
+  }
+  &::-moz-label {
+    @content;
+  }
+  &::-webkit-input-label {
+    @content;
+  }
+  &:-ms-input-label {
     @content;
   }
 }
@@ -38,4 +51,6 @@
   -webkit-backface-visibility: $value;
   backface-visibility: $value;
 }
+
+
 /* stylelint-enable */

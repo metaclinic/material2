@@ -10,7 +10,7 @@
     "strictNullChecks": true,
     "outDir": ".",
     "paths": {
-      "@angular/material": ["./material"],
+      "@metaclinic/material": ["./material"],
       "@angular/cdk/*": ["./cdk/*"],
       "@angular/material-moment-adapter": ["./material-moment-adapter"]
     }

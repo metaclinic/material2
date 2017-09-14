@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdIconRegistry} from '@angular/material';
+import {MdIconRegistry} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,

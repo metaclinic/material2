@@ -5,7 +5,7 @@ import {
   MdSnackBarHorizontalPosition,
   MdSnackBarVerticalPosition,
   Dir,
-} from '@angular/material';
+} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,

@@ -104,6 +104,7 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
 
   /** Placeholder attribute of the element. */
   @Input() placeholder: string = '';
+  @Input() label: string = '';
 
   /** Whether the element is required. */
   @Input()

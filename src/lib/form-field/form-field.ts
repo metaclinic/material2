@@ -23,26 +23,30 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {coerceBooleanProperty} from '../core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { coerceBooleanProperty } from '../core';
 import {
   getMdFormFieldDuplicatedHintError,
   getMdFormFieldMissingControlError,
   getMdFormFieldPlaceholderConflictError,
+  getMdFormFieldLabelConflictError,
 } from './form-field-errors';
+
 import {
   FloatPlaceholderType,
   MD_PLACEHOLDER_GLOBAL_OPTIONS,
   PlaceholderOptions
 } from '../core/placeholder/placeholder-options';
-import {startWith, first} from '@angular/cdk/rxjs';
-import {MdError} from './error';
-import {MdFormFieldControl} from './form-field-control';
-import {MdHint} from './hint';
-import {MdPlaceholder} from './placeholder';
-import {MdPrefix} from './prefix';
-import {MdSuffix} from './suffix';
-import {fromEvent} from 'rxjs/observable/fromEvent';
+
+import { startWith, first } from '@angular/cdk/rxjs';
+import { MdError } from './error';
+import { MdFormFieldControl } from './form-field-control';
+import { MdHint } from './hint';
+import { MdPlaceholder } from './placeholder';
+import { MdLabel } from './label';
+import { MdPrefix } from './prefix';
+import { MdSuffix } from './suffix';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 
 let nextUniqueId = 0;
@@ -146,16 +150,18 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
   @ViewChild('underline') underlineRef: ElementRef;
   @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
   @ViewChild('placeholder') private _placeholder: ElementRef;
+  @ViewChild('label') private _label: ElementRef;
   @ContentChild(MdFormFieldControl) _control: MdFormFieldControl<any>;
   @ContentChild(MdPlaceholder) _placeholderChild: MdPlaceholder;
+  @ContentChild(MdLabel) _labelChild: MdLabel;
   @ContentChildren(MdError) _errorChildren: QueryList<MdError>;
   @ContentChildren(MdHint) _hintChildren: QueryList<MdHint>;
   @ContentChildren(MdPrefix) _prefixChildren: QueryList<MdPrefix>;
   @ContentChildren(MdSuffix) _suffixChildren: QueryList<MdSuffix>;
 
   constructor(
-      public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef,
-      @Optional() @Inject(MD_PLACEHOLDER_GLOBAL_OPTIONS) placeholderOptions: PlaceholderOptions) {
+    public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef,
+    @Optional() @Inject(MD_PLACEHOLDER_GLOBAL_OPTIONS) placeholderOptions: PlaceholderOptions) {
     this._placeholderOptions = placeholderOptions ? placeholderOptions : {};
     this.floatPlaceholder = this._placeholderOptions.float || 'auto';
   }
@@ -166,6 +172,7 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
     // Subscribe to changes in the child control state in order to update the form field UI.
     startWith.call(this._control.stateChanges, null).subscribe(() => {
       this._validatePlaceholders();
+      this._validateLabels();
       this._syncDescribedByIds();
       this._changeDetectorRef.markForCheck();
     });
@@ -211,10 +218,14 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
     return !!(this._control.placeholder || this._placeholderChild);
   }
 
+  _hasLabel() {
+    return !!(this._control.label || this._labelChild);
+  }
+
   /** Determines whether to display hints or errors. */
   _getDisplayedMessages(): 'error' | 'hint' {
     return (this._errorChildren && this._errorChildren.length > 0 &&
-        this._control.errorState) ? 'error' : 'hint';
+      this._control.errorState) ? 'error' : 'hint';
   }
 
   /** Animates the placeholder up and locks it in position. */
@@ -238,6 +249,12 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
   private _validatePlaceholders() {
     if (this._control.placeholder && this._placeholderChild) {
       throw getMdFormFieldPlaceholderConflictError();
+    }
+  }
+
+  private _validateLabels() {
+    if (this._control.label && this._labelChild) {
+      throw getMdFormFieldLabelConflictError();
     }
   }
 
@@ -281,9 +298,9 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
 
       if (this._getDisplayedMessages() === 'hint') {
         let startHint = this._hintChildren ?
-            this._hintChildren.find(hint => hint.align === 'start') : null;
+          this._hintChildren.find(hint => hint.align === 'start') : null;
         let endHint = this._hintChildren ?
-            this._hintChildren.find(hint => hint.align === 'end') : null;
+          this._hintChildren.find(hint => hint.align === 'end') : null;
 
         if (startHint) {
           ids.push(startHint.id);

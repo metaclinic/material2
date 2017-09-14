@@ -33,7 +33,7 @@ import {
   MdTooltipModule,
   StyleModule,
   MdStepperModule,
-} from '@angular/material';
+} from '@metaclinic/material';
 import {CdkTableModule} from '@angular/cdk/table';
 import {A11yModule} from '@angular/cdk/a11y';
 import {BidiModule} from '@angular/cdk/bidi';

@@ -16,7 +16,7 @@ import {
     // tslint:disable-next-line:no-unused-variable
     Portal,
     TemplatePortalDirective,
-} from '@angular/material';
+} from '@metaclinic/material';
 
 
 @Component({

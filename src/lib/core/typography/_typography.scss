@@ -18,7 +18,7 @@
 // Represents a collection of typography levels.
 // Defaults come from https://material.io/guidelines/style/typography.html
 @function mat-typography-config(
-  $font-family:   'Roboto, "Helvetica Neue", sans-serif',
+  $font-family:   'sf_ui_text, sans-serif',
   $display-4:     mat-typography-level(112px, 112px, 300),
   $display-3:     mat-typography-level(56px, 56px, 400),
   $display-2:     mat-typography-level(45px, 48px, 400),
@@ -32,7 +32,7 @@
   $caption:       mat-typography-level(12px, 20px, 400),
   $button:        mat-typography-level(14px, 14px, 500),
   // Line-height must be unit-less fraction of the font-size.
-  $input:         mat-typography-level(16px, 1.125, 400)
+  $input:         mat-typography-level(13px, 1.125, 300)
 ) {
 
   // Declare an initial map with all of the levels.

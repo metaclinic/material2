@@ -45,8 +45,14 @@ import {DemoMaterialModule} from '../demo-material-module';
 import {
   FullscreenOverlayContainer,
   OverlayContainer,
-} from '@angular/material';
+} from '@metaclinic/material';
 import {TableHeaderDemo} from '../table/table-header-demo';
+
+import {
+  FloatPlaceholderType,
+  PlaceholderOptions,
+  MD_PLACEHOLDER_GLOBAL_OPTIONS
+} from '@metaclinic/material';
 
 @NgModule({
   imports: [
@@ -108,6 +114,7 @@ import {TableHeaderDemo} from '../table/table-header-demo';
     ExpansionDemo,
   ],
   providers: [
+    {provide: MD_PLACEHOLDER_GLOBAL_OPTIONS, useValue: {float: 'never'}},
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
     PeopleDatabase
   ],

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LiveAnnouncer} from '@angular/material';
+import {LiveAnnouncer} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,

@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Observable} from 'rxjs/Observable';
-import {NgControl} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { NgControl } from '@angular/forms';
 
 
 /** An interface which allows a control to work inside of a `MdFormField`. */
@@ -26,6 +26,7 @@ export abstract class MdFormFieldControl<T> {
 
   /** The placeholder for this control. */
   readonly placeholder: string;
+  readonly label: string;
 
   /** Gets the NgControl for this control. */
   readonly ngControl: NgControl | null;

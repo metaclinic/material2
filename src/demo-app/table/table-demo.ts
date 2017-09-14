@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {PeopleDatabase, UserData} from './people-database';
 import {PersonDataSource} from './person-data-source';
-import {MdPaginator, MdSort} from '@angular/material';
+import {MdPaginator, MdSort} from '@metaclinic/material';
 
 export type UserProperties = 'userId' | 'userName' | 'progress' | 'color' | undefined;
 

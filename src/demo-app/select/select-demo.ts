@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MdSelectChange} from '@angular/material';
+import {MdSelectChange} from '@metaclinic/material';
 
 @Component({
     moduleId: module.id,

@@ -1,4 +1,4 @@
-import {MdPaginator, MdSort} from '@angular/material';
+import {MdPaginator, MdSort} from '@metaclinic/material';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import {PeopleDatabase, UserData} from './people-database';

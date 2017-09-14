@@ -1,5 +1,5 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {Component, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,22 +9,23 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {By} from '@angular/platform-browser';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MdInputModule} from './index';
-import {MdInput} from './input';
-import {Platform} from '../core/platform/platform';
-import {PlatformModule} from '../core/platform/index';
-import {wrappedErrorMessage, dispatchFakeEvent, createFakeEvent} from '@angular/cdk/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MdInputModule } from './index';
+import { MdInput } from './input';
+import { Platform } from '../core/platform/platform';
+import { PlatformModule } from '../core/platform/index';
+import { wrappedErrorMessage, dispatchFakeEvent, createFakeEvent } from '@angular/cdk/testing';
 import {
   MdFormField,
   MdFormFieldModule,
   getMdFormFieldDuplicatedHintError,
   getMdFormFieldMissingControlError,
   getMdFormFieldPlaceholderConflictError,
+  getMdFormFieldLabelConflictError,
 } from '../form-field/index';
-import {MD_PLACEHOLDER_GLOBAL_OPTIONS} from '../core/placeholder/placeholder-options';
-import {MD_ERROR_GLOBAL_OPTIONS, showOnDirtyErrorStateMatcher} from '../core/error/error-options';
+import { MD_PLACEHOLDER_GLOBAL_OPTIONS } from '../core/placeholder/placeholder-options';
+import { MD_ERROR_GLOBAL_OPTIONS, showOnDirtyErrorStateMatcher } from '../core/error/error-options';
 
 describe('MdInput without forms', function () {
   beforeEach(async(() => {
@@ -77,9 +78,9 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     let formField = fixture.debugElement.query(By.directive(MdFormField))
-        .componentInstance as MdFormField;
+      .componentInstance as MdFormField;
     expect(formField.floatPlaceholder).toBe('auto',
-        'Expected MdInput to set floatingLabel to auto by default.');
+      'Expected MdInput to set floatingLabel to auto by default.');
   });
 
   it('should default to global floating placeholder type', () => {
@@ -101,35 +102,35 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     let formField = fixture.debugElement.query(By.directive(MdFormField))
-        .componentInstance as MdFormField;
+      .componentInstance as MdFormField;
     expect(formField.floatPlaceholder).toBe('always',
-        'Expected MdInput to set floatingLabel to always from global option.');
+      'Expected MdInput to set floatingLabel to always from global option.');
   });
 
   it('should not be treated as empty if type is date',
-      inject([Platform], (platform: Platform) => {
-        if (!(platform.TRIDENT || platform.FIREFOX || (platform.SAFARI && !platform.IOS))) {
-          let fixture = TestBed.createComponent(MdInputDateTestController);
-          fixture.detectChanges();
+    inject([Platform], (platform: Platform) => {
+      if (!(platform.TRIDENT || platform.FIREFOX || (platform.SAFARI && !platform.IOS))) {
+        let fixture = TestBed.createComponent(MdInputDateTestController);
+        fixture.detectChanges();
 
-          let el = fixture.debugElement.query(By.css('label')).nativeElement;
-          expect(el).not.toBeNull();
-          expect(el.classList.contains('mat-form-field-empty')).toBe(false);
-        }
-      }));
+        let el = fixture.debugElement.query(By.css('label')).nativeElement;
+        expect(el).not.toBeNull();
+        expect(el.classList.contains('mat-form-field-empty')).toBe(false);
+      }
+    }));
 
   // Firefox, Safari Desktop and IE don't support type="date" and fallback to type="text".
   it('should be treated as empty if type is date on Firefox and IE',
-      inject([Platform], (platform: Platform) => {
-        if (platform.TRIDENT || platform.FIREFOX || (platform.SAFARI && !platform.IOS)) {
-          let fixture = TestBed.createComponent(MdInputDateTestController);
-          fixture.detectChanges();
+    inject([Platform], (platform: Platform) => {
+      if (platform.TRIDENT || platform.FIREFOX || (platform.SAFARI && !platform.IOS)) {
+        let fixture = TestBed.createComponent(MdInputDateTestController);
+        fixture.detectChanges();
 
-          let el = fixture.debugElement.query(By.css('label')).nativeElement;
-          expect(el).not.toBeNull();
-          expect(el.classList.contains('mat-form-field-empty')).toBe(true);
-        }
-      }));
+        let el = fixture.debugElement.query(By.css('label')).nativeElement;
+        expect(el).not.toBeNull();
+        expect(el.classList.contains('mat-form-field-empty')).toBe(true);
+      }
+    }));
 
   it('should treat text input type as empty at init', () => {
     let fixture = TestBed.createComponent(MdInputTextTestController);
@@ -169,7 +170,7 @@ describe('MdInput without forms', function () {
 
     inputEl.nativeElement.value = 'hello';
     // Simulate input event.
-    inputEl.triggerEventHandler('input', {target: inputEl.nativeElement});
+    inputEl.triggerEventHandler('input', { target: inputEl.nativeElement });
     fixture.detectChanges();
 
     el = fixture.debugElement.query(By.css('label')).nativeElement;
@@ -201,7 +202,7 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     let placeholderEl =
-        fixture.debugElement.query(By.css('.mat-form-field-placeholder')).nativeElement;
+      fixture.debugElement.query(By.css('.mat-form-field-placeholder')).nativeElement;
 
     expect(placeholderEl.classList).not.toContain('mat-form-field-empty');
 
@@ -216,9 +217,9 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('input')).nativeElement;
+      fixture.debugElement.query(By.css('input')).nativeElement;
     const labelElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('label')).nativeElement;
+      fixture.debugElement.query(By.css('label')).nativeElement;
 
     expect(inputElement.id).toBeTruthy();
     expect(inputElement.id).toEqual(labelElement.getAttribute('for'));
@@ -229,9 +230,9 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('input')).nativeElement;
+      fixture.debugElement.query(By.css('input')).nativeElement;
     const labelElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('label')).nativeElement;
+      fixture.debugElement.query(By.css('label')).nativeElement;
 
     expect(labelElement.getAttribute('aria-owns')).toBe(inputElement.id);
   });
@@ -241,9 +242,9 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('input')).nativeElement;
+      fixture.debugElement.query(By.css('input')).nativeElement;
     const labelElement: HTMLInputElement =
-        fixture.debugElement.query(By.css('label')).nativeElement;
+      fixture.debugElement.query(By.css('label')).nativeElement;
 
     expect(inputElement.id).toBe('test-id');
     expect(labelElement.getAttribute('for')).toBe('test-id');
@@ -253,40 +254,47 @@ describe('MdInput without forms', function () {
     let fixture = TestBed.createComponent(MdInputInvalidHintTestController);
 
     expect(() => fixture.detectChanges()).toThrowError(
-        wrappedErrorMessage(getMdFormFieldDuplicatedHintError('start')));
+      wrappedErrorMessage(getMdFormFieldDuplicatedHintError('start')));
   });
 
   it('validates there\'s only one hint label per side (attribute)', () => {
     let fixture = TestBed.createComponent(MdInputInvalidHint2TestController);
 
     expect(() => fixture.detectChanges()).toThrowError(
-        wrappedErrorMessage(getMdFormFieldDuplicatedHintError('start')));
+      wrappedErrorMessage(getMdFormFieldDuplicatedHintError('start')));
   });
 
   it('validates there\'s only one placeholder', () => {
     let fixture = TestBed.createComponent(MdInputInvalidPlaceholderTestController);
 
     expect(() => fixture.detectChanges()).toThrowError(
-        wrappedErrorMessage(getMdFormFieldPlaceholderConflictError()));
+      wrappedErrorMessage(getMdFormFieldPlaceholderConflictError()));
+  });
+
+  it('validates there\'s only one label', () => {
+    let fixture = TestBed.createComponent(MdInputInvalidLabelTestController);
+
+    expect(() => fixture.detectChanges()).toThrowError(
+      wrappedErrorMessage(getMdFormFieldLabelConflictError()));
   });
 
   it('validates that mdInput child is present', () => {
     let fixture = TestBed.createComponent(MdInputMissingMdInputTestController);
 
     expect(() => fixture.detectChanges()).toThrowError(
-        wrappedErrorMessage(getMdFormFieldMissingControlError()));
+      wrappedErrorMessage(getMdFormFieldMissingControlError()));
   });
 
   it('validates that mdInput child is present after initialization', async(() => {
     let fixture = TestBed.createComponent(MdInputWithNgIf);
 
     expect(() => fixture.detectChanges()).not.toThrowError(
-        wrappedErrorMessage(getMdFormFieldMissingControlError()));
+      wrappedErrorMessage(getMdFormFieldMissingControlError()));
 
     fixture.componentInstance.renderInput = false;
 
     expect(() => fixture.detectChanges()).toThrowError(
-        wrappedErrorMessage(getMdFormFieldMissingControlError()));
+      wrappedErrorMessage(getMdFormFieldMissingControlError()));
   }));
 
   it('validates the type', () => {
@@ -422,18 +430,18 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     const underlineEl =
-        fixture.debugElement.query(By.css('.mat-form-field-underline')).nativeElement;
+      fixture.debugElement.query(By.css('.mat-form-field-underline')).nativeElement;
     const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 
     expect(underlineEl.classList.contains('mat-disabled'))
-        .toBe(false, `Expected underline not to start out disabled.`);
+      .toBe(false, `Expected underline not to start out disabled.`);
     expect(inputEl.disabled).toBe(false);
 
     fixture.componentInstance.disabled = true;
     fixture.detectChanges();
 
     expect(underlineEl.classList.contains('mat-disabled'))
-        .toBe(true, `Expected underline to look disabled after property is set.`);
+      .toBe(true, `Expected underline to look disabled after property is set.`);
     expect(inputEl.disabled).toBe(true);
   }));
 
@@ -604,13 +612,13 @@ describe('MdInput without forms', function () {
 
     expect(containerInstance.floatPlaceholder).toBe('auto');
     expect(placeholder.classList)
-        .toContain('mat-form-field-empty', 'Expected input to be considered empty.');
+      .toContain('mat-form-field-empty', 'Expected input to be considered empty.');
 
     containerInstance.floatPlaceholder = 'always';
     fixture.detectChanges();
 
     expect(placeholder.classList)
-        .not.toContain('mat-form-field-empty', 'Expected input to be considered not empty.');
+      .not.toContain('mat-form-field-empty', 'Expected input to be considered not empty.');
   });
 
   it('should not have prefix and suffix elements when none are specified', () => {
@@ -643,7 +651,7 @@ describe('MdInput without forms', function () {
 
     let component = fixture.componentInstance;
     let placeholder =
-        fixture.debugElement.query(By.css('.mat-form-field-placeholder')).nativeElement;
+      fixture.debugElement.query(By.css('.mat-form-field-placeholder')).nativeElement;
 
     expect(placeholder.classList).toContain('mat-form-field-empty', 'Input initially empty');
 
@@ -674,7 +682,7 @@ describe('MdInput without forms', function () {
     fixture.detectChanges();
 
     let inputContainer = fixture.debugElement.query(By.directive(MdFormField))
-        .componentInstance as MdFormField;
+      .componentInstance as MdFormField;
     let placeholder = fixture.debugElement.query(By.css('.mat-input-placeholder')).nativeElement;
 
     expect(inputContainer.floatPlaceholder).toBe('auto');
@@ -871,7 +879,7 @@ describe('MdInput with forms', () => {
       fixture.detectChanges();
 
       let errorIds = fixture.debugElement.queryAll(By.css('.mat-error'))
-          .map(el => el.nativeElement.getAttribute('id')).join(' ');
+        .map(el => el.nativeElement.getAttribute('id')).join(' ');
       describedBy = inputEl.getAttribute('aria-describedby');
 
       expect(errorIds).toBeTruthy('errors should be shown');
@@ -929,7 +937,8 @@ describe('MdInput with forms', () => {
         providers: [
           {
             provide: MD_ERROR_GLOBAL_OPTIONS,
-            useValue: { errorStateMatcher: globalErrorStateMatcher } }
+            useValue: { errorStateMatcher: globalErrorStateMatcher }
+          }
         ]
       });
 
@@ -1008,7 +1017,7 @@ describe('MdInput with forms', () => {
     fixture.detectChanges();
 
     const underlineEl =
-        fixture.debugElement.query(By.css('.mat-form-field-underline')).nativeElement;
+      fixture.debugElement.query(By.css('.mat-form-field-underline')).nativeElement;
     const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 
     expect(underlineEl.classList)
@@ -1043,7 +1052,7 @@ describe('MdInput with forms', () => {
       <input mdInput id="test-id" placeholder="test">
     </md-form-field>`
 })
-class MdInputWithId {}
+class MdInputWithId { }
 
 @Component({
   template: `<md-form-field><input mdInput [disabled]="disabled"></md-form-field>`
@@ -1117,7 +1126,7 @@ class MdInputHintLabelTestController {
 @Component({
   template: `<md-form-field><input mdInput type="file"></md-form-field>`
 })
-class MdInputInvalidTypeTestController {}
+class MdInputInvalidTypeTestController { }
 
 @Component({
   template: `
@@ -1126,7 +1135,16 @@ class MdInputInvalidTypeTestController {}
       <md-placeholder>World</md-placeholder>
     </md-form-field>`
 })
-class MdInputInvalidPlaceholderTestController {}
+class MdInputInvalidPlaceholderTestController { }
+
+@Component({
+  template: `
+    <md-form-field>
+      <input mdInput label="Hello">
+      <md-label>World</md-label>
+    </md-form-field>`
+})
+class MdInputInvalidLabelTestController { }
 
 @Component({
   template: `
@@ -1135,7 +1153,7 @@ class MdInputInvalidPlaceholderTestController {}
       <md-hint>World</md-hint>
     </md-form-field>`
 })
-class MdInputInvalidHint2TestController {}
+class MdInputInvalidHint2TestController { }
 
 @Component({
   template: `
@@ -1145,7 +1163,7 @@ class MdInputInvalidHint2TestController {}
       <md-hint>World</md-hint>
     </md-form-field>`
 })
-class MdInputInvalidHintTestController {}
+class MdInputInvalidHintTestController { }
 
 @Component({
   template: `
@@ -1167,7 +1185,7 @@ class MdInputMultipleHintTestController {
       <md-hint align="end">World</md-hint>
     </md-form-field>`
 })
-class MdInputMultipleHintMixedTestController {}
+class MdInputMultipleHintMixedTestController { }
 
 @Component({
   template: `
@@ -1175,7 +1193,7 @@ class MdInputMultipleHintMixedTestController {}
       <input mdInput type="date" placeholder="Placeholder">
     </md-form-field>`
 })
-class MdInputDateTestController {}
+class MdInputDateTestController { }
 
 @Component({
   template: `
@@ -1183,7 +1201,7 @@ class MdInputDateTestController {}
       <input mdInput type="text" placeholder="Placeholder">
     </md-form-field>`
 })
-class MdInputTextTestController {}
+class MdInputTextTestController { }
 
 @Component({
   template: `
@@ -1191,7 +1209,7 @@ class MdInputTextTestController {}
       <input mdInput type="password" placeholder="Placeholder">
     </md-form-field>`
 })
-class MdInputPasswordTestController {}
+class MdInputPasswordTestController { }
 
 @Component({
   template: `
@@ -1199,7 +1217,7 @@ class MdInputPasswordTestController {}
       <input mdInput type="number" placeholder="Placeholder">
     </md-form-field>`
 })
-class MdInputNumberTestController {}
+class MdInputNumberTestController { }
 
 @Component({
   template: `
@@ -1228,7 +1246,7 @@ class MdInputWithValueBinding {
     </md-form-field>
   `
 })
-class MdInputWithStaticPlaceholder {}
+class MdInputWithStaticPlaceholder { }
 
 @Component({
   template: `
@@ -1255,7 +1273,7 @@ class MdInputTextareaWithBindings {
 @Component({
   template: `<md-form-field><input></md-form-field>`
 })
-class MdInputMissingMdInputTestController {}
+class MdInputMissingMdInputTestController { }
 
 @Component({
   template: `
@@ -1326,7 +1344,7 @@ class MdInputWithFormGroupErrorMessages {
     </md-form-field>
   `
 })
-class MdInputWithPrefixAndSuffix {}
+class MdInputWithPrefixAndSuffix { }
 
 @Component({
   template: `
@@ -1358,4 +1376,4 @@ class MdInputOnPush {
     </md-form-field>
   `
 })
-class MdInputWithReadonlyInput {}
+class MdInputWithReadonlyInput { }

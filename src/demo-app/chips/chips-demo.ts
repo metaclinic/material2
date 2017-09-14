@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdChipInputEvent, ENTER} from '@angular/material';
+import {MdChipInputEvent, ENTER} from '@metaclinic/material';
 
 const COMMA = 188;
 

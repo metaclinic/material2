@@ -152,6 +152,6 @@ export {
     A11yModule,
     MdOptionModule,
     MdPseudoCheckboxModule,
-  ],
+  ]
 })
 export class MdCoreModule {}

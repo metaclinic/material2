@@ -11,6 +11,10 @@ export function getMdFormFieldPlaceholderConflictError(): Error {
   return Error('Placeholder attribute and child element were both specified.');
 }
 
+export function getMdFormFieldLabelConflictError(): Error {
+  return Error('Label attribute and child element were both specified.');
+}
+
 /** @docs-private */
 export function getMdFormFieldDuplicatedHintError(align: string): Error {
   return Error(`A hint was already declared for 'align="${align}"'.`);

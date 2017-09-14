@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdChipInputEvent, MdSnackBar} from '@angular/material';
+import {MdChipInputEvent, MdSnackBar} from '@metaclinic/material';
 
 
 export interface Person {

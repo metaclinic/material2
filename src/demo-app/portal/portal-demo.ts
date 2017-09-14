@@ -3,7 +3,7 @@ import {
     Portal,
     ComponentPortal,
     TemplatePortalDirective,
-} from '@angular/material';
+} from '@metaclinic/material';
 
 
 @Component({

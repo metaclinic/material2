@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FocusOriginMonitor} from '@angular/material';
+import {FocusOriginMonitor} from '@metaclinic/material';
 
 
 @Component({

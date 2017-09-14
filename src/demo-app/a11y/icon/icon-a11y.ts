@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MdSnackBar} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,

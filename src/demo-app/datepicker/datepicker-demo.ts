@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {MdDatepickerInputEvent} from '@angular/material';
+import {MdDatepickerInputEvent} from '@metaclinic/material';
 
 
 @Component({

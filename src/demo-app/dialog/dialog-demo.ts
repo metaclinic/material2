@@ -1,6 +1,6 @@
 import {Component, Inject, ViewChild, TemplateRef} from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@metaclinic/material';
 
 
 @Component({
