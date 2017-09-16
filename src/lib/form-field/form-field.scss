@@ -32,16 +32,6 @@ $mat-form-field-label-font-size: 15px !default;
 .mat-form-field-suffix {
   white-space: nowrap;
   flex: none; // Allow icons in a prefix or suffix to adapt to the correct size.
-  .mat-icon {
-    width: 1em;
-  } // Allow icon buttons in a prefix or suffix to adapt to the correct size.
-  .mat-icon-button {
-    font: inherit;
-    vertical-align: baseline;
-    .mat-icon {
-      font-size: inherit;
-    }
-  }
 }
 
 .mat-form-field-infix {
@@ -92,9 +82,8 @@ $mat-form-field-label-font-size: 15px !default;
   width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden; // The perspective helps smooth out animations on Chrome and Firefox but isn't needed on IE.
-  // top: $mat-form-field-label-font-size;
-  top: 4px;
+  overflow: hidden;
+  top: 2px;
   display: block;
   [dir='rtl'] & {
     transform-origin: 100% 0;

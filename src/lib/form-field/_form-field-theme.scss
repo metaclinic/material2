@@ -19,7 +19,6 @@
   $underline-color-accent: mat-color($accent);
   $underline-color-warn: mat-color($warn);
   $underline-focused-color: mat-color($foreground, focused-dividers);
-   
   .mat-form-field {
     width: 200px;
   }
@@ -112,7 +111,7 @@
   // The unit-less line-height from the font config.
   $line-height: mat-line-height($config, input); // The amount to scale the font for the floating label and subscript.
   $subscript-font-scale: 0.75; // The amount to scale the font for the prefix and suffix icons.
-  $prefix-suffix-icon-font-scale: 1.5; // The amount of space between the top of the line and the top of the actual text
+  $prefix-suffix-icon-font-scale: 1.7; // The amount of space between the top of the line and the top of the actual text
   // (as a fraction of the font-size).
   $line-spacing: ($line-height - 1) / 2; // The padding on the infix. Mocks show half of the text size, but seem to measure from the edge
   // of the text itself, not the edge of the line; therefore we subtract off the line spacing.
@@ -131,26 +130,42 @@
   .mat-form-field {
     font-family: mat-font-family($config);
     font-size: inherit;
-    font-weight: mat-font-weight($config, input);
-    line-height: mat-line-height($config, input);
+    font-weight: mat-font-weight($config, input); // line-height: mat-line-height($config, input);
   }
   .mat-form-field-wrapper {
     padding-bottom: $wrapper-padding-bottom;
   }
   .mat-form-field-prefix,
   .mat-form-field-suffix {
-    // Allow icons in a prefix or suffix to adapt to the correct size.
+    margin-top: -$line-spacing * 1em;
+    font-size: 13px;
+    line-height: 30px;
     .mat-icon {
-      font-size: $prefix-suffix-icon-font-size;
-      line-height: $line-height;
+      font-size: mat-font-size($config, input);
+      line-height: mat-line-height($config, input);
+      width: 1em;
     } // Allow icon buttons in a prefix or suffix to adapt to the correct size.
     .mat-icon-button {
+      font-size: $prefix-suffix-icon-font-size;
+      line-height: $prefix-suffix-icon-font-size;
       height: $prefix-suffix-icon-font-scale * 1em;
       width: $prefix-suffix-icon-font-scale * 1em;
       .mat-icon {
-        height: $line-height * 1em;
-        line-height: $line-height;
+        font-size: mat-font-size($config, input);
+        line-height: mat-line-height($config, input);
       }
+    }
+  }
+  .mat-form-field-prefix {
+    .mat-icon-button {
+      margin-left: -(($prefix-suffix-icon-font-scale * 1em)/3);
+      margin-right: -((($prefix-suffix-icon-font-scale * 1em)/3));
+    }
+  }
+  .mat-form-field-suffix {
+    .mat-icon-button {
+      margin-right: -(($prefix-suffix-icon-font-scale * 1em)/3);
+      margin-left: -((($prefix-suffix-icon-font-scale * 1em)/3));
     }
   }
   .mat-form-field-infix {
@@ -174,7 +189,7 @@
     }
   }
   .mat-form-field-label-wrapper {
-    top: -$infix-margin-top;
+    // top: -$infix-margin-top;
     padding-top: $infix-margin-top;
   }
   .mat-form-field-label {
@@ -191,7 +206,7 @@
   }
   .mat-form-field-subscript-wrapper {
     font-size: $subscript-font-size;
-    margin-top: $subscript-margin-top; // We want the subscript to start at the end of the content box, not the padding box,
+    margin-top: ($subscript-margin-top -($subscript-margin-top * 2)); // We want the subscript to start at the end of the content box, not the padding box,
     // so we move it up by the padding amount (adjusted for the smaller font size);
     top: calc(100% - #{$wrapper-padding-bottom / $subscript-font-scale});
   }

@@ -6,8 +6,8 @@ Space above cards: <input type="number" [formControl]="topHeightCtrl">
   <md-card>
     <md-card-subtitle>ngModel</md-card-subtitle>
 
-    <md-select placeholder="Drink" [color]="drinksTheme" [(ngModel)]="currentDrink" [required]="drinksRequired"
-      [disabled]="drinksDisabled" [floatPlaceholder]="floatPlaceholder" #drinkControl="ngModel">
+    <md-select placeholder="Select" [color]="drinksTheme" [(ngModel)]="currentDrink" [required]="drinksRequired" [disabled]="drinksDisabled"
+      [floatPlaceholder]="floatPlaceholder" #drinkControl="ngModel" label="Which panels are you offering?" style="width:100%">
       <md-option>None</md-option>
       <md-option *ngFor="let drink of drinks" [value]="drink.value" [disabled]="drink.disabled">
         {{ drink.viewValue }}
@@ -42,8 +42,8 @@ Space above cards: <input type="number" [formControl]="topHeightCtrl">
     <md-card-subtitle>Multiple selection</md-card-subtitle>
 
     <md-card-content>
-      <md-select multiple [color]="pokemonTheme" placeholder="Pokemon" [(ngModel)]="currentPokemon"
-        [required]="pokemonRequired" [disabled]="pokemonDisabled" #pokemonControl="ngModel">
+      <md-select multiple [color]="pokemonTheme" placeholder="Pokemon" [(ngModel)]="currentPokemon" [required]="pokemonRequired"
+        [disabled]="pokemonDisabled" #pokemonControl="ngModel">
         <md-option *ngFor="let creature of pokemon" [value]="creature.value">
           {{ creature.viewValue }}
         </md-option>
@@ -86,8 +86,7 @@ Space above cards: <input type="number" [formControl]="topHeightCtrl">
 
     <md-card-content>
       <md-select placeholder="Pokemon" [(ngModel)]="currentPokemonFromGroup">
-        <md-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
-          [disabled]="group.disabled">
+        <md-optgroup *ngFor="let group of pokemonGroups" [label]="group.name" [disabled]="group.disabled">
           <md-option *ngFor="let creature of group.pokemon" [value]="creature.value">
             {{ creature.viewValue }}
           </md-option>
@@ -100,11 +99,8 @@ Space above cards: <input type="number" [formControl]="topHeightCtrl">
   <md-card>
     <md-card-subtitle>compareWith</md-card-subtitle>
     <md-card-content>
-      <md-select placeholder="Drink" [color]="drinksTheme"
-                 [(ngModel)]="currentDrinkObject"
-                 [required]="drinkObjectRequired"
-                 [compareWith]="compareByValue ? compareDrinkObjectsByValue : compareByReference"
-                 #drinkObjectControl="ngModel">
+      <md-select placeholder="Drink" [color]="drinksTheme" [(ngModel)]="currentDrinkObject" [required]="drinkObjectRequired" [compareWith]="compareByValue ? compareDrinkObjectsByValue : compareByReference"
+        #drinkObjectControl="ngModel">
         <md-option *ngFor="let drink of drinks" [value]="drink" [disabled]="drink.disabled">
           {{ drink.viewValue }}
         </md-option>
@@ -115,8 +111,7 @@ Space above cards: <input type="number" [formControl]="topHeightCtrl">
       <p> Status: {{ drinkObjectControl.control?.status }} </p>
       <p> Comparison Mode: {{ compareByValue ? 'VALUE' : 'REFERENCE' }} </p>
 
-      <button md-button (click)="reassignDrinkByCopy()"
-              mdTooltip="This action should clear the display value when comparing by reference.">
+      <button md-button (click)="reassignDrinkByCopy()" mdTooltip="This action should clear the display value when comparing by reference.">
         REASSIGN DRINK BY COPY
       </button>
       <button md-button (click)="drinkObjectRequired=!drinkObjectRequired">TOGGLE REQUIRED</button>

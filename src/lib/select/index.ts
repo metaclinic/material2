@@ -6,12 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MdSelect, MdSelectTrigger, MD_SELECT_SCROLL_STRATEGY_PROVIDER} from './select';
-import {MdCommonModule, MdOptionModule} from '../core';
-import {OverlayModule} from '@metaclinic/cdk/overlay';
-
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MdSelect, MdSelectTrigger, MD_SELECT_SCROLL_STRATEGY_PROVIDER } from './select';
+import { MdIconModule } from '../icon';
+import { MdCommonModule, MdOptionModule } from '../core';
+import { OverlayModule } from '@metaclinic/cdk/overlay';
 
 @NgModule({
   imports: [
@@ -19,13 +19,13 @@ import {OverlayModule} from '@metaclinic/cdk/overlay';
     OverlayModule,
     MdOptionModule,
     MdCommonModule,
+    MdIconModule
   ],
   exports: [MdSelect, MdSelectTrigger, MdOptionModule, MdCommonModule],
   declarations: [MdSelect, MdSelectTrigger],
   providers: [MD_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
-export class MdSelectModule {}
-
+export class MdSelectModule { }
 
 export * from './select';
-export {fadeInContent, transformPanel, transformPlaceholder} from './select-animations';
+export { fadeInContent, transformPanel, transformPlaceholder } from './select-animations';

@@ -1,4 +1,22 @@
 <div class="mat-input-wrapper mat-form-field-wrapper">
+
+    <span class="mat-input-label-wrapper mat-form-field-label-wrapper">
+        <label class="mat-input-label mat-form-field-label"
+        [attr.for]="_control.id"
+        [attr.aria-owns]="_control.id"
+        [class.mat-accent]="color == 'accent'"
+        [class.mat-warn]="color == 'warn'"
+        #label
+        *ngIf="_hasLabel()">
+          <ng-content select="md-label, mat-label"></ng-content>
+          {{_control.label}}
+          <span
+          class="mat-label-required mat-form-field-required-marker"
+          aria-hidden="true"
+          *ngIf="!hideRequiredMarker && _control.required">*</span>
+        </label>
+    </span>
+
   <div class="mat-input-flex mat-form-field-flex" #connectionContainer>
     <div class="mat-input-prefix mat-form-field-prefix" *ngIf="_prefixChildren.length">
       <ng-content select="[mdPrefix], [matPrefix]"></ng-content>
@@ -6,23 +24,6 @@
 
     <div class="mat-input-infix mat-form-field-infix">
       <ng-content></ng-content>
-
-      <span class="mat-input-label-wrapper mat-form-field-label-wrapper">
-          <label class="mat-input-label mat-form-field-label"
-          [attr.for]="_control.id"
-          [attr.aria-owns]="_control.id"
-          [class.mat-accent]="color == 'accent'"
-          [class.mat-warn]="color == 'warn'"
-          #label
-          *ngIf="_hasLabel()">
-            <ng-content select="md-label, mat-label"></ng-content>
-            {{_control.label}}
-            <span
-            class="mat-label-required mat-form-field-required-marker"
-            aria-hidden="true"
-            *ngIf="!hideRequiredMarker && _control.required">*</span>
-          </label>
-      </span>
 
       <span class="mat-input-placeholder-wrapper mat-form-field-placeholder-wrapper">
         <!-- We add aria-owns as a workaround for an issue in JAWS & NVDA where the label isn't

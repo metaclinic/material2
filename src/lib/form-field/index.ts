@@ -6,15 +6,16 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NgModule} from '@angular/core';
-import {MdError} from './error';
-import {MdFormField} from './form-field';
-import {MdHint} from './hint';
-import {MdPlaceholder} from './placeholder';
-import {MdPrefix} from './prefix';
-import {MdSuffix} from './suffix';
-import {CommonModule} from '@angular/common';
-import {PlatformModule} from '../core/platform/index';
+import { NgModule } from '@angular/core';
+import { MdError } from './error';
+import { MdFormField } from './form-field';
+import { MdHint } from './hint';
+import { MdPlaceholder } from './placeholder';
+import { MdLabel } from './label';
+import { MdPrefix } from './prefix';
+import { MdSuffix } from './suffix';
+import { CommonModule } from '@angular/common';
+import { PlatformModule } from '../core/platform/index';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {PlatformModule} from '../core/platform/index';
     MdPlaceholder,
     MdPrefix,
     MdSuffix,
+    MdLabel
   ],
   imports: [
     CommonModule,
@@ -37,9 +39,10 @@ import {PlatformModule} from '../core/platform/index';
     MdPlaceholder,
     MdPrefix,
     MdSuffix,
+    MdLabel
   ],
 })
-export class MdFormFieldModule {}
+export class MdFormFieldModule { }
 
 
 export * from './error';
@@ -48,6 +51,7 @@ export * from './form-field-control';
 export * from './form-field-errors';
 export * from './hint';
 export * from './placeholder';
+export * from './label';
 export * from './prefix';
 export * from './suffix';
 

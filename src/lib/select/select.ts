@@ -31,12 +31,12 @@ import {
   Directive,
   isDevMode,
 } from '@angular/core';
-import {ControlValueAccessor, FormGroupDirective, NgControl, NgForm} from '@angular/forms';
-import {DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW} from '@metaclinic/cdk/keycodes';
-import {FocusKeyManager} from '@metaclinic/cdk/a11y';
-import {Directionality} from '@metaclinic/cdk/bidi';
-import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
-import {filter, startWith} from '@metaclinic/cdk/rxjs';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW } from '@metaclinic/cdk/keycodes';
+import { FocusKeyManager } from '@metaclinic/cdk/a11y';
+import { Directionality } from '@metaclinic/cdk/bidi';
+import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
+import { filter, startWith } from '@metaclinic/cdk/rxjs';
 import {
   ConnectedOverlayDirective,
   Overlay,
@@ -47,26 +47,26 @@ import {
   ScrollStrategy,
   ViewportRuler
 } from '@metaclinic/cdk/overlay';
-import {merge} from 'rxjs/observable/merge';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import {fadeInContent, transformPanel, transformPlaceholder} from './select-animations';
-import {SelectionModel} from '@metaclinic/cdk/collections';
+import { merge } from 'rxjs/observable/merge';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { fadeInContent, transformPanel, transformPlaceholder } from './select-animations';
+import { SelectionModel } from '@metaclinic/cdk/collections';
 import {
   getMdSelectDynamicMultipleError,
   getMdSelectNonArrayValueError,
   getMdSelectNonFunctionValueError
 } from './select-errors';
-import {CanColor, mixinColor} from '../core/common-behaviors/color';
-import {CanDisable, mixinDisabled} from '../core/common-behaviors/disabled';
-import {MdOptgroup, MdOption, MdOptionSelectionChange} from '../core/option/index';
+import { CanColor, mixinColor } from '../core/common-behaviors/color';
+import { CanDisable, mixinDisabled } from '../core/common-behaviors/disabled';
+import { MdOptgroup, MdOption, MdOptionSelectionChange } from '../core/option/index';
 import {
   FloatPlaceholderType,
   MD_PLACEHOLDER_GLOBAL_OPTIONS,
   PlaceholderOptions
 } from '../core/placeholder/placeholder-options';
-import {Platform} from '@metaclinic/cdk/platform';
-import {HasTabIndex, mixinTabIndex} from '../core/common-behaviors/tabindex';
+import { Platform } from '@metaclinic/cdk/platform';
+import { HasTabIndex, mixinTabIndex } from '../core/common-behaviors/tabindex';
 
 /**
  * The following style constants are necessary to save here in order
@@ -82,7 +82,7 @@ export const SELECT_PANEL_MAX_HEIGHT = 256;
 
 /** The max number of options visible at once in the select panel. */
 export const SELECT_MAX_OPTIONS_DISPLAYED =
-    Math.floor(SELECT_PANEL_MAX_HEIGHT / SELECT_ITEM_HEIGHT);
+  Math.floor(SELECT_PANEL_MAX_HEIGHT / SELECT_ITEM_HEIGHT);
 
 /** The fixed height of the select's trigger element. */
 export const SELECT_TRIGGER_HEIGHT = 30;
@@ -131,11 +131,11 @@ const SELECT_TRIGGER_MIN_WIDTH = 112;
 
 /** Injection token that determines the scroll handling while a select is open. */
 export const MD_SELECT_SCROLL_STRATEGY =
-    new InjectionToken<() => ScrollStrategy>('md-select-scroll-strategy');
+  new InjectionToken<() => ScrollStrategy>('md-select-scroll-strategy');
 
 /** @docs-private */
 export function MD_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay):
-    () => RepositionScrollStrategy {
+  () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
 }
 
@@ -154,7 +154,7 @@ export class MdSelectChange {
 // Boilerplate for applying mixins to MdSelect.
 /** @docs-private */
 export class MdSelectBase {
-  constructor(public _renderer: Renderer2, public _elementRef: ElementRef) {}
+  constructor(public _renderer: Renderer2, public _elementRef: ElementRef) { }
 }
 export const _MdSelectMixinBase =
   mixinTabIndex(mixinColor(mixinDisabled(MdSelectBase), 'primary'));
@@ -166,7 +166,7 @@ export const _MdSelectMixinBase =
 @Directive({
   selector: 'md-select-trigger, mat-select-trigger'
 })
-export class MdSelectTrigger {}
+export class MdSelectTrigger { }
 
 
 @Component({
@@ -202,7 +202,7 @@ export class MdSelectTrigger {}
   exportAs: 'mdSelect',
 })
 export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, OnDestroy, OnInit,
-    ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
+  ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
   /** Whether or not the overlay panel is open. */
   private _panelOpen = false;
 
@@ -223,6 +223,9 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
 
   /** The placeholder displayed in the trigger of the select. */
   private _placeholder: string;
+
+  /** The label displayed above the select. */
+  @Input() label: string = '';
 
   /** Whether the component is in multiple selection mode. */
   private _multiple: boolean = false;
@@ -255,10 +258,10 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
   _selectedValueWidth: number;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => {};
+  _onChange: (value: any) => void = () => { };
 
   /** View -> model callback called when select has been touched */
-  _onTouched = () => {};
+  _onTouched = () => { };
 
   /** The IDs of child options to be passed to the aria-owns attribute. */
   _optionIds: string = '';
@@ -306,6 +309,10 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
   /** Overlay pane containing the options. */
   @ViewChild(ConnectedOverlayDirective) overlayDir: ConnectedOverlayDirective;
 
+  /** The label displayed above the select. */
+  // @ViewChild('label') private _label: ElementRef;
+  // @ContentChild(MdSelectLabel) _labelChild: MdSelectLabel;
+
   /** All of the defined select options. */
   @ContentChildren(MdOption, { descendants: true }) options: QueryList<MdOption>;
 
@@ -313,7 +320,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
   @ContentChildren(MdOptgroup) optionGroups: QueryList<MdOptgroup>;
 
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  @Input() panelClass: string|string[]|Set<string>|{[key: string]: any};
+  @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
 
   /** User-supplied override of the trigger element. */
   @ContentChild(MdSelectTrigger) customTrigger: MdSelectTrigger;
@@ -459,6 +466,10 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     this._tabSubscription.unsubscribe();
   }
 
+  _hasLabel() {
+    return !!(this.label);
+  }
+
   /** Toggles the overlay panel open or closed. */
   toggle(): void {
     this.panelOpen ? this.close() : this.open();
@@ -580,7 +591,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
    */
   private _setTriggerWidth(): void {
     this._triggerWidth = this._platform.isBrowser ? this._getTriggerRect().width :
-        SELECT_TRIGGER_MIN_WIDTH;
+      SELECT_TRIGGER_MIN_WIDTH;
 
     this._changeDetectorRef.markForCheck();
   }
@@ -602,7 +613,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     if (event.keyCode === HOME || event.keyCode === END) {
       event.preventDefault();
       event.keyCode === HOME ? this._keyManager.setFirstItemActive() :
-                               this._keyManager.setLastItemActive();
+        this._keyManager.setLastItemActive();
     } else {
       this._keyManager.onKeydown(event);
     }
@@ -662,7 +673,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     const isInvalid = this._control && this._control.invalid;
     const isTouched = this._control && this._control.touched;
     const isSubmitted = (this._parentFormGroup && this._parentFormGroup.submitted) ||
-        (this._parentForm && this._parentForm.submitted);
+      (this._parentForm && this._parentForm.submitted);
 
     return !!(isInvalid && (isTouched || isSubmitted));
   }
@@ -674,7 +685,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
    */
   private _setScrollTop(): void {
     const scrollContainer =
-        this.overlayDir.overlayRef.overlayElement.querySelector('.mat-select-panel');
+      this.overlayDir.overlayRef.overlayElement.querySelector('.mat-select-panel');
     scrollContainer!.scrollTop = this._scrollTop;
   }
 
@@ -729,7 +740,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     const correspondingOption = this.options.find((option: MdOption) => {
       try {
         // Treat null as a special reset value.
-        return option.value != null && this._compareWith(option.value,  value);
+        return option.value != null && this._compareWith(option.value, value);
       } catch (error) {
         if (isDevMode()) {
           // Notify developers of errors in their comparator.
@@ -924,7 +935,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
       let selectedOptionOffset = this._getOptionIndex(this._selectionModel.selected[0])!;
 
       selectedOptionOffset += MdOption.countGroupLabelsBeforeOption(selectedOptionOffset,
-          this.options, this.optionGroups);
+        this.options, this.optionGroups);
 
       // We must maintain a scroll buffer so the selected option will be scrolled to the
       // center of the overlay panel rather than the top.
@@ -939,7 +950,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
       let groupLabels = MdOption.countGroupLabelsBeforeOption(0, this.options, this.optionGroups);
 
       this._offsetY = (SELECT_ITEM_HEIGHT - SELECT_TRIGGER_HEIGHT) / 2 * -1 -
-          (groupLabels * SELECT_ITEM_HEIGHT);
+        (groupLabels * SELECT_ITEM_HEIGHT);
     }
 
     this._checkOverlayWithinViewport(maxScroll);
@@ -953,7 +964,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
    * scroll position to the min or max scroll positions respectively.
    */
   _calculateOverlayScroll(selectedIndex: number, scrollBuffer: number,
-                          maxScroll: number): number {
+    maxScroll: number): number {
     const optionOffsetFromScrollTop = SELECT_ITEM_HEIGHT * selectedIndex;
     const halfOptionHeight = SELECT_ITEM_HEIGHT / 2;
 
@@ -1006,7 +1017,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     const viewportRect = this._viewportRuler.getViewportRect();
     const isRtl = this._isRtl();
     const paddingWidth = this.multiple ? SELECT_MULTIPLE_PANEL_PADDING_X + SELECT_PANEL_PADDING_X :
-                                         SELECT_PANEL_PADDING_X * 2;
+      SELECT_PANEL_PADDING_X * 2;
     let offsetX: number;
 
     // Adjust the offset, depending on the option padding.
@@ -1025,7 +1036,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
     // Determine how much the select overflows on each side.
     const leftOverflow = 0 - (overlayRect.left + offsetX - (isRtl ? paddingWidth : 0));
     const rightOverflow = overlayRect.right + offsetX - viewportRect.width
-                          + (isRtl ? 0 : paddingWidth);
+      + (isRtl ? 0 : paddingWidth);
 
     // If the element overflows on either side, reduce the offset to allow it to fit.
     if (leftOverflow > 0) {
@@ -1046,7 +1057,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
    * selected option to be aligned over the trigger when the panel opens.
    */
   private _calculateOverlayOffsetY(selectedIndex: number, scrollBuffer: number,
-                                  maxScroll: number): number {
+    maxScroll: number): number {
     let optionOffsetFromPanelTop: number;
 
     if (this._scrollTop === 0) {
@@ -1060,7 +1071,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
       // scrolled to the very bottom, this padding is at the top of the panel and
       // must be added to the offset.
       optionOffsetFromPanelTop =
-          selectedDisplayIndex * SELECT_ITEM_HEIGHT + SELECT_PANEL_PADDING_Y;
+        selectedDisplayIndex * SELECT_ITEM_HEIGHT + SELECT_PANEL_PADDING_Y;
     } else {
       // If the option was scrolled to the middle of the panel using a scroll buffer,
       // its offset will be the scroll buffer minus the half height that was added to
@@ -1086,17 +1097,17 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
 
     const topSpaceAvailable = triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
     const bottomSpaceAvailable =
-        viewportRect.height - triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
+      viewportRect.height - triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
 
     const panelHeightTop = Math.abs(this._offsetY);
     const totalPanelHeight =
-        Math.min(this._getItemCount() * SELECT_ITEM_HEIGHT, SELECT_PANEL_MAX_HEIGHT);
+      Math.min(this._getItemCount() * SELECT_ITEM_HEIGHT, SELECT_PANEL_MAX_HEIGHT);
     const panelHeightBottom = totalPanelHeight - panelHeightTop - triggerRect.height;
 
     if (panelHeightBottom > bottomSpaceAvailable) {
       this._adjustPanelUp(panelHeightBottom, bottomSpaceAvailable);
     } else if (panelHeightTop > topSpaceAvailable) {
-     this._adjustPanelDown(panelHeightTop, topSpaceAvailable, maxScroll);
+      this._adjustPanelDown(panelHeightTop, topSpaceAvailable, maxScroll);
     } else {
       this._transformOrigin = this._getOriginBasedOnOption();
     }
@@ -1124,7 +1135,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
 
   /** Adjusts the overlay panel down to fit in the viewport. */
   private _adjustPanelDown(panelHeightTop: number, topSpaceAvailable: number,
-                           maxScroll: number) {
+    maxScroll: number) {
     const distanceAboveViewport = panelHeightTop - topSpaceAvailable;
 
     // Scrolls the panel down by the distance it was extending past the boundary, then
@@ -1147,7 +1158,7 @@ export class MdSelect extends _MdSelectMixinBase implements AfterContentInit, On
   /** Sets the transform origin point based on the selected option. */
   private _getOriginBasedOnOption(): string {
     const originY =
-        Math.abs(this._offsetY) - SELECT_OPTION_HEIGHT_ADJUSTMENT + SELECT_ITEM_HEIGHT / 2;
+      Math.abs(this._offsetY) - SELECT_OPTION_HEIGHT_ADJUSTMENT + SELECT_ITEM_HEIGHT / 2;
     return `50% ${originY}px 0px`;
   }
 
