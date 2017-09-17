@@ -61,12 +61,12 @@
   // Default list
   .mat-list, .mat-nav-list, .mat-selection-list {
     .mat-list-item {
-      font-size: mat-font-size($config, subheading-2);
+      font-size: mat-font-size($config, body-1);
       @include mat-line-base(mat-font-size($config, body-1));
     }
 
     .mat-list-option {
-      font-size: mat-font-size($config, subheading-2);
+      font-size: mat-font-size($config, body-1);
       @include mat-line-base(mat-font-size($config, body-1));
     }
 
