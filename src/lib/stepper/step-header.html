@@ -1,12 +1,18 @@
-<div [class.mat-step-icon]="icon !== 'number' || selected"
-     [class.mat-step-icon-not-touched]="icon == 'number' && !selected"
-     [ngSwitch]="icon">
-  <span *ngSwitchCase="'number'">{{index + 1}}</span>
-  <md-icon *ngSwitchCase="'edit'">create</md-icon>
-  <md-icon *ngSwitchCase="'done'">done</md-icon>
+<div class="mat-stepper-top-container">
+
+  <div class="mat-stepper-line-container">
+    <div class="mat-stepper-line" [class.mat-stepper-line-first]="isFirst" [class.mat-stepper-line-last]="isLast"></div>
+  </div>
+
+  <div [class.mat-step-icon-completed]="icon !== 'number'" [class.mat-step-icon]="selected" [class.mat-step-icon-not-touched]="icon === 'number' && !selected">
+    <!-- <span *ngSwitchCase="'number'">{{index + 1}}</span>
+    <md-icon *ngSwitchCase="'edit'">create</md-icon>
+    <md-icon *ngSwitchCase="'done'">done</md-icon> -->
+  </div>
+
 </div>
-<div class="mat-step-label"
-     [class.mat-step-label-active]="active">
+
+<div class="mat-step-label" [class.mat-step-label-active]="active">
   <!-- If there is a label template, use it. -->
   <ng-container *ngIf="_templateLabel()" [ngTemplateOutlet]="label.template">
   </ng-container>
@@ -15,4 +21,3 @@
 
   <div class="mat-step-optional" *ngIf="optional">Optional</div>
 </div>
-

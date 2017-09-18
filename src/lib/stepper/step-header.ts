@@ -27,6 +27,9 @@ export class MdStepHeader {
   /** Icon for the given step. */
   @Input() icon: string;
 
+  @Input() isFirst: boolean;
+  @Input() isLast: boolean;
+
   /** Label of the given step. */
   @Input() label: MdStepLabel | string;
 

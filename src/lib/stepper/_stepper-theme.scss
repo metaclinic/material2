@@ -23,8 +23,13 @@
       color: mat-color($primary, default-contrast);
     }
 
+    .mat-step-icon-completed {
+      background-color: mat-color($foreground, stepper-border);
+      color: mat-color($primary, default-contrast);
+    }
+
     .mat-step-icon-not-touched {
-      background-color: mat-color($foreground, disabled-text);
+      background-color: mat-color($background, background);
       color: mat-color($primary, default-contrast);
     }
 
@@ -44,10 +49,22 @@
   .mat-stepper-horizontal-line {
     border-top-color: mat-color($foreground, divider);
   }
+
+  .mat-stepper-line {
+    border-top-color: mat-color($foreground, stepper-border);
+  }
+
+  .mat-step-icon,
+  .mat-step-icon-completed,
+  .mat-step-icon-not-touched {
+    border: solid 2px mat-color($foreground, stepper-border);
+  }
+
 }
 
 @mixin mat-stepper-typography($config) {
   .mat-stepper-vertical, .mat-stepper-horizontal {
     font-family: mat-font-family($config);
+    font-size: mat-font-size($config, input);
   }
 }

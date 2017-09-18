@@ -16,7 +16,7 @@ import { MdPrefix } from './prefix';
 import { MdSuffix } from './suffix';
 import { CommonModule } from '@angular/common';
 import { PlatformModule } from '../core/platform/index';
-
+import { MD_PLACEHOLDER_GLOBAL_OPTIONS } from '../core';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,9 @@ import { PlatformModule } from '../core/platform/index';
     MdSuffix,
     MdLabel
   ],
+  providers: [
+    { provide: MD_PLACEHOLDER_GLOBAL_OPTIONS, useValue: { float: 'never' } }
+  ]
 })
 export class MdFormFieldModule { }
 

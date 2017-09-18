@@ -114,7 +114,6 @@ import {
     ExpansionDemo,
   ],
   providers: [
-    {provide: MD_PLACEHOLDER_GLOBAL_OPTIONS, useValue: {float: 'never'}},
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
     PeopleDatabase
   ],

@@ -11,6 +11,7 @@ $mat-step-header-icon-size: 16px !default;
 }
 
 .mat-step-icon,
+.mat-step-icon-completed,
 .mat-step-icon-not-touched {
   border-radius: 50%;
   height: $mat-stepper-label-header-height;
@@ -27,12 +28,11 @@ $mat-step-header-icon-size: 16px !default;
 }
 
 .mat-step-label {
-  display: inline-block;
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: $mat-stepper-label-min-width;
-  vertical-align: middle;
 }
 
 .mat-step-text-label {

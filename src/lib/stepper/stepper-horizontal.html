@@ -1,5 +1,6 @@
 <div class="mat-horizontal-stepper-header-container">
-  <ng-container *ngFor="let step of _steps; let i = index; let isLast = last">
+  <ng-container *ngFor="let step of _steps; let i = index; let isLast = last; let isFirst = first;">
+    
     <md-step-header  class="mat-horizontal-stepper-header"
                      (click)="step.select()"
                      (keydown)="_onKeydown($event)"
@@ -12,9 +13,11 @@
                      [label]="step.stepLabel || step.label"
                      [selected]="selectedIndex === i"
                      [active]="step.completed || selectedIndex === i"
-                     [optional]="step.optional">
+                     [optional]="step.optional"
+                     [isFirst]="isFirst"
+                     [isLast]="isLast">
     </md-step-header>
-    <div *ngIf="!isLast" class="mat-stepper-horizontal-line"></div>
+    <!-- <div *ngIf="!isLast" class="mat-stepper-horizontal-line"></div> -->
   </ng-container>
 </div>
 

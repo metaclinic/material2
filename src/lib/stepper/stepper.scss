@@ -1,15 +1,15 @@
 @import '../core/style/variables';
-
 $mat-horizontal-stepper-header-height: 72px !default;
 $mat-stepper-label-header-height: 24px !default;
 $mat-stepper-side-gap: 24px !default;
-$mat-vertical-stepper-content-margin: 36px !default;
-$mat-stepper-line-width: 1px !default;
-$mat-stepper-line-gap: 8px !default;
-
+$mat-vertical-stepper-content-margin: 37px !default;
+$mat-stepper-line-width: 2px !default;
+$mat-stepper-line-gap: 2px !default;
 .mat-stepper-vertical,
 .mat-stepper-horizontal {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .mat-step-header {
@@ -20,6 +20,8 @@ $mat-stepper-line-gap: 8px !default;
 .mat-horizontal-stepper-header-container {
   white-space: nowrap;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 
@@ -33,21 +35,47 @@ $mat-stepper-line-gap: 8px !default;
 }
 
 .mat-horizontal-stepper-header {
-  display: flex;
-  height: $mat-horizontal-stepper-header-height;
+  display: block;
+  height: $mat-horizontal-stepper-header-height + 12;
   overflow: hidden;
   align-items: center;
-  padding: 0 $mat-stepper-side-gap;
-
-  .mat-step-icon,
-  .mat-step-icon-not-touched {
-    margin-right: $mat-stepper-line-gap;
-    flex: none;
-
-    [dir='rtl'] & {
-      margin-right: 0;
-      margin-left: $mat-stepper-line-gap;
+  text-align: center;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  padding-top: 24px;
+  .mat-stepper-top-container {
+    .mat-stepper-line-container {
+      width: 100%;
+      .mat-stepper-line {
+        border-top-width: $mat-stepper-line-width;
+        border-top-style: solid;
+        height: 0;
+        width: 100%;
+        margin-top: (($mat-stepper-label-header-height) / 2);
+      }
+      .mat-stepper-line-first {
+        width: 50%;
+        text-align: right;
+        margin-left: 50%;
+      }
+      .mat-stepper-line-last {
+        width: 50%;
+        text-align: left;
+        margin-right: 50%;
+      }
     }
+  }
+  .mat-step-label {
+    margin-top: 12px;
+  }
+  .mat-step-icon,
+  .mat-step-icon-completed,
+  .mat-step-icon-not-touched {
+    text-align: center;
+    margin: auto;
+    flex: none;
+    margin-top: -(($mat-stepper-label-header-height + 8) / 2);
   }
 }
 
@@ -56,11 +84,10 @@ $mat-stepper-line-gap: 8px !default;
   align-items: center;
   padding: $mat-stepper-side-gap;
   max-height: $mat-stepper-label-header-height;
-
   .mat-step-icon,
+  .mat-step-icon-completed,
   .mat-step-icon-not-touched {
     margin-right: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
-
     [dir='rtl'] & {
       margin-right: 0;
       margin-left: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
@@ -70,7 +97,6 @@ $mat-stepper-line-gap: 8px !default;
 
 .mat-horizontal-stepper-content {
   overflow: hidden;
-
   &[aria-expanded='false'] {
     height: 0;
   }
@@ -85,7 +111,6 @@ $mat-stepper-line-gap: 8px !default;
   margin-left: $mat-vertical-stepper-content-margin;
   border: 0;
   position: relative;
-
   [dir='rtl'] & {
     margin-left: 0;
     margin-right: $mat-vertical-stepper-content-margin;
@@ -100,7 +125,6 @@ $mat-stepper-line-gap: 8px !default;
   left: 0;
   border-left-width: $mat-stepper-line-width;
   border-left-style: solid;
-
   [dir='rtl'] & {
     left: auto;
     right: 0;

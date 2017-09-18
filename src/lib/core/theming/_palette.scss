@@ -15,9 +15,12 @@ $white-12-opacity: rgba(white, 0.12);
 $black-6-opacity: rgba(black, 0.06);
 $white-6-opacity: rgba(white, 0.06);
 
+$lightest-grey: #888888;
 $lighter-grey: #CBCFD3;
 $light-grey: #AFB5BC;
 $dark-grey-blue: #2d3d53;
+$darker-grey-blue: #2c3944;
+$darkest-grey-blue: #232e37;
 $blue-grey: #879bb6;
 $pale-salmon: #ffa1a1;
 $deep-sky-blue: #217df2;
@@ -786,7 +789,7 @@ $mat-meta-palesalmon: (
 $mat-light-theme-background: (
   status-bar: map_get($mat-grey, 300),
   app-bar:    map_get($mat-grey, 100),
-  background: map_get($mat-grey, 50),
+  background: white,
   hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
   card:       white,
   dialog:     white,
@@ -804,9 +807,9 @@ $mat-light-theme-background: (
 $mat-dark-theme-background: (
   status-bar: black,
   app-bar:    map_get($mat-grey, 900),
-  background: #303030,
+  background: $darkest-grey-blue,
   hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-  card:       map_get($mat-grey, 800),
+  card:       $darker-grey-blue,
   dialog:     map_get($mat-grey, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
@@ -823,6 +826,7 @@ $mat-light-theme-foreground: (
   base:              black,
   divider:           $lighter-grey,
   dividers:          $lighter-grey,
+  stepper-border:    $lighter-grey,
   focused-dividers:  $deep-sky-blue,
   disabled:          rgba(black, 0.38),
   disabled-button:   rgba(black, 0.38),
@@ -842,6 +846,7 @@ $mat-dark-theme-foreground: (
   base:              white,
   divider:           $white-6-opacity,
   dividers:          $white-6-opacity,
+  stepper-border:    $lighter-grey,
   focused-dividers:  white,
   disabled:          rgba(white, 0.3),
   disabled-button:   rgba(white, 0.3),
