@@ -10,6 +10,7 @@ $mat-stepper-line-gap: 2px !default;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  box-sizing: content-box;
 }
 
 .mat-step-header {

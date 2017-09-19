@@ -28,7 +28,7 @@
   $subheading-6:  mat-typography-level(19px, 19px, bold),
   $subheading-5:  mat-typography-level(21px, 21px, bold),
   $subheading-2:  mat-typography-level(31px, 31px, 400),
-  $subheading-1:  mat-typography-level(24px, 24px, 400),
+  $subheading-1:  mat-typography-level(24px, 24px, 500),
   $body-2:        mat-typography-level(14px, 24px, 500),
   $body-1:        mat-typography-level(14px, 20px, 400),
   $caption:       mat-typography-level(12px, 20px, 400),
@@ -72,22 +72,22 @@
 @mixin mat-base-typography($config, $selector: '.mat-typography') {
   .mat-h1, .mat-headline, #{$selector} h1 {
     @include mat-typography-level-to-styles($config, headline);
-    margin:auto;
+    // margin:auto;
   }
 
   .mat-h2, .mat-title, #{$selector} h2 {
     @include mat-typography-level-to-styles($config, title);
-    margin:auto;
+    // margin:auto;
   }
 
   .mat-h3, .mat-subheading-2, #{$selector} h3 {
     @include mat-typography-level-to-styles($config, subheading-2);
-    margin:auto;
+    // margin:auto;
   }
 
   .mat-h4, .mat-subheading-1, #{$selector} h4 {
     @include mat-typography-level-to-styles($config, subheading-1);
-    margin:auto;
+    // margin:auto;
   }
 
   // Note: the spec doesn't have anything that would correspond to h5 and h6, but we add these for
@@ -98,7 +98,7 @@
     font-weight: mat-font-weight($config, subheading-5);
     font-family: mat-font-family($config, subheading-5);
     line-height: mat-line-height($config, subheading-5);
-    margin:auto;
+    // margin:auto;
   }
 
   .mat-h6, #{$selector} h6 {
@@ -106,18 +106,27 @@
     font-weight: mat-font-weight($config, subheading-6);
     font-family: mat-font-family($config, subheading-6);
     line-height: mat-line-height($config, subheading-6);
-    margin:auto;
+    // margin:auto;
   }
 
   .mat-body-strong, .mat-body-2 {
     @include mat-typography-level-to-styles($config, body-2);
   }
 
-  .mat-body, .mat-body-1, #{$selector} {
+  .mat-body, .mat-body-1, #{$selector} p {
     @include mat-typography-level-to-styles($config, body-1);
-    p {
-      margin:auto;
-    }
+  }
+
+  .mat-body, .mat-body-1, #{$selector} pre {
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+
+  .mat-body, .mat-body-1, #{$selector} label {
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+
+  .mat-body, .mat-body-1, #{$selector} span {
+    @include mat-typography-level-to-styles($config, body-1);
   }
 
   .mat-small, .mat-caption {

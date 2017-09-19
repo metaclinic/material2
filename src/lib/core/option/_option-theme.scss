@@ -48,8 +48,9 @@
 @mixin mat-option-typography($config) {
   .mat-option {
     font: {
-      family: mat-font-family($config, subheading-6);
-      size: mat-font-size($config, subheading-6);
+      family: mat-font-family($config, body-1);
+      size: mat-font-size($config, body-1);
+      line-height: mat-line-height($config, body-1);
     }
   }
 }

@@ -270,6 +270,11 @@ $_mat-checkbox-mark-stroke-size: 2 / 15 * $mat-checkbox-size !default;
   transform: scaleX(0) rotate(0deg);
 }
 
+.mat-checkbox-label{
+  font-size: 15px;
+  font-weight: 200;
+}
+
 .mat-checkbox-label-before {
   .mat-checkbox-inner-container {
     order: 1;
