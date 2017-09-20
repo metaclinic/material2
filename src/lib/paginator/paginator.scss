@@ -23,8 +23,21 @@ $mat-paginator-button-increment-icon-margin: 16px;
   margin: $mat-paginator-range-label-margin;
 }
 
+.mat-page-index-controls {
+  display: flex;
+}
+
+.mat-page-index-container {
+  margin-top: 10px;
+}
+
 .mat-paginator-page-size-label {
   margin: $mat-paginator-items-per-page-label-margin;
+}
+
+.mat-page-index {
+  cursor: pointer;
+  margin: 0 10px;
 }
 
 .mat-paginator-page-size-select {

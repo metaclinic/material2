@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -17,20 +9,22 @@ import {
   ViewEncapsulation,
   OnDestroy,
 } from '@angular/core';
-import {MdPaginatorIntl} from './paginator-intl';
-import {MATERIAL_COMPATIBILITY_MODE} from '../core';
-import {Subscription} from 'rxjs/Subscription';
+import { MdPaginatorIntl } from './paginator-intl';
+import { MATERIAL_COMPATIBILITY_MODE } from '../core';
+import { Subscription } from 'rxjs/Subscription';
 
 /** The default page size if there is no page size and there are no provided page size options. */
 const DEFAULT_PAGE_SIZE = 50;
 
-/**
- * Change event object that is emitted when the user selects a
- * different page size or navigates to another page.
- */
 export class PageEvent {
   /** The current page index. */
   pageIndex: number;
+
+  /** The current step index. */
+  stepIndex: number;
+
+  /** The current step size */
+  stepSize: number;
 
   /** The current page size */
   pageSize: number;
@@ -53,7 +47,7 @@ export class PageEvent {
     'class': 'mat-paginator',
   },
   providers: [
-    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: false}
+    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: false }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -61,6 +55,11 @@ export class PageEvent {
 export class MdPaginator implements OnInit, OnDestroy {
   private _initialized: boolean;
   private _intlChanges: Subscription;
+  private _pageIndices: number[];
+  private _stepIndices: number[][];
+  private _pageIndicesFocusRange: number = 9;
+  private _lastPageIndex: number | null = null;
+  private _lastStepIndex: number | null = null;
 
   /** The zero-based page index of the displayed list of items. Defaulted to 0. */
   @Input()
@@ -70,6 +69,15 @@ export class MdPaginator implements OnInit, OnDestroy {
     this._changeDetectorRef.markForCheck();
   }
   _pageIndex: number = 0;
+
+  /** The zero-based step index of the displayed list of items. Defaulted to 0. */
+  @Input()
+  get stepIndex(): number { return this._stepIndex; }
+  set stepIndex(stepIndex: number) {
+    this._stepIndex = stepIndex;
+    this._changeDetectorRef.markForCheck();
+  }
+  _stepIndex: number = 0;
 
   /** The length of the total number of items that are being paginated. Defaulted to 0. */
   @Input()
@@ -89,6 +97,15 @@ export class MdPaginator implements OnInit, OnDestroy {
   }
   private _pageSize: number;
 
+  /** Number of steps to display on a page. By default set to 7. */
+  @Input()
+  get stepSize(): number { return this._stepSize; }
+  set stepSize(stepSize: number) {
+    this._stepSize = stepSize;
+    // this._updateDisplayedPageSizeOptions();
+  }
+  private _stepSize: number;
+
   /** The set of provided page size options to display to the user. */
   @Input()
   get pageSizeOptions(): number[] { return this._pageSizeOptions; }
@@ -105,30 +122,67 @@ export class MdPaginator implements OnInit, OnDestroy {
   _displayedPageSizeOptions: number[];
 
   constructor(public _intl: MdPaginatorIntl,
-              private _changeDetectorRef: ChangeDetectorRef) {
+    private _changeDetectorRef: ChangeDetectorRef) {
     this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
   ngOnInit() {
     this._initialized = true;
     this._updateDisplayedPageSizeOptions();
+    this._updatePageIndexArray();
   }
 
   ngOnDestroy() {
     this._intlChanges.unsubscribe();
   }
 
+  gotoPage(pageIndex: number) {
+    if (this._pageIndex === pageIndex) { return; }
+    this.pageIndex = pageIndex;
+    this._emitPageEvent();
+  }
+
   /** Advances to the next page if it exists. */
   nextPage() {
     if (!this.hasNextPage()) { return; }
-    this.pageIndex++;
-    this._emitPageEvent();
+    const lastPageInStepIndex = this._stepIndices[this.stepIndex].length - 1;
+    const lastPageInStep = this._stepIndices[this.stepIndex][lastPageInStepIndex];
+    if (this.pageIndex === (lastPageInStep - 1)) {
+      this.nextStep();
+    } else {
+      this.pageIndex++;
+      this._emitPageEvent();
+    }
   }
 
   /** Move back to the previous page if it exists. */
   previousPage() {
     if (!this.hasPreviousPage()) { return; }
-    this.pageIndex--;
+    const firstPageInStep = this._stepIndices[this.stepIndex][0];
+    if (this.pageIndex === (firstPageInStep - 1)) {
+      this.previousStep();
+    } else {
+      this.pageIndex--;
+      this._emitPageEvent();
+    }
+  }
+
+  gotoStep(stepIndex: number, pageIndex: number) {
+    this.stepIndex = stepIndex;
+    this.pageIndex = pageIndex;
+    this._emitPageEvent();
+  }
+
+  nextStep() {
+    this.stepIndex++;
+    this.pageIndex = (this._stepIndices[this.stepIndex][0] - 1);
+    this._emitPageEvent();
+  }
+
+  previousStep() {
+    this.stepIndex--;
+    const lastPageInStep = this._stepIndices[this.stepIndex].length - 1;
+    this.pageIndex = (this._stepIndices[this.stepIndex][lastPageInStep] - 1);
     this._emitPageEvent();
   }
 
@@ -154,9 +208,8 @@ export class MdPaginator implements OnInit, OnDestroy {
   _changePageSize(pageSize: number) {
     // Current page needs to be updated to reflect the new page size. Navigate to the page
     // containing the previous page's first item.
-    const startIndex = this.pageIndex * this.pageSize;
-    this.pageIndex = Math.floor(startIndex / pageSize) || 0;
-
+    this.stepIndex = 0;
+    this.pageIndex = 0;
     this.pageSize = pageSize;
     this._emitPageEvent();
   }
@@ -171,8 +224,8 @@ export class MdPaginator implements OnInit, OnDestroy {
     // If no page size is provided, use the first page size option or the default page size.
     if (!this.pageSize) {
       this._pageSize = this.pageSizeOptions.length != 0 ?
-          this.pageSizeOptions[0] :
-          DEFAULT_PAGE_SIZE;
+        this.pageSizeOptions[0] :
+        DEFAULT_PAGE_SIZE;
     }
 
     this._displayedPageSizeOptions = this.pageSizeOptions.slice();
@@ -186,12 +239,56 @@ export class MdPaginator implements OnInit, OnDestroy {
     this._changeDetectorRef.markForCheck();
   }
 
+  private _updatePageIndexArray() {
+    this._stepIndices = [];
+    this._pageIndices = [];
+    const entryMod = this._length % this._pageSize;
+    let adjustedCount = this._length;
+    let offsetPad = 0;
+    if (entryMod !== 0) {
+      adjustedCount = this._length - entryMod;
+      offsetPad = 1;
+    }
+    const numberOfIndices = (adjustedCount / this._pageSize) + offsetPad;
+    for (let i = 1; i <= numberOfIndices; i++) {
+      this._pageIndices.push(i);
+    }
+
+    if (this._pageIndices.length <= this._pageIndicesFocusRange + 1) {
+      this._stepIndices.push(this._pageIndices);
+    } else {
+      const stepMod = this._pageIndices.length % this._pageIndicesFocusRange;
+      let adjustedStepCount = this._pageIndices.length;
+      if (stepMod !== 0) {
+        adjustedStepCount = this._pageIndices.length - stepMod;
+        for (let i = 0; i < (adjustedStepCount / this._pageIndicesFocusRange); i++) {
+          let stepStartIndex = i * this._pageIndicesFocusRange;
+          let stepEndIndex = stepStartIndex + this._pageIndicesFocusRange;
+          this._stepIndices.push(this._pageIndices.slice(stepStartIndex, stepEndIndex));
+        }
+        this._stepIndices.push(this._pageIndices.slice(adjustedStepCount, this._pageIndices.length));
+      } else {
+        for (let i = 0; i < (adjustedStepCount / this._pageIndicesFocusRange); i++) {
+          let stepStartIndex = i * this._pageIndicesFocusRange;
+          let stepEndIndex = stepStartIndex + this._pageIndicesFocusRange;
+          this._stepIndices.push(this._pageIndices.slice(stepStartIndex, stepEndIndex));
+        }
+      }
+    }
+
+    this._lastPageIndex = this._pageIndices.length;
+    this._lastStepIndex = (this._stepIndices.length - 1);
+  }
+
   /** Emits an event notifying that a change of the paginator's properties has been triggered. */
   private _emitPageEvent() {
     this.page.next({
       pageIndex: this.pageIndex,
+      stepIndex: this.stepIndex,
       pageSize: this.pageSize,
+      stepSize: this.stepSize,
       length: this.length
     });
+    this._updatePageIndexArray();
   }
 }

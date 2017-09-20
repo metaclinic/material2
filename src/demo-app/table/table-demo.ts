@@ -5,8 +5,6 @@ import { MdPaginator, MdSort } from '@metaclinic/material';
 import { CASESTATUS } from '../dataset/caseStatus';
 export type OrderProperties = 'orderNumber' | 'patientName' | 'location' | 'caseStatus' | 'assignedPathologist';
 
-export type TrackByStrategy = 'id' | 'reference' | 'index';
-
 const properties = ['id', 'orderNumber', 'patientId', 'patientFirstName', 'patientLastName',
   'addressId', 'address', 'caseStatusId', 'assignedPathologistId', 'assignedPathologistFirstName',
   'assignedPathologistLastName'];
@@ -18,14 +16,10 @@ const properties = ['id', 'orderNumber', 'patientId', 'patientFirstName', 'patie
   styleUrls: ['table-demo.css'],
 })
 export class TableDemo {
-  dataSource: OrderDataSource | null;
-  displayedColumns: OrderProperties[] = [];
-  trackByStrategy: TrackByStrategy = 'reference';
-  changeReferences = false;
-  highlights = new Set<string>();
 
-  dynamicColumnDefs: any[] = [];
-  dynamicColumnIds: string[] = [];
+  dataSource: OrderDataSource | null;
+
+  displayedColumns: OrderProperties[] = [];
 
   @ViewChild(MdPaginator) _paginator: MdPaginator;
 
@@ -37,27 +31,9 @@ export class TableDemo {
     this.connect();
   }
 
-  addDynamicColumnDef() {
-    const nextProperty = properties[this.dynamicColumnDefs.length];
-
-    this.dynamicColumnDefs.push({
-      id: nextProperty.toUpperCase(),
-      property: nextProperty,
-      headerText: nextProperty
-    });
-
-    this.dynamicColumnIds = this.dynamicColumnDefs.map(columnDef => columnDef.id);
-  }
-
-  removeDynamicColumnDef() {
-    this.dynamicColumnDefs.pop();
-    this.dynamicColumnIds.pop();
-  }
-
   connect() {
     this.displayedColumns = ['orderNumber', 'patientName', 'location', 'caseStatus', 'assignedPathologist'];
-    this.dataSource = new OrderDataSource(this._orderDatabase,
-      this._paginator, this.sort);
+    this.dataSource = new OrderDataSource(this._orderDatabase, this._paginator, this.sort);
     this._orderDatabase.initialize();
   }
 
@@ -71,15 +47,4 @@ export class TableDemo {
     return caseStatus.name;
   }
 
-  orderTrackBy = (index: number, item: OrderData) => {
-    switch (this.trackByStrategy) {
-      case 'id': return item.id;
-      case 'reference': return item;
-      case 'index': return index;
-    }
-  }
-
-  toggleHighlight(property: string, enable: boolean) {
-    enable ? this.highlights.add(property) : this.highlights.delete(property);
-  }
 }

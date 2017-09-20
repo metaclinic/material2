@@ -6,7 +6,7 @@
       <h4>Simple</h4>
 
       <md-chip-list>
-        <md-chip>Chip 1</md-chip>
+        <md-chip color="warn">Chip 1</md-chip>
         <md-chip>Chip 2</md-chip>
         <md-chip>Chip 3</md-chip>
       </md-chip-list>
@@ -23,9 +23,7 @@
 
       <md-chip-list selectable="false">
         <md-chip color="accent" selected="true">Selected/Colored</md-chip>
-
-        <md-chip color="warn" selected="true" *ngIf="visible"
-                 (destroy)="displayMessage('chip destroyed')" (remove)="toggleVisible()">
+        <md-chip color="warn" selected="true" *ngIf="visible" (destroy)="displayMessage('chip destroyed')" (remove)="toggleVisible()">
           With Events
           <md-icon mdChipRemove>cancel</md-icon>
         </md-chip>
@@ -36,51 +34,36 @@
 
   <md-card>
     <md-toolbar color="primary">Dynamic Chips</md-toolbar>
-
     <md-card-content>
       <h4>Form Field</h4>
-
       <p>
         You can easily put the the <code>&lt;md-chip-list&gt;</code> inside of an
         <code>&lt;md-form-field&gt;</code>.
       </p>
-
-
       <md-form-field>
         <md-chip-list mdPrefix #chipList1>
-          <md-chip *ngFor="let person of people" [color]="color" [selectable]="selectable"
-                   [removable]="removable" (remove)="remove(person)">
+          <md-chip *ngFor="let person of people" [color]="color" [selectable]="selectable" [removable]="removable" (remove)="remove(person)">
             {{person.name}}
             <md-icon mdChipRemove *ngIf="removable">cancel</md-icon>
           </md-chip>
         </md-chip-list>
-        <input mdInput placeholder="New Contributor..."
-               [mdChipInputFor]="chipList1"
-               [mdChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [mdChipInputAddOnBlur]="addOnBlur"
-               (mdChipInputTokenEnd)="add($event)" />
+        <input mdInput placeholder="New Contributor..." [mdChipInputFor]="chipList1" [mdChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [mdChipInputAddOnBlur]="addOnBlur" (mdChipInputTokenEnd)="add($event)" />
       </md-form-field>
 
-
-
       <p>
-        You can also put <code>&lt;md-form-field&gt;</code> outside of an <code>md-chip-list</code>.
-        With <code>mdChipInput</code> the input work with chip-list
+        You can also put <code>&lt;md-form-field&gt;</code> outside of an <code>md-chip-list</code>. With <code>mdChipInput</code>        the input work with chip-list
       </p>
 
       <md-chip-list #chipList2>
-        <md-chip *ngFor="let person of people" [color]="color" [selectable]="selectable"
-                 [removable]="removable" (remove)="remove(person)">
+        <md-chip *ngFor="let person of people" [color]="color" [selectable]="selectable" [removable]="removable" (remove)="remove(person)">
           {{person.name}}
           <md-icon mdChipRemove *ngIf="removable">cancel</md-icon>
         </md-chip>
       </md-chip-list>
       <md-form-field>
-        <input mdInput placeholder="New Contributor..."
-               [mdChipInputFor]="chipList2"
-               [mdChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [mdChipInputAddOnBlur]="addOnBlur"
-               (mdChipInputTokenEnd)="add($event)" />
+        <input mdInput placeholder="New Contributor..." [mdChipInputFor]="chipList2" [mdChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [mdChipInputAddOnBlur]="addOnBlur" (mdChipInputTokenEnd)="add($event)" />
       </md-form-field>
 
       <p>
@@ -103,8 +86,7 @@
       </p>
 
       <md-chip-list class="mat-chip-list-stacked" aria-orientation="vertical" [tabIndex]="-1">
-        <md-chip *ngFor="let aColor of availableColors"
-                 (focus)="color = aColor.color" color="{{aColor.color}}" selected="true">
+        <md-chip *ngFor="let aColor of availableColors" (focus)="color = aColor.color" color="{{aColor.color}}" selected="true">
           {{aColor.name}}
         </md-chip>
       </md-chip-list>

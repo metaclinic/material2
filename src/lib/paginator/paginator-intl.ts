@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * To modify the labels and text displayed, create a new instance of MdPaginatorIntl and
@@ -30,6 +30,10 @@ export class MdPaginatorIntl {
   /** A label for the button that decrements the current page. */
   previousPageLabel = 'Previous page';
 
+  getPageIndexLabel = (pageIndex: number) => {
+    return `Page ${pageIndex}`;
+  }
+
   /** A label for the range of items within the current page and the length of the whole list. */
   getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length == 0 || pageSize == 0) { return `Showing 0 of ${length} entries`; }
@@ -40,8 +44,8 @@ export class MdPaginatorIntl {
 
     // If the start index exceeds the list length, do not try and fix the end index to the end.
     const endIndex = startIndex < length ?
-        Math.min(startIndex + pageSize, length) :
-        startIndex + pageSize;
+      Math.min(startIndex + pageSize, length) :
+      startIndex + pageSize;
 
     return `Showing ${startIndex + 1} to ${endIndex} of ${length} entries`;
   }

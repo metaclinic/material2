@@ -21,7 +21,6 @@ export class OrderDataSource extends DataSource<any> {
     return Observable.merge(...displayDataChanges).map(() => {
       const data = this.getSortedData();
 
-      // Grab the page's slice of data.
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
       return data.splice(startIndex, this._paginator.pageSize);
     });
@@ -31,7 +30,6 @@ export class OrderDataSource extends DataSource<any> {
     // No-op
   }
 
-  /** Returns a sorted copy of the database data. */
   getSortedData(): OrderData[] {
     const data = this._orderDatabase.data.slice();
     if (!this._sort.active || this._sort.direction == '') { return data; }

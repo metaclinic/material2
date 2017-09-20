@@ -1,32 +1,33 @@
 @import '../core/theming/palette';
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
-
-
 @mixin mat-paginator-theme($theme) {
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-
   .mat-paginator {
     background: mat-color($background, table-background);
   }
-
   .mat-paginator,
   .mat-paginator-page-size .mat-select-trigger {
     color: mat-color($foreground, secondary-text);
   }
-
   .mat-paginator-increment,
   .mat-paginator-decrement {
     border-top: 2px solid mat-color($foreground, 'icon');
     border-right: 2px solid mat-color($foreground, 'icon');
   }
-
   .mat-icon-button[disabled] {
     .mat-paginator-increment,
     .mat-paginator-decrement {
       border-color: mat-color($foreground, 'disabled');
     }
+  }
+  .mat-active-page-index {
+    color: mat-color($foreground, icon);
+    font-weight: bold;
+  }
+  .mat-page-index-container {
+    color: mat-color($foreground, text);
   }
 }
 
@@ -37,5 +38,9 @@
       family: mat-font-family($config, caption);
       size: mat-font-size($config, caption);
     }
+  }
+  .mat-page-index-container {
+    font-size: mat-font-size($config, label);
+    font-weight: 300;
   }
 }

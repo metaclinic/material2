@@ -1,149 +1,41 @@
-<div class="demo-data-source-actions">
-  <div>
-    <button md-raised-button (click)="connect()">Connect New Data Source</button>
-    <button md-raised-button (click)="disconnect()" [disabled]="!dataSource">Disconnect Data Source</button>
-  </div>
-
-  <div>
-    <button md-raised-button (click)="_orderDatabase.shuffle(changeReferences)">Randomize Data</button>
-    <md-checkbox [(ngModel)]="changeReferences">Change references</md-checkbox>
-  </div>
-
-  <div class="demo-track-by-select">
-    <div class="demo-track-by-label">Track By</div>
-    <md-radio-group [(ngModel)]="trackByStrategy">
-      <md-radio-button [value]="'reference'">Reference</md-radio-button>
-      <md-radio-button [value]="'id'">ID</md-radio-button>
-      <md-radio-button [value]="'index'">Index</md-radio-button>
-    </md-radio-group>
-  </div>
-</div>
-
-<h3>MdTable Example</h3>
-
 <div>
-
   <!-- <table-header-demo (shiftColumns)="displayedColumns.push(displayedColumns.shift())">
   </table-header-demo> -->
-
-  <md-table [dataSource]="dataSource" [trackBy]="orderTrackBy" mdSort>
-
+  <md-table [dataSource]="dataSource" mdSort>
     <ng-container mdColumnDef="orderNumber">
       <md-header-cell *mdHeaderCellDef md-sort-header> Order # </md-header-cell>
       <md-cell *mdCellDef="let row"> {{row.orderNumber}} </md-cell>
     </ng-container>
-
     <ng-container mdColumnDef="patientName">
       <md-header-cell *mdHeaderCellDef md-sort-header> Patient Name </md-header-cell>
       <md-cell *mdCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </md-cell>
     </ng-container>
-
     <ng-container mdColumnDef="location">
       <md-header-cell *mdHeaderCellDef md-sort-header> Location </md-header-cell>
       <md-cell *mdCellDef="let row"> {{row.address}} </md-cell>
     </ng-container>
-
     <ng-container mdColumnDef="caseStatus">
       <md-header-cell *mdHeaderCellDef md-sort-header> Case Status </md-header-cell>
       <md-cell *mdCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </md-cell>
     </ng-container>
-
     <ng-container mdColumnDef="assignedPathologist">
       <md-header-cell *mdHeaderCellDef md-sort-header> Assigned Pathologist </md-header-cell>
       <md-cell *mdCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </md-cell>
     </ng-container>
-
     <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *mdRowDef="let row; columns: displayedColumns; let even = even; let odd = odd;let first = first; let last = last;"
       [ngClass]="{'mat-row-highlight-even': even,'mat-row-highlight-odd': odd, 
                 'mat-row-first': first, 'mat-row-last': last,
                 'mat-elevation-z25': even || odd }"></md-row>
-
   </md-table>
-
   <md-paginator #paginator [length]="_orderDatabase.data.length" [pageSizeOptions]="[5, 10, 25, 100]">
   </md-paginator>
 </div>
 
-<md-card class="demo-table-card">
-  <h3>
-    CdkTable With Dynamic Column Def
-    <div>
-      <button md-raised-button (click)="addDynamicColumnDef()" [disabled]="dynamicColumnIds.length >= 4">
-        Add Column Def
-      </button>
-      <button md-raised-button (click)="removeDynamicColumnDef()" [disabled]="dynamicColumnIds.length == 0">
-        Remove Column Def
-      </button>
-    </div>
-  </h3>
-
-  <cdk-table [dataSource]="dataSource">
-    <ng-container [cdkColumnDef]="column.id" *ngFor="let column of dynamicColumnDefs">
-      <cdk-header-cell *cdkHeaderCellDef> {{column.headerText}} </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row[column.property]}} </cdk-cell>
-    </ng-container>
-
-    <cdk-header-row *cdkHeaderRowDef="dynamicColumnIds"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: dynamicColumnIds;"></cdk-row>
-  </cdk-table>
-</md-card>
-
-<md-card class="demo-table-card">
-  <h3>CdkTable Example</h3>
-
-  <div class="demo-highlighter">
-    Highlight:
-    <md-checkbox (change)="toggleHighlight('first', $event.checked)">First Row</md-checkbox>
-    <md-checkbox (change)="toggleHighlight('last', $event.checked)">Last Row</md-checkbox>
-    <md-checkbox (change)="toggleHighlight('even', $event.checked)">Even Rows</md-checkbox>
-    <md-checkbox (change)="toggleHighlight('odd', $event.checked)">Odd Rows</md-checkbox>
+<div class="demo-data-source-actions">
+  <div>
+    <button md-raised-button (click)="connect()">Connect New Data Source</button>
+    <button md-raised-button (click)="disconnect()" [disabled]="!dataSource">Disconnect Data Source</button>
+    <button md-raised-button (click)="_orderDatabase.shuffle(changeReferences)">Randomize Data</button>
   </div>
-
-  <cdk-table #table mdSort [dataSource]="dataSource" [trackBy]="orderTrackBy">
-
-    <ng-container cdkColumnDef="orderNumber">
-      <cdk-header-cell *cdkHeaderCellDef md-sort-header start="desc">
-        Order #
-      </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.orderNumber}} </cdk-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="patientName">
-      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
-        Patient Name
-      </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </cdk-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="location">
-      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
-        Location
-      </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.address}} </cdk-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="caseStatus">
-      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
-        Case Status
-      </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </cdk-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="assignedPathologist">
-      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
-        Assigned Pathologist
-      </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </cdk-cell>
-    </ng-container>
-
-    <cdk-header-row *cdkHeaderRowDef="displayedColumns"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: displayedColumns;
-                         let first = first; let last = last; let even = even; let odd = odd" [ngClass]="{
-                          'demo-row-highlight-first': highlights.has('first') && first,
-                          'demo-row-highlight-last': highlights.has('last') && last,
-                          'demo-row-highlight-even': highlights.has('even') && even,
-                          'demo-row-highlight-odd': highlights.has('odd') && odd }">
-    </cdk-row>
-  </cdk-table>
-</md-card>
+</div>
