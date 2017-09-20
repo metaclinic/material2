@@ -32,7 +32,7 @@ export class MdPaginatorIntl {
 
   /** A label for the range of items within the current page and the length of the whole list. */
   getRangeLabel = (page: number, pageSize: number, length: number) => {
-    if (length == 0 || pageSize == 0) { return `0 of ${length}`; }
+    if (length == 0 || pageSize == 0) { return `Showing 0 of ${length} entries`; }
 
     length = Math.max(length, 0);
 
@@ -43,6 +43,6 @@ export class MdPaginatorIntl {
         Math.min(startIndex + pageSize, length) :
         startIndex + pageSize;
 
-    return `${startIndex + 1} - ${endIndex} of ${length}`;
+    return `Showing ${startIndex + 1} to ${endIndex} of ${length} entries`;
   }
 }

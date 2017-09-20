@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -8,5 +8,4 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class TableHeaderDemo {
   @Output() shiftColumns = new EventEmitter<void>();
-  @Output() toggleColorColumn = new EventEmitter<void>();
 }

@@ -1,8 +1,9 @@
+@import '../core/theming/palette';
 $mat-sort-header-arrow-margin: 6px;
+$mat-sort-header-arrow-top-margin: 9px;
 $mat-sort-header-arrow-container-size: 10px;
 $mat-sort-header-arrow-pointer-length: 8px;
 $mat-sort-header-arrow-thickness: 2px;
-
 .mat-sort-header-container {
   display: flex;
   cursor: pointer;
@@ -25,20 +26,21 @@ $mat-sort-header-arrow-thickness: 2px;
 }
 
 .mat-sort-header-arrow {
-  height: $mat-sort-header-arrow-container-size;
-  width: $mat-sort-header-arrow-container-size;
+  height: 0;
+  width: 0;
   position: relative;
-  margin: 0 0 0 $mat-sort-header-arrow-margin;
-  transform: rotate(45deg);
-
+  margin: $mat-sort-header-arrow-top-margin 0 0 $mat-sort-header-arrow-margin;
+  transform: rotate(90deg);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid $deep-sky-blue;
   .mat-sort-header-position-before & {
     margin: 0 $mat-sort-header-arrow-margin 0 0;
   }
 }
 
 .mat-sort-header-stem {
-  background: currentColor;
-  transform: rotate(135deg);
+  background: currentColor; //transform: rotate(135deg);
   height: $mat-sort-header-arrow-container-size;
   width: $mat-sort-header-arrow-thickness;
   margin: auto;

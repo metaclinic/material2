@@ -1,30 +1,26 @@
 $mat-paginator-height: 56px;
 $mat-paginator-padding: 0 8px;
-
 $mat-paginator-items-per-page-label-margin: 0 4px;
 $mat-paginator-selector-margin: 0 4px;
 $mat-paginator-selector-trigger-min-width: 56px;
-
-$mat-paginator-range-label-margin: 0 32px;
-
+$mat-paginator-range-label-margin: 0 18px;
 $mat-paginator-button-margin: 8px;
 $mat-paginator-button-icon-height: 8px;
 $mat-paginator-button-icon-width: 8px;
-
 $mat-paginator-button-decrement-icon-margin: 12px;
 $mat-paginator-button-increment-icon-margin: 16px;
-
 .mat-paginator {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  display: flex; // align-items: center;
+  // justify-content: flex-end;
+  justify-content: space-between;
   min-height: $mat-paginator-height;
   padding: $mat-paginator-padding;
 }
 
 .mat-paginator-page-size {
-  display: flex;
-  align-items: center;
+  display: flex; // align-items: center;
+  text-align: right;
+  margin: $mat-paginator-range-label-margin;
 }
 
 .mat-paginator-page-size-label {
@@ -35,7 +31,6 @@ $mat-paginator-button-increment-icon-margin: 16px;
   // Since the select won't have a placeholder we can remove the space that is reserved for it.
   padding-top: 0;
   margin: $mat-paginator-selector-margin;
-
   .mat-select-trigger {
     min-width: $mat-paginator-selector-trigger-min-width;
   }
@@ -43,11 +38,11 @@ $mat-paginator-button-increment-icon-margin: 16px;
 
 .mat-paginator-range-label {
   margin: $mat-paginator-range-label-margin;
+  text-align: left;
 }
 
-.mat-paginator-increment-button + .mat-paginator-increment-button {
+.mat-paginator-increment-button+.mat-paginator-increment-button {
   margin: 0 0 0 $mat-paginator-button-margin;
-
   [dir='rtl'] & {
     margin: 0 $mat-paginator-button-margin 0 0;
   }
@@ -63,6 +58,7 @@ $mat-paginator-button-increment-icon-margin: 16px;
 [dir='rtl'] .mat-paginator-increment {
   transform: rotate(45deg);
 }
+
 .mat-paginator-increment,
 [dir='rtl'] .mat-paginator-decrement {
   transform: rotate(225deg);

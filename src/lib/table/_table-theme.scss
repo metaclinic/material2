@@ -1,23 +1,33 @@
 @import '../core/theming/palette';
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
-
 @mixin mat-table-theme($theme) {
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-
   .mat-table {
-    background: mat-color($background, 'card');
+    background: mat-color($background, table-background);
+    padding: 20px;
+    margin-bottom: -5px;
+    z-index: 2;
   }
-
-  .mat-row, .mat-header-row {
-    border-bottom-color: mat-color($foreground, divider);
+  .mat-row-highlight-even {
+    background: mat-color($background, table-row-even);
   }
-
+  .mat-row-highlight-odd {
+    background: mat-color($background, table-row-odd);
+  }
+  .mat-row-first {
+    border-radius: 6px 6px 0 0;
+  }
+  .mat-row-last {
+    border-radius: 0 0 6px 6px;
+  }
+  .mat-header-row {
+    background: mat-color($background, table-background);
+  }
   .mat-header-cell {
-    color: mat-color($foreground, secondary-text);
+    color: mat-color($foreground, text);
   }
-
   .mat-cell {
     color: mat-color($foreground, text);
   }
@@ -27,12 +37,12 @@
   .mat-table {
     font-family: mat-font-family($config);
   }
-
   .mat-header-cell {
-    font-size: mat-font-size($config, caption);
-    font-weight: mat-font-weight($config, body-2);
+    font-size: mat-font-size($config, table-labels);
+    line-height: mat-line-height($config, table-labels);
+    font-weight: mat-font-weight($config, table-labels);
+    letter-spacing: 0.2px;
   }
-
   .mat-cell {
     font-size: mat-font-size($config, body-1);
   }

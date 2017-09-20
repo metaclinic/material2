@@ -36,7 +36,7 @@ import {AutocompleteDemo} from '../autocomplete/autocomplete-demo';
 import {InputDemo} from '../input/input-demo';
 import {StyleDemo} from '../style/style-demo';
 import {TableDemo} from '../table/table-demo';
-import {PeopleDatabase} from '../table/people-database';
+import {OrderDatabase} from '../table/order-database';
 import {DatepickerDemo} from '../datepicker/datepicker-demo';
 import {TypographyDemo} from '../typography/typography-demo';
 import {ExpansionDemo} from '../expansion/expansion-demo';
@@ -115,7 +115,7 @@ import {
   ],
   providers: [
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
-    PeopleDatabase
+    OrderDatabase
   ],
   entryComponents: [
     DemoApp,

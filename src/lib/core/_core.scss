@@ -18,7 +18,7 @@
   // Provides external CSS classes for each elevation value. Each CSS class is formatted as
   // `mat-elevation-z$zValue` where `$zValue` corresponds to the z-space to which the element is
   // elevated.
-  @for $zValue from 0 through 24 {
+  @for $zValue from 0 through 25 {
     .mat-elevation-z#{$zValue} {
       @include mat-elevation($zValue);
     }

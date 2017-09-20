@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <button md-raised-button (click)="_peopleDatabase.shuffle(changeReferences)">Randomize Data</button>
+    <button md-raised-button (click)="_orderDatabase.shuffle(changeReferences)">Randomize Data</button>
     <md-checkbox [(ngModel)]="changeReferences">Change references</md-checkbox>
   </div>
 
@@ -19,18 +19,60 @@
   </div>
 </div>
 
+<h3>MdTable Example</h3>
+
+<div>
+
+  <!-- <table-header-demo (shiftColumns)="displayedColumns.push(displayedColumns.shift())">
+  </table-header-demo> -->
+
+  <md-table [dataSource]="dataSource" [trackBy]="orderTrackBy" mdSort>
+
+    <ng-container mdColumnDef="orderNumber">
+      <md-header-cell *mdHeaderCellDef md-sort-header> Order # </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.orderNumber}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="patientName">
+      <md-header-cell *mdHeaderCellDef md-sort-header> Patient Name </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="location">
+      <md-header-cell *mdHeaderCellDef md-sort-header> Location </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.address}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="caseStatus">
+      <md-header-cell *mdHeaderCellDef md-sort-header> Case Status </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="assignedPathologist">
+      <md-header-cell *mdHeaderCellDef md-sort-header> Assigned Pathologist </md-header-cell>
+      <md-cell *mdCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns; let even = even; let odd = odd;let first = first; let last = last;"
+      [ngClass]="{'mat-row-highlight-even': even,'mat-row-highlight-odd': odd, 
+                'mat-row-first': first, 'mat-row-last': last,
+                'mat-elevation-z25': even || odd }"></md-row>
+
+  </md-table>
+
+  <md-paginator #paginator [length]="_orderDatabase.data.length" [pageSizeOptions]="[5, 10, 25, 100]">
+  </md-paginator>
+</div>
+
 <md-card class="demo-table-card">
   <h3>
     CdkTable With Dynamic Column Def
     <div>
-      <button md-raised-button
-              (click)="addDynamicColumnDef()"
-              [disabled]="dynamicColumnIds.length >= 4">
+      <button md-raised-button (click)="addDynamicColumnDef()" [disabled]="dynamicColumnIds.length >= 4">
         Add Column Def
       </button>
-      <button md-raised-button
-              (click)="removeDynamicColumnDef()"
-              [disabled]="dynamicColumnIds.length == 0">
+      <button md-raised-button (click)="removeDynamicColumnDef()" [disabled]="dynamicColumnIds.length == 0">
         Remove Column Def
       </button>
     </div>
@@ -58,115 +100,50 @@
     <md-checkbox (change)="toggleHighlight('odd', $event.checked)">Odd Rows</md-checkbox>
   </div>
 
-  <cdk-table #table mdSort
-               [dataSource]="dataSource"
-               [trackBy]="userTrackBy">
+  <cdk-table #table mdSort [dataSource]="dataSource" [trackBy]="orderTrackBy">
 
-    <!-- Column Definition: ID -->
-    <ng-container cdkColumnDef="userId">
-      <cdk-header-cell *cdkHeaderCellDef
-                       md-sort-header arrowPosition="before">
-          ID
-        </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.id}} </cdk-cell>
+    <ng-container cdkColumnDef="orderNumber">
+      <cdk-header-cell *cdkHeaderCellDef md-sort-header start="desc">
+        Order #
+      </cdk-header-cell>
+      <cdk-cell *cdkCellDef="let row"> {{row.orderNumber}} </cdk-cell>
     </ng-container>
 
-    <!-- Column Definition: Progress -->
-    <ng-container cdkColumnDef="progress">
-      <cdk-header-cell *cdkHeaderCellDef
-                         md-sort-header start="desc">
-          Progress
-        </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row">
-        <div class="demo-progress-stat">{{row.progress}}%</div>
-        <div class="demo-progress-indicator-container">
-          <div class="demo-progress-indicator"
-               [style.background]="row.progress > 50 ? 'green' : 'red'"
-               [style.opacity]="getOpacity(row.progress)"
-               [style.width.%]="row.progress"></div>
-        </div>
-      </cdk-cell>
-    </ng-container>
-
-    <!-- Column Definition: Name -->
-    <ng-container cdkColumnDef="userName">
+    <ng-container cdkColumnDef="patientName">
       <cdk-header-cell *cdkHeaderCellDef md-sort-header>
-          Name
-        </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row"> {{row.name}} </cdk-cell>
+        Patient Name
+      </cdk-header-cell>
+      <cdk-cell *cdkCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </cdk-cell>
     </ng-container>
 
-    <!-- Column Definition: Color -->
-    <ng-container cdkColumnDef="color">
-      <cdk-header-cell *cdkHeaderCellDef
-                         md-sort-header disableClear>
-          Color
-        </cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.color}} </cdk-cell>
+    <ng-container cdkColumnDef="location">
+      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
+        Location
+      </cdk-header-cell>
+      <cdk-cell *cdkCellDef="let row"> {{row.address}} </cdk-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="caseStatus">
+      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
+        Case Status
+      </cdk-header-cell>
+      <cdk-cell *cdkCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </cdk-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="assignedPathologist">
+      <cdk-header-cell *cdkHeaderCellDef md-sort-header>
+        Assigned Pathologist
+      </cdk-header-cell>
+      <cdk-cell *cdkCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </cdk-cell>
     </ng-container>
 
     <cdk-header-row *cdkHeaderRowDef="displayedColumns"></cdk-header-row>
     <cdk-row *cdkRowDef="let row; columns: displayedColumns;
-                           let first = first; let last = last; let even = even; let odd = odd"
-               [ngClass]="{
-                 'demo-row-highlight-first': highlights.has('first') && first,
-                 'demo-row-highlight-last': highlights.has('last') && last,
-                 'demo-row-highlight-even': highlights.has('even') && even,
-                 'demo-row-highlight-odd': highlights.has('odd') && odd
-               }">
-      </cdk-row>
+                         let first = first; let last = last; let even = even; let odd = odd" [ngClass]="{
+                          'demo-row-highlight-first': highlights.has('first') && first,
+                          'demo-row-highlight-last': highlights.has('last') && last,
+                          'demo-row-highlight-even': highlights.has('even') && even,
+                          'demo-row-highlight-odd': highlights.has('odd') && odd }">
+    </cdk-row>
   </cdk-table>
 </md-card>
-
-<h3>MdTable Example</h3>
-
-<div class="demo-table-container demo-mat-table-example mat-elevation-z4">
-
-  <table-header-demo (shiftColumns)="displayedColumns.push(displayedColumns.shift())"
-                     (toggleColorColumn)="toggleColorColumn()">
-  </table-header-demo>
-
-  <md-table [dataSource]="dataSource" [trackBy]="userTrackBy">
-
-    <!-- Column Definition: ID -->
-    <ng-container cdkColumnDef="userId">
-      <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.id}} </md-cell>
-    </ng-container>
-
-    <!-- Column Definition: Progress -->
-    <ng-container mdColumnDef="progress">
-      <md-header-cell *mdHeaderCellDef> Progress </md-header-cell>
-      <md-cell *mdCellDef="let row">
-        <div class="demo-progress-stat">{{row.progress}}%</div>
-        <div class="demo-progress-indicator-container">
-          <div class="demo-progress-indicator"
-               [style.background]="row.progress > 50 ? 'green' : 'red'"
-               [style.opacity]="getOpacity(row.progress)"
-               [style.width.%]="row.progress"></div>
-        </div>
-      </md-cell>
-    </ng-container>
-
-    <!-- Column Definition: Name -->
-    <ng-container mdColumnDef="userName">
-      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.name}} </md-cell>
-    </ng-container>
-
-    <!-- Column Definition: Color -->
-    <ng-container mdColumnDef="color">
-      <md-header-cell *mdHeaderCellDef>Color</md-header-cell>
-      <md-cell *mdCellDef="let row" [style.color]="row.color"> {{row.color}} </md-cell>
-    </ng-container>
-
-    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
-
-  </md-table>
-
-  <md-paginator #paginator
-                [length]="_peopleDatabase.data.length"
-                [pageSizeOptions]="[5, 10, 25, 100]">
-  </md-paginator>
-</div>

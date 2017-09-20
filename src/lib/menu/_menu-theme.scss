@@ -37,8 +37,9 @@
 @mixin mat-menu-typography($config) {
   .mat-menu-item {
     font: {
-      family: mat-font-family($config, subheading-2);
-      size: mat-font-size($config, subheading-2);
+      family: mat-font-family($config, body-2);
+      line-height: mat-line-height($config, body-2);
+      size: mat-font-size($config, body-2);
     }
   }
 }

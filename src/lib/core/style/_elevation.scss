@@ -61,7 +61,8 @@ $_umbra-elevation-map: (
   21: '0px 10px 13px -6px #{$_umbra-color}',
   22: '0px 10px 14px -6px #{$_umbra-color}',
   23: '0px 11px 14px -7px #{$_umbra-color}',
-  24: '0px 11px 15px -7px #{$_umbra-color}'
+  24: '0px 11px 15px -7px #{$_umbra-color}',
+  25: '7px 5px 0 -20px #{$_umbra-color}'
 );
 
 $_penumbra-elevation-map: (
@@ -90,7 +91,8 @@ $_penumbra-elevation-map: (
   21: '0px 21px 33px 3px #{$_penumbra-color}',
   22: '0px 22px 35px 3px #{$_penumbra-color}',
   23: '0px 23px 36px 3px #{$_penumbra-color}',
-  24: '0px 24px 38px 3px #{$_penumbra-color}'
+  24: '0px 24px 38px 3px #{$_penumbra-color}',
+  25: '-7px 5px 0 -20px #{$_penumbra-color}'
 );
 
 $_ambient-elevation-map: (
@@ -119,7 +121,8 @@ $_ambient-elevation-map: (
   21: '0px 8px 40px 7px #{$_ambient-color}',
   22: '0px 8px 42px 7px #{$_ambient-color}',
   23: '0px 9px 44px 8px #{$_ambient-color}',
-  24: '0px 9px 46px 8px #{$_ambient-color}'
+  24: '0px 9px 46px 8px #{$_ambient-color}',
+  25: '0 7px 10px 0 #{$_ambient-color}'
 );
 
 
@@ -135,8 +138,8 @@ $mat-elevation-transition-timing-function: $mat-fast-out-slow-in-timing-function
   @if type-of($zValue) != number or not unitless($zValue) {
     @error '$zValue must be a unitless number';
   }
-  @if $zValue < 0 or $zValue > 24 {
-    @error '$zValue must be between 0 and 24';
+  @if $zValue < 0 or $zValue > 25 {
+    @error '$zValue must be between 0 and 25';
   }
 
   box-shadow: #{map-get($_umbra-elevation-map, $zValue)},

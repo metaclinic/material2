@@ -33,7 +33,8 @@
   $body-1:        mat-typography-level(14px, 20px, 400),
   $caption:       mat-typography-level(12px, 20px, 400),
   $button:        mat-typography-level(14px, 38px, 400),
-  $input:         mat-typography-level(13px, 1.175, 300)
+  $input:         mat-typography-level(13px, 1.175, 300),
+  $table-labels:  mat-typography-level(13px, 19px, 600)
 ) {
 
   // Declare an initial map with all of the levels.
@@ -53,6 +54,7 @@
     caption:        $caption,
     button:         $button,
     input:          $input,
+    table-labels:   $table-labels
   );
 
   // Loop through the levels and set the `font-family` of the ones that don't have one to the base.

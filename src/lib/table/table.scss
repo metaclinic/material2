@@ -7,8 +7,6 @@ $mat-row-horizontal-padding: 24px;
 
 .mat-row, .mat-header-row {
   display: flex;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
   align-items: center;
   min-height: $mat-row-height;
   padding: 0 $mat-row-horizontal-padding;

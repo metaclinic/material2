@@ -1,13 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
-import {PeopleDatabase, UserData} from './people-database';
-import {PersonDataSource} from './person-data-source';
-import {MdPaginator, MdSort} from '@metaclinic/material';
-
-export type UserProperties = 'userId' | 'userName' | 'progress' | 'color' | undefined;
+import { Component, ViewChild } from '@angular/core';
+import { OrderDatabase, OrderData } from './order-database';
+import { OrderDataSource } from './order-data-source';
+import { MdPaginator, MdSort } from '@metaclinic/material';
+import { CASESTATUS } from '../dataset/caseStatus';
+export type OrderProperties = 'orderNumber' | 'patientName' | 'location' | 'caseStatus' | 'assignedPathologist';
 
 export type TrackByStrategy = 'id' | 'reference' | 'index';
 
-const properties = ['id', 'name', 'progress', 'color'];
+const properties = ['id', 'orderNumber', 'patientId', 'patientFirstName', 'patientLastName',
+  'addressId', 'address', 'caseStatusId', 'assignedPathologistId', 'assignedPathologistFirstName',
+  'assignedPathologistLastName'];
 
 @Component({
   moduleId: module.id,
@@ -16,8 +18,8 @@ const properties = ['id', 'name', 'progress', 'color'];
   styleUrls: ['table-demo.css'],
 })
 export class TableDemo {
-  dataSource: PersonDataSource | null;
-  displayedColumns: UserProperties[] = [];
+  dataSource: OrderDataSource | null;
+  displayedColumns: OrderProperties[] = [];
   trackByStrategy: TrackByStrategy = 'reference';
   changeReferences = false;
   highlights = new Set<string>();
@@ -29,7 +31,7 @@ export class TableDemo {
 
   @ViewChild(MdSort) sort: MdSort;
 
-  constructor(public _peopleDatabase: PeopleDatabase) { }
+  constructor(public _orderDatabase: OrderDatabase) { }
 
   ngOnInit() {
     this.connect();
@@ -37,6 +39,7 @@ export class TableDemo {
 
   addDynamicColumnDef() {
     const nextProperty = properties[this.dynamicColumnDefs.length];
+
     this.dynamicColumnDefs.push({
       id: nextProperty.toUpperCase(),
       property: nextProperty,
@@ -52,10 +55,10 @@ export class TableDemo {
   }
 
   connect() {
-    this.displayedColumns = ['userId', 'userName', 'progress', 'color'];
-    this.dataSource = new PersonDataSource(this._peopleDatabase,
-        this._paginator, this.sort);
-    this._peopleDatabase.initialize();
+    this.displayedColumns = ['orderNumber', 'patientName', 'location', 'caseStatus', 'assignedPathologist'];
+    this.dataSource = new OrderDataSource(this._orderDatabase,
+      this._paginator, this.sort);
+    this._orderDatabase.initialize();
   }
 
   disconnect() {
@@ -63,25 +66,16 @@ export class TableDemo {
     this.displayedColumns = [];
   }
 
-  getOpacity(progress: number) {
-    let distanceFromMiddle = Math.abs(50 - progress);
-    return distanceFromMiddle / 50 + .3;
+  getCaseStatusText(caseStatusId: number) {
+    const caseStatus = CASESTATUS.filter(f => f.id === caseStatusId)[0];
+    return caseStatus.name;
   }
 
-  userTrackBy = (index: number, item: UserData) => {
+  orderTrackBy = (index: number, item: OrderData) => {
     switch (this.trackByStrategy) {
       case 'id': return item.id;
       case 'reference': return item;
       case 'index': return index;
-    }
-  }
-
-  toggleColorColumn() {
-    let colorColumnIndex = this.displayedColumns.indexOf('color');
-    if (colorColumnIndex == -1) {
-      this.displayedColumns.push('color');
-    } else {
-      this.displayedColumns.splice(colorColumnIndex, 1);
     }
   }
 
