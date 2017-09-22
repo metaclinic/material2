@@ -70,9 +70,7 @@ export class MdCheckboxChange {
 export class MdCheckboxBase {
   constructor(public _renderer: Renderer2, public _elementRef: ElementRef) {}
 }
-export const _MdCheckboxMixinBase =
-  mixinColor(mixinDisableRipple(mixinDisabled(MdCheckboxBase)), 'accent');
-
+export const _MdCheckboxMixinBase = mixinColor(mixinDisableRipple(mixinDisabled(MdCheckboxBase)), 'accent');
 
 /**
  * A material design checkbox component. Supports all of the functionality of an HTML5 checkbox,

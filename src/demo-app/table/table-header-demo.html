@@ -1,15 +1,9 @@
-<div class="title">
-  Orders
-</div>
-
-<div class="actions">
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-    <md-icon>more_vert</md-icon>
-  </button>
-  <md-menu #menu="mdMenu">
-    <button md-menu-item (click)="shiftColumns.next()">
-      <md-icon>subdirectory_arrow_left</md-icon>
-      Shift Columns Left
-    </button>
-  </md-menu>
-</div>
+<md-toolbar color="dark-trans">
+  <div *ngIf="selectedRowCount > 0" class="mat-selected-row-data-container">
+    <div>
+      <span class="mat-selected-row-count">{{getSelectedRowCount()}}</span>
+      <span>items selected</span>
+    </div>
+    <md-icon color="warn" (click)="delete.next()">delete</md-icon>
+  </div>
+</md-toolbar>

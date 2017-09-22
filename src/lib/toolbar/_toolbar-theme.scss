@@ -2,16 +2,27 @@
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
 
-
 @mixin _mat-toolbar-color($palette) {
   background: mat-color($palette);
   color: mat-color($palette, default-contrast);
 }
 
+@mixin _mat-toolbar-color-dark-trans($background-color, $color) {
+  background: $background-color;
+  color: $color;
+}
+
+@mixin _mat-toolbar-typography-dark-trans($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
 @mixin mat-toolbar-theme($theme) {
+
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
+
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
@@ -30,6 +41,10 @@
     &.mat-warn {
       @include _mat-toolbar-color($warn);
     }
+
+    &.mat-dark-trans {
+      @include _mat-toolbar-color-dark-trans($black-3-opacity, mat-color($foreground, text));
+    }
   }
 }
 
@@ -43,5 +58,9 @@
   .mat-toolbar h6 {
     @include mat-typography-level-to-styles($config, subheading-6);
     margin: 0;
+
+    &.mat-dark-trans {
+      @include _mat-toolbar-typography-dark-trans(mat-font-size($config, input), mat-font-weight($config, input));
+    }
   }
 }

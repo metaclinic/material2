@@ -149,7 +149,7 @@ export function serverTask(packagePath: string, livereload = true) {
     gulpConnect.server({
       root: projectDir,
       livereload: livereload,
-      port: 4200,
+      port: 4400,
       middleware: () => {
         return [httpRewrite.getMiddleware([
           // Rewrite the node_modules/ and dist/ folder to the real paths. This is a trick to

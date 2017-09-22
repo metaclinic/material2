@@ -1,14 +1,12 @@
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
 
-
 @mixin mat-checkbox-theme($theme) {
   $is-dark-theme: map-get($theme, is-dark);
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
-
 
   // The color of the checkbox's checkmark / mixedmark.
   $checkbox-mark-color: mat-color($background, background);
@@ -21,36 +19,80 @@
   $disabled-color: if($is-dark-theme, $white-30pct-opacity-on-dark, $black-26pct-opacity-on-light);
 
   .mat-checkbox-frame {
-    border-color: mat-color(map-get($theme, foreground), secondary-text);
+    border-color: mat-color(map-get($theme, foreground), text);
   }
 
   .mat-checkbox-checkmark {
-    fill: $checkbox-mark-color;
+    fill: mat-color(map-get($theme, foreground), text);
   }
 
   .mat-checkbox-checkmark-path {
     // !important is needed here because a stroke must be set as an attribute on the SVG in order
     // for line animation to work properly.
-    stroke: $checkbox-mark-color !important;
+    stroke: mat-color(map-get($theme, foreground), text) !important;
   }
 
-  .mat-checkbox-mixedmark {
-    background-color: $checkbox-mark-color;
+  // .mat-checkbox-mixedmark {
+  //   background-color: $checkbox-mark-color;
+  // }
+
+  /////////////////////color switching 
+  .mat-checkbox { 
+    &.mat-primary .mat-checkbox-frame{
+      border-color: mat-color($primary);
+    }
+
+    &.mat-accent .mat-checkbox-frame{
+      border-color: mat-color(map-get($theme, foreground), text);
+    }
+
+    &.mat-warn .mat-checkbox-frame{
+      border-color: mat-color($warn);
+    }
   }
 
   .mat-checkbox-indeterminate, .mat-checkbox-checked {
-    &.mat-primary .mat-checkbox-background {
-      background-color: mat-color($primary);
+    &.mat-primary .mat-checkbox-checkmark {
+      fill: mat-color($primary);
     }
 
-    &.mat-accent .mat-checkbox-background {
-      background-color: mat-color($accent);
+    &.mat-accent .mat-checkbox-checkmark {
+      fill: mat-color(map-get($theme, foreground), text);
     }
 
-    &.mat-warn .mat-checkbox-background {
-      background-color: mat-color($warn);
+    &.mat-warn .mat-checkbox-checkmark {
+      fill: mat-color($warn);
     }
   }
+
+  .mat-checkbox-indeterminate, .mat-checkbox-checked {
+    &.mat-primary .mat-checkbox-checkmark-path {
+      stroke: mat-color($primary) !important;
+    }
+
+    &.mat-accent .mat-checkbox-checkmark-path {
+      stroke: mat-color(map-get($theme, foreground), text) !important;
+    }
+
+    &.mat-warn .mat-checkbox-checkmark-path {
+      stroke: mat-color($warn) !important;
+    }
+  }
+
+  .mat-checkbox:not(.mat-checkbox-disabled) {
+    &.mat-primary .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($primary, 0.26);
+    }
+
+    &.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($accent, 0.26);
+    }
+
+    &.mat-warn .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($warn, 0.26);
+    }
+  }
+  /////////////////////color switching end
 
   .mat-checkbox-disabled {
     &.mat-checkbox-checked, &.mat-checkbox-indeterminate {
@@ -70,19 +112,6 @@
     }
   }
 
-  .mat-checkbox:not(.mat-checkbox-disabled) {
-    &.mat-primary .mat-checkbox-ripple .mat-ripple-element {
-      background-color: mat-color($primary, 0.26);
-    }
-
-    &.mat-accent .mat-checkbox-ripple .mat-ripple-element {
-      background-color: mat-color($accent, 0.26);
-    }
-
-    &.mat-warn .mat-checkbox-ripple .mat-ripple-element {
-      background-color: mat-color($warn, 0.26);
-    }
-  }
 }
 
 @mixin mat-checkbox-typography($config) {

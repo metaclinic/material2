@@ -38,11 +38,16 @@ export class OrderDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
+      console.log(this._sort.active);
+
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
         case 'orderNumber': [propertyA, propertyB] = [a.orderNumber, b.orderNumber]; break;
-        case 'patientLastName': [propertyA, propertyB] = [a.patientLastName, b.patientLastName]; break;
-        case 'assignedPathologistLastName': [propertyA, propertyB] = [a.assignedPathologistLastName, b.assignedPathologistLastName]; break;
+        case 'patientName': [propertyA, propertyB] = [a.patientFirstName + a.patientLastName, b.patientFirstName + b.patientLastName]; break;
+        case 'location': [propertyA, propertyB] = [a.address, b.address]; break;
+        case 'caseStatus': [propertyA, propertyB] = [a.caseStatusId, b.caseStatusId]; break;
+        case 'assignedPathologist': [propertyA, propertyB] = [a.assignedPathologistFirstName + a.assignedPathologistLastName,
+        b.assignedPathologistFirstName + b.assignedPathologistLastName]; break;
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
