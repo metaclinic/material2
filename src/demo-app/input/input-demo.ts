@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-
+import { FormControl, Validators } from '@angular/forms';
 
 let max = 5;
 
@@ -8,13 +7,12 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 
 @Component({
   moduleId: module.id,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'input-demo',
   templateUrl: 'input-demo.html',
   styleUrls: ['input-demo.css'],
 })
 export class InputDemo {
-  floatingLabel: string = 'auto';
+  floatingLabel: string = 'never';
   color: boolean;
   requiredField: boolean;
   hideRequiredMarker: boolean;

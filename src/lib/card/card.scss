@@ -1,24 +1,19 @@
 @import '../core/style/variables';
 @import '../core/style/elevation';
 @import '../core/a11y/a11y';
-
-
 $mat-card-default-padding: 24px !default;
 $mat-card-mobile-padding: 24px 16px !default;
-$mat-card-border-radius: 2px !default;
+$mat-card-border-radius: 6px !default;
 $mat-card-header-size: 40px !default;
-
 .mat-card {
   @include mat-elevation-transition;
   display: block;
   position: relative;
   padding: $mat-card-default-padding;
   border-radius: $mat-card-border-radius;
-
   &:not([class*='mat-elevation-z']) {
     @include mat-elevation(2);
   }
-
   @include cdk-high-contrast {
     outline: solid 1px;
   }
@@ -34,7 +29,9 @@ $mat-card-header-size: 40px !default;
   margin-bottom: 16px;
 }
 
-.mat-card-title, .mat-card-subtitle, .mat-card-content {
+.mat-card-title,
+.mat-card-subtitle,
+.mat-card-content {
   @extend %mat-card-section-base;
 }
 
@@ -65,19 +62,18 @@ $mat-card-header-size: 40px !default;
   // The negative margins pulls out the element, countering the padding
   // to get the footer to be flush against the side of the card.
   $margin: -$mat-card-default-padding;
-
   display: block;
   margin: 0 $margin $margin $margin;
 }
 
 .mat-card-actions {
-  .mat-button, .mat-raised-button {
+  .mat-button,
+  .mat-raised-button {
     margin: 0 4px;
   }
 }
 
 // HEADER STYLES
-
 .mat-card-header {
   display: flex;
   flex-direction: row;
@@ -95,7 +91,6 @@ $mat-card-header-size: 40px !default;
 }
 
 // TITLE-GROUP STYLES
-
 // images grouped with title in title-group layout
 %mat-card-title-img {
   margin: -8px 0;
@@ -126,54 +121,46 @@ $mat-card-header-size: 40px !default;
 }
 
 // MEDIA QUERIES
-
 @media ($mat-xsmall) {
   .mat-card {
     padding: $mat-card-mobile-padding;
   }
-
   .mat-card-actions {
     margin-left: -8px;
     margin-right: -8px;
   }
-
   .mat-card-image {
     width: calc(100% + 32px);
     margin: 16px -16px;
   }
-
   .mat-card-title-group {
     margin: 0;
   }
-
   .mat-card-xl-image {
     margin-left: 0;
     margin-right: 0;
   }
-
   .mat-card-header {
     margin: -8px 0 0 0;
   }
-
   .mat-card-footer {
     margin-left: -16px;
     margin-right: -16px;
   }
-
 }
 
 // FIRST/LAST CHILD ADJUSTMENTS
-
 // top els in mat-card-content and mat-card can't have their default margin-tops (e.g. <p> tags)
 // or they'll incorrectly add to card's top padding
-.mat-card > :first-child, .mat-card-content > :first-child {
+.mat-card> :first-child,
+.mat-card-content> :first-child {
   margin-top: 0;
 }
 
 // last els in mat-card-content and mat-card can't have their default margin-bottoms (e.g. <p> tags)
 // or they'll incorrectly add to card's bottom padding
-.mat-card > :last-child:not(.mat-card-footer),
-.mat-card-content > :last-child:not(.mat-card-footer) {
+.mat-card> :last-child:not(.mat-card-footer),
+.mat-card-content> :last-child:not(.mat-card-footer) {
   margin-bottom: 0;
 }
 
@@ -185,7 +172,7 @@ $mat-card-header-size: 40px !default;
 
 // actions panel on bottom should be 8px from bottom of card
 // so must strip 16px from default card padding of 24px
-.mat-card > .mat-card-actions:last-child {
+.mat-card>.mat-card-actions:last-child {
   margin-bottom: -16px;
   padding-bottom: 0;
 }
@@ -200,7 +187,8 @@ $mat-card-header-size: 40px !default;
 
 // should be 12px space between titles and subtitles generally
 // default margin-bottom is 16px, so need to move lower title up 4px
-.mat-card-title:not(:first-child), .mat-card-subtitle:not(:first-child) {
+.mat-card-title:not(:first-child),
+.mat-card-subtitle:not(:first-child) {
   margin-top: -4px;
 }
 
@@ -212,12 +200,12 @@ $mat-card-header-size: 40px !default;
 
 // xl image should always have 16px on top.
 // when it's the first el, it'll need to remove 8px from default card padding of 24px
-.mat-card > .mat-card-xl-image:first-child {
+.mat-card>.mat-card-xl-image:first-child {
   margin-top: -8px;
 }
 
 // xl image should always have 16px on bottom
 // when it's the last el, it'll need to remove 8px from default card padding of 24px
-.mat-card > .mat-card-xl-image:last-child {
+.mat-card>.mat-card-xl-image:last-child {
   margin-bottom: -8px;
 }

@@ -1,13 +1,19 @@
 @import '../core/theming/palette';
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
-
 @mixin _mat-toolbar-color($palette) {
   background: mat-color($palette);
   color: mat-color($palette, default-contrast);
 }
 
-@mixin _mat-toolbar-color-dark-trans($background-color, $color) {
+@mixin _mat-toolbar-color-dark-trans($background-color, $border-color, $color) {
+  height: 59px;
+  min-height: 59px;
+  .mat-toolbar-row {
+    height: 59px;
+  }
+  border-top: solid 1px $border-color;
+  border-bottom: solid 1px $border-color;
   background: $background-color;
   color: $color;
 }
@@ -18,32 +24,25 @@
 }
 
 @mixin mat-toolbar-theme($theme) {
-
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-
   .mat-toolbar {
     background: mat-color($background, app-bar);
     color: mat-color($foreground, text);
-
     &.mat-primary {
       @include _mat-toolbar-color($primary);
     }
-
     &.mat-accent {
       @include _mat-toolbar-color($accent);
     }
-
     &.mat-warn {
       @include _mat-toolbar-color($warn);
     }
-
     &.mat-dark-trans {
-      @include _mat-toolbar-color-dark-trans($black-3-opacity, mat-color($foreground, text));
+      @include _mat-toolbar-color-dark-trans($black-3-opacity, $black-6-opacity, mat-color($foreground, text));
     }
   }
 }
@@ -58,7 +57,6 @@
   .mat-toolbar h6 {
     @include mat-typography-level-to-styles($config, subheading-6);
     margin: 0;
-
     &.mat-dark-trans {
       @include _mat-toolbar-typography-dark-trans(mat-font-size($config, input), mat-font-weight($config, input));
     }

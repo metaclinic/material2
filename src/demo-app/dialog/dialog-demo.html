@@ -88,6 +88,8 @@
   </md-input-container>
 
   <p> {{ data.message }} </p>
-  <button type="button" (click)="dialogRef.close(lastCloseResult = howMuch.value)">Close dialog</button>
-  <button (click)="dialogRef.updateSize('500px', '500px').updatePosition({ top: '25px', left: '25px' });">Change dimensions</button>`
+
+  <button md-raised-button color="accent" type="button" (click)="dialogRef.close(lastCloseResult = howMuch.value)">Close dialog</button>
+  <button md-raised-button color="primary" (click)="dialogRef.updateSize('500px', '500px').updatePosition({ top: '25px', left: '25px' });">Change dimensions</button>
+
 </ng-template>

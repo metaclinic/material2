@@ -1,6 +1,6 @@
-import {Component, Inject, ViewChild, TemplateRef} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@metaclinic/material';
+import { Component, Inject, ViewChild, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@metaclinic/material';
 
 
 @Component({
@@ -83,8 +83,8 @@ export class DialogDemo {
   </md-form-field>
 
   <p> {{ data.message }} </p>
-  <button type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
-  <button (click)="togglePosition()">Change dimensions</button>`
+  <button md-raised-button color="accent" type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
+  <button md-raised-button color="primary" (click)="togglePosition()">Change dimensions</button>`
 })
 export class JazzDialog {
   private _dimesionToggle = false;

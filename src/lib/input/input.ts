@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import {
   Directive,
   DoCheck,
@@ -103,7 +95,7 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   /** Placeholder attribute of the element. */
   @Input() placeholder: string = '';
 
-   /** Label attribute of the element. */
+  /** Label attribute of the element. */
   @Input() label: string = '';
 
   /** Whether the element is required. */
@@ -155,6 +147,13 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
     @Optional() private _parentFormGroup: FormGroupDirective,
     @Optional() @Inject(MD_ERROR_GLOBAL_OPTIONS) errorOptions: ErrorOptions) {
 
+    if (this._isTextarea) {
+      setTimeout(function () {
+        let correction = _elementRef.nativeElement.offsetHeight - _elementRef.nativeElement.clientHeight;
+        _elementRef.nativeElement.style.height = ((_elementRef.nativeElement.scrollHeight - correction) + 10) + 'px';
+      }, 0);
+    }
+
     // Force setter to be called in case id was not specified.
     this.id = this.id;
     this._errorOptions = errorOptions ? errorOptions : {};
@@ -177,7 +176,20 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
     }
   }
 
+  ngAfterContentChecked() {
+    if (this._isTextarea) {
+      this._elementRef.nativeElement.style.height = 'auto';
+      let correction = this._elementRef.nativeElement.offsetHeight - this._elementRef.nativeElement.clientHeight;
+      this._elementRef.nativeElement.style.height = ((this._elementRef.nativeElement.scrollHeight - correction)) + 'px';
+    }
+  }
+
   ngOnChanges() {
+    if (this._isTextarea) {
+      this._elementRef.nativeElement.style.overflow = 'hidden';
+      this._elementRef.nativeElement.style.height = 'auto';
+      this._elementRef.nativeElement.style.height = this._elementRef.nativeElement.scrollHeight + 'px';
+    }
     this.stateChanges.next();
   }
 
@@ -285,4 +297,3 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   // Implemented as part of MdFormFieldControl.
   focus() { this._elementRef.nativeElement.focus(); }
 }
-

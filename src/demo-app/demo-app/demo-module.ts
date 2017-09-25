@@ -34,6 +34,7 @@ import { FoggyTabContent, RainyTabContent, SunnyTabContent, TabsDemo } from '../
 import { PlatformDemo } from '../platform/platform-demo';
 import { AutocompleteDemo } from '../autocomplete/autocomplete-demo';
 import { InputDemo } from '../input/input-demo';
+import { InputsDemo } from '../inputs/inputs-demo';
 import { StyleDemo } from '../style/style-demo';
 import { TableDemo } from '../table/table-demo';
 import { OrderDatabase } from '../table/order-database';
@@ -78,6 +79,7 @@ import {
     Home,
     IconDemo,
     InputDemo,
+    InputsDemo,
     JazzDialog,
     ContentElementDialog,
     IFrameDialog,
