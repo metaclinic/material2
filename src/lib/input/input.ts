@@ -29,6 +29,7 @@ const MD_INPUT_INVALID_TYPES = [
   'button',
   'checkbox',
   'color',
+  'mod',
   'file',
   'hidden',
   'image',
@@ -147,13 +148,6 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
     @Optional() private _parentFormGroup: FormGroupDirective,
     @Optional() @Inject(MD_ERROR_GLOBAL_OPTIONS) errorOptions: ErrorOptions) {
 
-    if (this._isTextarea) {
-      setTimeout(function () {
-        let correction = _elementRef.nativeElement.offsetHeight - _elementRef.nativeElement.clientHeight;
-        _elementRef.nativeElement.style.height = ((_elementRef.nativeElement.scrollHeight - correction) + 10) + 'px';
-      }, 0);
-    }
-
     // Force setter to be called in case id was not specified.
     this.id = this.id;
     this._errorOptions = errorOptions ? errorOptions : {};
@@ -173,14 +167,6 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
           el.setSelectionRange(0, 0);
         }
       });
-    }
-  }
-
-  ngAfterContentChecked() {
-    if (this._isTextarea) {
-      this._elementRef.nativeElement.style.height = 'auto';
-      let correction = this._elementRef.nativeElement.offsetHeight - this._elementRef.nativeElement.clientHeight;
-      this._elementRef.nativeElement.style.height = ((this._elementRef.nativeElement.scrollHeight - correction)) + 'px';
     }
   }
 

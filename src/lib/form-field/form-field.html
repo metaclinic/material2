@@ -1,11 +1,12 @@
-<div class="mat-input-wrapper mat-form-field-wrapper">
+<div class="mat-input-wrapper mat-form-field-wrapper" [class.mat-large]="mod == 'large'">
 
-    <span class="mat-input-label-wrapper mat-form-field-label-wrapper">
+  <span class="mat-input-label-wrapper mat-form-field-label-wrapper" [class.mat-large]="mod == 'large'">
         <label class="mat-input-label mat-form-field-label"
         [attr.for]="_control.id"
         [attr.aria-owns]="_control.id"
         [class.mat-accent]="color == 'accent'"
         [class.mat-warn]="color == 'warn'"
+        [class.mat-large]="mod == 'large'"
         #label
         *ngIf="_hasLabel()">
           <ng-content select="md-label, mat-label"></ng-content>
@@ -14,18 +15,18 @@
           class="mat-label-required mat-form-field-required-marker"
           aria-hidden="true"
           *ngIf="!hideRequiredMarker && _control.required">*</span>
-        </label>
-    </span>
+  </label>
+  </span>
 
   <div class="mat-input-flex mat-form-field-flex" #connectionContainer>
     <div class="mat-input-prefix mat-form-field-prefix" *ngIf="_prefixChildren.length">
       <ng-content select="[mdPrefix], [matPrefix]"></ng-content>
     </div>
 
-    <div class="mat-input-infix mat-form-field-infix">
+    <div class="mat-input-infix mat-form-field-infix" [class.mat-large]="mod == 'large'">
       <ng-content></ng-content>
 
-      <span class="mat-input-placeholder-wrapper mat-form-field-placeholder-wrapper">
+      <span class="mat-input-placeholder-wrapper mat-form-field-placeholder-wrapper" [class.mat-large]="mod == 'large'">
         <!-- We add aria-owns as a workaround for an issue in JAWS & NVDA where the label isn't
              read if it comes before the control in the DOM. -->
         <label class="mat-input-placeholder mat-form-field-placeholder"
@@ -37,6 +38,7 @@
              [class.mat-form-field-float]="_canPlaceholderFloat"
              [class.mat-accent]="color == 'accent'"
              [class.mat-warn]="color == 'warn'"
+             [class.mat-large]="mod == 'large'"
              #placeholder
              *ngIf="_hasPlaceholder()">
             <ng-content select="md-placeholder, mat-placeholder"></ng-content>
@@ -45,9 +47,9 @@
             class="mat-placeholder-required mat-form-field-required-marker"
             aria-hidden="true"
             *ngIf="!hideRequiredMarker && _control.required">*</span>
-        </label>  
+      </label>
       </span>
-      
+
     </div>
 
     <div class="mat-input-suffix mat-form-field-suffix" *ngIf="_suffixChildren.length">
@@ -55,21 +57,16 @@
     </div>
   </div>
 
-  <div class="mat-input-underline mat-form-field-underline" #underline
-       [class.mat-disabled]="_control.disabled">
-    <span class="mat-input-ripple mat-form-field-ripple"
-          [class.mat-accent]="color == 'accent'"
-          [class.mat-warn]="color == 'warn'"></span>
+  <div class="mat-input-underline mat-form-field-underline" #underline [class.mat-disabled]="_control.disabled">
+    <span class="mat-input-ripple mat-form-field-ripple" [class.mat-accent]="color == 'accent'" [class.mat-warn]="color == 'warn'"></span>
   </div>
 
-  <div class="mat-input-subscript-wrapper mat-form-field-subscript-wrapper"
-       [ngSwitch]="_getDisplayedMessages()">
+  <div class="mat-input-subscript-wrapper mat-form-field-subscript-wrapper" [ngSwitch]="_getDisplayedMessages()" [class.mat-large]="mod == 'large'">
     <div *ngSwitchCase="'error'" [@transitionMessages]="_subscriptAnimationState">
       <ng-content select="md-error, mat-error"></ng-content>
     </div>
 
-    <div class="mat-input-hint-wrapper mat-form-field-hint-wrapper" *ngSwitchCase="'hint'"
-      [@transitionMessages]="_subscriptAnimationState">
+    <div class="mat-input-hint-wrapper mat-form-field-hint-wrapper" *ngSwitchCase="'hint'" [@transitionMessages]="_subscriptAnimationState">
       <!-- TODO(mmalerba): use an actual <mat-hint> once all selectors are switched to mat-* -->
       <div *ngIf="hintLabel" [id]="_hintLabelId" class="mat-hint">{{hintLabel}}</div>
       <ng-content select="md-hint:not([align='end']), mat-hint:not([align='end'])"></ng-content>

@@ -1,25 +1,48 @@
+<div>
+  <md-form-field>
+    <input mdInput placeholder="placeholder" label="A label goes here">
+  </md-form-field>
+</div>
+
+<md-card class="demo-card demo-basic">
+  <md-toolbar color="primary">Mod large</md-toolbar>
+  <md-card-content>
+    <table style="width: 100%" cellspacing="0">
+      <tr>
+        <td>
+          <md-form-field class="demo-full-width" mod="large">
+            <input mdInput [(ngModel)]="errorMessageExample1" placeholder="Last, First" label="What is the patient's name?" required>
+            <md-error>This field is required</md-error>
+          </md-form-field>
+        </td>
+      </tr>
+    </table>
+  </md-card-content>
+</md-card>
+
 <md-card class="demo-card demo-basic">
   <md-toolbar color="primary">Basic</md-toolbar>
   <md-card-content>
     <form>
-      <md-form-field class="demo-full-width">
-        <input mdInput placeholder="Company name" disabled value="Google" label="Company (disabled)">
-      </md-form-field>
-
+      <p>
+        <md-form-field class="demo-full-width">
+          <input mdInput placeholder="Company name" disabled value="Google" label="Company (disabled)">
+        </md-form-field>
+      </p>
       <table style="width: 100%" cellspacing="0">
         <tr>
           <td>
-            <md-form-field style="width: 100%" floatPlaceholder="never">
+            <md-form-field class="demo-full-width">
               <input mdInput placeholder="placeholder" label="A label goes here">
             </md-form-field>
           </td>
           <td>
-            <md-form-field style="width: 100%" floatPlaceholder="never">
-              <input mdInput placeholder="placeholder" label="A label goes here">
+            <md-form-field class="demo-full-width">
+              <input mdInput placeholder="placeholder 2" label="A label goes here also">
             </md-form-field>
           </td>
           <td>
-            <md-form-field style="width: 100%">
+            <md-form-field class="demo-full-width">
               <input mdInput placeholder="Long Last Name That Will Be Truncated" label="Last name">
             </md-form-field>
           </td>
@@ -30,14 +53,14 @@
           <textarea mdInput placeholder="Address" label="Address">1600 Amphitheatre Pkway</textarea>
         </md-form-field>
         <md-form-field class="demo-full-width">
-          <textarea mdInput placeholder="text area" label="Text Area"></textarea>
+          <textarea mdInput mdTextareaAutosize rows="1" placeholder="text area" label="Text Area"></textarea>
         </md-form-field>
       </p>
       <table style="width: 100%" cellspacing="0">
         <tr>
           <td>
             <md-form-field class="demo-full-width">
-              <input mdInput placeholder="City" value="Mountain View" label="City">
+              <input mdInput placeholder="Last, First" label="What is the patient's name?">
             </md-form-field>
           </td>
           <td>

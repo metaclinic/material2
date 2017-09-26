@@ -1,13 +1,15 @@
 @import '../core/style/variables';
 @import '../core/style/vendor-prefixes';
-
 // The Input element proper.
 .mat-input-element {
   // Font needs to be inherited, because by default <input> has a system font.
   // font: inherit;
-  font-family: sf_ui_text, sans-serif;
+  font-family: sf_ui_text;
   font-weight: 300;
   font-size: 13px;
+  &:not(textarea) {
+    height: 30px !important;
+  }
   height: 30px;
   line-height: 30px;
   color: currentColor;

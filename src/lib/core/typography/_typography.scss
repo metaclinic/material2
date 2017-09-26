@@ -1,4 +1,5 @@
 @import 'typography-utils';
+@import '../theming/_palette.scss';
 
 // Represents a typography level from the Material design spec.
 @function mat-typography-level(
@@ -33,10 +34,11 @@
   $body-1:        mat-typography-level(14px, 20px, 400),
   $body:          mat-typography-level(13px, 1.46, 400),
   $caption:       mat-typography-level(12px, 20px, 400),
-  $button:        mat-typography-level(14px, 38px, 400),
+  $button:        mat-typography-level(13px, 38px, 500),
   $input:         mat-typography-level(13px, 1.175, 300),
   $table-labels:  mat-typography-level(13px, 19px, 600),
-  $label:         mat-typography-level(15px, 15px, 400)
+  $label:         mat-typography-level(15px, 15px, 400),
+  $link:          mat-typography-level(14px, 14px, 400)
 ) {
 
   // Declare an initial map with all of the levels.
@@ -58,7 +60,8 @@
     button:         $button,
     input:          $input,
     table-labels:   $table-labels,
-    label:          $label
+    label:          $label,
+    link:           $link
   );
 
   // Loop through the levels and set the `font-family` of the ones that don't have one to the base.
@@ -76,6 +79,7 @@
 
 // Adds the base typography styles, based on a config.
 @mixin mat-base-typography($config, $selector: '.mat-typography') {
+
   .mat-h1, .mat-headline, #{$selector} h1 {
     @include mat-typography-level-to-styles($config, headline);
     font-family: 'sf_ui_display';
@@ -122,6 +126,17 @@
   .mat-body, #{$selector} body {
     @include mat-typography-level-to-styles($config, body);
     letter-spacing: 0.2px;
+  }
+
+  .mat-body, #{$selector} a {
+    @include mat-typography-level-to-styles($config, link);
+    font-family: 'sf_ui_display';
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: $dark-grey-blue;
+    &.mat-light-link{
+      color: white;
+    }
   }
 
   .mat-body, .mat-body-1, #{$selector} p {

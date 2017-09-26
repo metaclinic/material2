@@ -21,12 +21,26 @@
   $underline-focused-color: mat-color($foreground, focused-dividers);
   .mat-form-field {
     width: 200px;
+    &.mat-large {
+      padding-top: 2em;
+      text-align: center;
+    }
   }
   .mat-form-field-placeholder {
     color: $placeholder-color;
+    &.mat-large {
+      font-size: 32px !important;
+      text-align: center !important;
+    }
   }
   .mat-form-field-label {
     color: $label-color;
+    &.mat-large {
+      font-size: 16px !important;
+      margin-bottom: 3px !important;
+      text-align: center !important;
+      font-weight: normal !important;
+    }
   }
   .mat-hint {
     color: mat-color($foreground, secondary-text);
@@ -171,6 +185,14 @@
   .mat-form-field-infix {
     padding: $infix-padding 0; // Throws off the baseline if we do it as a real margin, so we do it as a border instead.
     border-top: $infix-margin-top solid transparent;
+    &.mat-large {
+      .mat-input-element {
+        font-size: 32px !important;
+        text-align: center !important;
+        line-height: 42px !important;
+        padding-bottom: .35em;
+      }
+    }
   }
   .mat-form-field-autofill-float {
     &:-webkit-autofill+.mat-form-field-placeholder-wrapper .mat-form-field-float {
@@ -180,6 +202,11 @@
   .mat-form-field-placeholder-wrapper {
     top: -$infix-margin-top;
     padding-top: $infix-margin-top;
+    &.mat-large {
+      top: -3.3em;
+      padding-top: 4em;
+      line-height: 42px;
+    }
   }
   .mat-form-field-placeholder {
     top: $infix-margin-top + $infix-padding; // Show the placeholder above the control when it's not empty, or focused.
@@ -191,6 +218,10 @@
   .mat-form-field-label-wrapper {
     // top: -$infix-margin-top;
     padding-top: $infix-margin-top;
+    &.mat-large {
+      line-height: 2em;
+      top: -2em;
+    }
   }
   .mat-form-field-label {
     top: $infix-margin-top + $infix-padding; // Show the placeholder above the control when it's not empty, or focused.
@@ -209,5 +240,8 @@
     margin-top: ($subscript-margin-top -($subscript-margin-top * 2)); // We want the subscript to start at the end of the content box, not the padding box,
     // so we move it up by the padding amount (adjusted for the smaller font size);
     top: calc(100% - #{$wrapper-padding-bottom / $subscript-font-scale});
+    &.mat-large {
+      text-align: center;
+    }
   }
 }

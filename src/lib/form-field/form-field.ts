@@ -84,6 +84,7 @@ let nextUniqueId = 0;
     '[class.ng-valid]': '_shouldForward("valid")',
     '[class.ng-invalid]': '_shouldForward("invalid")',
     '[class.ng-pending]': '_shouldForward("pending")',
+    '[class.mat-large]': '_isLargeMod()',
     '(click)': '_control.focus()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -95,6 +96,8 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
 
   /** Color of the form field underline, based on the theme. */
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
+
+  @Input() mod: 'normal' | 'large' = 'normal';
 
   /** @deprecated Use `color` instead. */
   @Input()
@@ -211,6 +214,10 @@ export class MdFormField implements AfterViewInit, AfterContentInit, AfterConten
   _shouldForward(prop: string): boolean {
     let ngControl = this._control ? this._control.ngControl : null;
     return ngControl && (ngControl as any)[prop];
+  }
+
+  _isLargeMod(): boolean {
+    return this.mod === 'large' ? true : false;
   }
 
   /** Whether the form field has a placeholder. */

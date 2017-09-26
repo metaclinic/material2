@@ -9,14 +9,14 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
 export class InputsDemo {
 
   tabLinks = [
-    { label: 'Input', link: 'input' },
-    { label: 'Autocomplete', link: 'autocomplete' },
-    { label: 'Checkbox', link: 'checkbox' },
-    { label: 'Datepicker', link: 'datepicker' },
-    { label: 'Radio', link: 'radio' },
-    { label: 'Select', link: 'select' },
-    { label: 'Slider', link: 'slider' },
-    { label: 'Slide Toggle', link: 'slidetoggle' },
+    { label: 'INPUT', link: 'input' },
+    { label: 'AUTOCOMPLETE', link: 'autocomplete' },
+    { label: 'CHECKBOX', link: 'checkbox' },
+    { label: 'DATEPICKER', link: 'datepicker' },
+    { label: 'RADIO', link: 'radio' },
+    { label: 'SELECT', link: 'select' },
+    { label: 'SLIDER', link: 'slider' },
+    { label: 'SLIDE TOGGLE', link: 'slidetoggle' },
   ];
 
 }
