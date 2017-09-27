@@ -8,7 +8,7 @@ $mat-snack-bar-spacing-margin: 24px !default;
 
 .mat-snack-bar-container {
   border-radius: 2px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   display: block;
   margin: $mat-snack-bar-spacing-margin;
   max-width: $mat-snack-bar-max-width;

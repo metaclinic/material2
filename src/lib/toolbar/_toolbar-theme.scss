@@ -24,6 +24,15 @@
 }
 
 @mixin mat-toolbar-theme($theme) {
+
+  .mat-toolbar-icon {
+    margin: 0 14px;
+  }
+
+  .mat-fill-remaining {
+    flex: 1 1 auto;
+  }
+
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
@@ -55,9 +64,17 @@
   .mat-toolbar h4,
   .mat-toolbar h5,
   .mat-toolbar h6 {
-    @include mat-typography-level-to-styles($config, subheading-6);
-    margin: 0;
+    font: {
+      family: "Montserrat";
+      size: 11px;
+      weight: 500;
+    }
+    letter-spacing: 1.5px;
+    line-height: normal;
     &.mat-dark-trans {
+      font-family: "sf_ui_text";
+      line-height: 1.46;
+      letter-spacing: 0.2px;
       @include _mat-toolbar-typography-dark-trans(mat-font-size($config, input), mat-font-weight($config, input));
     }
   }

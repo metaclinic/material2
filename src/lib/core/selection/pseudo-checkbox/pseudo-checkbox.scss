@@ -48,10 +48,10 @@ $_mat-pseudo-checkmark-size: $mat-checkbox-size - (2 * $_mat-pseudo-checkbox-pad
 }
 
 .mat-pseudo-checkbox-checked::after {
-  top: ($mat-checkbox-size / 2) - ($_mat-pseudo-checkmark-size / 4) - ($mat-checkbox-size / 10);
-  left: $_mat-pseudo-checkbox-padding - $mat-checkbox-border-width / 2;
-  width: $_mat-pseudo-checkmark-size;
-  height: ($_mat-pseudo-checkmark-size - $mat-checkbox-border-width) / 2;
+  top: 4px;
+  left: 4px;
+  width: 7px;
+  height: 5px;
   border-left: $mat-checkbox-border-width solid currentColor;
   transform: rotate(-45deg);
   opacity: 1;

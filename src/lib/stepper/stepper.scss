@@ -2,7 +2,7 @@
 $mat-horizontal-stepper-header-height: 72px !default;
 $mat-stepper-label-header-height: 24px !default;
 $mat-stepper-side-gap: 24px !default;
-$mat-vertical-stepper-content-margin: 37px !default;
+$mat-vertical-stepper-content-margin: 35px !default;
 $mat-stepper-line-width: 2px !default;
 $mat-stepper-line-gap: 2px !default;
 .mat-stepper-vertical,
@@ -10,7 +10,7 @@ $mat-stepper-line-gap: 2px !default;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 .mat-step-header {
@@ -38,7 +38,7 @@ $mat-stepper-line-gap: 2px !default;
 
 .mat-horizontal-stepper-header {
   display: block;
-  height: $mat-horizontal-stepper-header-height + 12;
+  height: $mat-horizontal-stepper-header-height + 20;
   overflow: hidden;
   align-items: center;
   text-align: center;
@@ -54,7 +54,7 @@ $mat-stepper-line-gap: 2px !default;
         border-top-style: solid;
         height: 0;
         width: 100%;
-        margin-top: (($mat-stepper-label-header-height) / 2);
+        padding-top: 2px;
       }
       .mat-stepper-line-first {
         width: 50%;
@@ -89,6 +89,8 @@ $mat-stepper-line-gap: 2px !default;
   .mat-step-icon,
   .mat-step-icon-completed,
   .mat-step-icon-not-touched {
+    z-index: 1;
+    position: relative;
     margin-right: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
     [dir='rtl'] & {
       margin-right: 0;

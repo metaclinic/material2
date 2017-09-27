@@ -14,7 +14,7 @@ $mat-select-label-font-size: 15px !default;
   font-weight: 200;
   font-size: $mat-select-label-font-size;
   left: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   overflow: hidden;

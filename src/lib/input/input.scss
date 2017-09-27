@@ -8,9 +8,9 @@
   font-weight: 300;
   font-size: 13px;
   &:not(textarea) {
-    height: 30px !important;
+    height: 32px !important;
   }
-  height: 30px;
+  height: 32px;
   line-height: 30px;
   color: currentColor;
   background: transparent; // color: currentColor; // By default, <input> has a padding, border, outline and a default width.
