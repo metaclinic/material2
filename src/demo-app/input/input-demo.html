@@ -1,8 +1,26 @@
-<div>
-  <md-form-field>
-    <input mdInput placeholder="placeholder" label="A label goes here">
-  </md-form-field>
-</div>
+<md-card class="demo-card demo-basic">
+  <md-card-content>
+    <table style="width: 100%" cellspacing="0">
+      <tr>
+        <td>
+          <md-form-field color="dark">
+            <input mdInput placeholder="placeholder" label="A label goes here" color="dark">
+          </md-form-field>
+        </td>
+        <td>
+          <md-form-field color="accent">
+            <input mdInput placeholder="placeholder" label="A label goes here">
+          </md-form-field>
+        </td>
+        <td>
+          <md-form-field color="warn">
+            <input mdInput placeholder="placeholder" label="A label goes here">
+          </md-form-field>
+        </td>
+      </tr>
+    </table>
+  </md-card-content>
+</md-card>
 
 <md-card class="demo-card demo-basic">
   <md-toolbar color="primary">Mod large</md-toolbar>
@@ -154,8 +172,12 @@
     <h4>Icon buttons</h4>
     <md-form-field>
       <input mdInput placeholder="amount" label="prefix and suffix icon btn">
-      <button md-icon-button mdPrefix><md-icon>attach_money</md-icon></button>
-      <button md-icon-button mdSuffix><md-icon>mode_edit</md-icon></button>
+      <button md-icon-button mdPrefix>
+        <md-icon>attach_money</md-icon>
+      </button>
+      <button md-icon-button mdSuffix>
+        <md-icon>mode_edit</md-icon>
+      </button>
     </md-form-field>
   </md-card-content>
 </md-card>
@@ -232,8 +254,7 @@
       Hello&nbsp;
       <md-form-field color="accent">
         <input mdInput [(ngModel)]="name" type="text" placeholder="First name">
-      </md-form-field>,
-      how are you?
+      </md-form-field>, how are you?
     </span>
   </md-toolbar>
   <md-card-content>
@@ -267,11 +288,13 @@
         <input mdInput>
         <md-placeholder>
           I
-          <md-icon>favorite</md-icon> <b>bold</b> placeholder
+          <md-icon>favorite</md-icon>
+          <b>bold</b> placeholder
         </md-placeholder>
         <md-hint>
           I also
-          <md-icon>home</md-icon> <i>italic</i> hint labels
+          <md-icon>home</md-icon>
+          <i>italic</i> hint labels
         </md-hint>
       </md-form-field>
     </p>
@@ -337,15 +360,22 @@
       <br/> Both:
       <md-form-field class="demo-text-align-end">
         <input mdInput #email placeholder="Email Address" value="angular-core">
-        <span mdPrefix><md-icon [class.primary]="email.focused">email</md-icon>&nbsp;</span>
+        <span mdPrefix>
+          <md-icon [class.primary]="email.focused">email</md-icon>&nbsp;</span>
         <span mdSuffix [class.primary]="email.focused">&nbsp;@gmail.com</span>
       </md-form-field>
     </p>
 
     <p>
       Empty:
-      <md-form-field><input mdInput></md-form-field>
-      <label>Label: <md-form-field><input mdInput></md-form-field></label>
+      <md-form-field>
+        <input mdInput>
+      </md-form-field>
+      <label>Label:
+        <md-form-field>
+          <input mdInput>
+        </md-form-field>
+      </label>
     </p>
   </md-card-content>
 </md-card>
@@ -382,7 +412,8 @@
 <md-card class="demo-card demo-basic">
   <md-toolbar color="primary">Forms</md-toolbar>
   <md-card-content>
-    <md-form-field><input mdInput placeholder="reactive" [formControl]="formControl">
+    <md-form-field>
+      <input mdInput placeholder="reactive" [formControl]="formControl">
     </md-form-field>
     <md-form-field>
       <input mdInput placeholder="template" [(ngModel)]="model" required [disabled]="ctrlDisabled">
@@ -416,7 +447,9 @@
 
     <h3>&lt;textarea&gt; with ngModel</h3>
     <div>
-      <label>Input with same ngModel <input [(ngModel)]="textareaNgModelValue"></label>
+      <label>Input with same ngModel
+        <input [(ngModel)]="textareaNgModelValue">
+      </label>
     </div>
     <label>
       Plain textarea with auto size

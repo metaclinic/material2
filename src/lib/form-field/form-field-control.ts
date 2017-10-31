@@ -28,6 +28,8 @@ export abstract class MdFormFieldControl<T> {
   readonly placeholder: string;
   readonly label: string;
 
+  readonly color: string;
+
   /** Gets the NgControl for this control. */
   readonly ngControl: NgControl | null;
 

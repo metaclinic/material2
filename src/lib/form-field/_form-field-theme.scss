@@ -32,6 +32,9 @@
       font-size: 32px !important;
       text-align: center !important;
     }
+    &.mat-dark {
+      color: #ffffff;
+    }
   }
   .mat-form-field-label {
     color: $label-color;
@@ -40,6 +43,9 @@
       margin-bottom: 3px !important;
       text-align: center !important;
       font-weight: normal !important;
+    }
+    &.mat-dark {
+      color: #4b6377;
     }
   }
   .mat-hint {

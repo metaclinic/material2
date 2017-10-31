@@ -63,6 +63,7 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
   private _type = 'text';
   private _disabled = false;
   private _required = false;
+  private _color = '';
   private _id: string;
   private _uid = `md-input-${nextUniqueId++}`;
   private _errorOptions: ErrorOptions;
@@ -129,6 +130,16 @@ export class MdInput implements MdFormFieldControl<any>, OnChanges, OnDestroy, D
       this._elementRef.nativeElement.value = value;
       this.stateChanges.next();
     }
+  }
+
+  @Input()
+  get color() { return this._color; }
+  set color(value: string) {
+    if (value != '') {
+      let classString = 'mat-' + value;
+      this._renderer.addClass(this._elementRef.nativeElement, classString.trim());
+    }
+    this._color = value;
   }
 
   private _neverEmptyInputTypes = [

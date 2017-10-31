@@ -6,6 +6,7 @@
         [attr.aria-owns]="_control.id"
         [class.mat-accent]="color == 'accent'"
         [class.mat-warn]="color == 'warn'"
+        [class.mat-dark]="color == 'dark'"
         [class.mat-large]="mod == 'large'"
         #label
         *ngIf="_hasLabel()">
@@ -38,6 +39,7 @@
              [class.mat-form-field-float]="_canPlaceholderFloat"
              [class.mat-accent]="color == 'accent'"
              [class.mat-warn]="color == 'warn'"
+             [class.mat-dark]="color == 'dark'"
              [class.mat-large]="mod == 'large'"
              #placeholder
              *ngIf="_hasPlaceholder()">
