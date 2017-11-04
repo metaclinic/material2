@@ -15,6 +15,7 @@ $mat-paginator-button-increment-icon-margin: 16px;
   justify-content: space-between;
   min-height: $mat-paginator-height;
   padding: $mat-paginator-padding;
+  flex-wrap: wrap-reverse;
 }
 
 .mat-paginator-page-size {
@@ -41,9 +42,8 @@ $mat-paginator-button-increment-icon-margin: 16px;
 }
 
 .mat-paginator-page-size-select {
-  // Since the select won't have a placeholder we can remove the space that is reserved for it.
-  padding-top: 0;
-  margin: $mat-paginator-selector-margin;
+  margin-top: -20px;
+  width: 50px;
   .mat-select-trigger {
     min-width: $mat-paginator-selector-trigger-min-width;
   }
@@ -90,3 +90,9 @@ $mat-paginator-button-increment-icon-margin: 16px;
     margin-right: $mat-paginator-button-increment-icon-margin;
   }
 }
+
+// .mat-paginator-range-actions {
+//   display: flex;
+//   align-items: center;
+//   // min-height: $mat-paginator-range-actions-min-height;
+// }

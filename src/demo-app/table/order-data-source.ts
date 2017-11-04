@@ -1,4 +1,4 @@
-import { MdPaginator, MdSort } from '@metaclinic/material';
+import { MatPaginator, MatSort } from '@metaclinic/material';
 import { DataSource } from '@metaclinic/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { OrderDatabase, OrderData } from './order-database';
@@ -7,15 +7,15 @@ import 'rxjs/add/operator/map';
 
 export class OrderDataSource extends DataSource<any> {
   constructor(private _orderDatabase: OrderDatabase,
-    private _paginator: MdPaginator,
-    private _sort: MdSort) {
+    private _paginator: MatPaginator,
+    private _sort: MatSort) {
     super();
   }
 
   connect(): Observable<OrderData[]> {
     const displayDataChanges = [
       this._paginator.page,
-      this._sort.mdSortChange,
+      this._sort.sortChange,
       this._orderDatabase.dataChange
     ];
     return Observable.merge(...displayDataChanges).map(() => {

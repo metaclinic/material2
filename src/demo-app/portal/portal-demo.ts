@@ -1,9 +1,5 @@
-import {Component, ViewChildren, QueryList} from '@angular/core';
-import {
-    Portal,
-    ComponentPortal,
-    TemplatePortalDirective,
-} from '@metaclinic/material';
+import {ComponentPortal, Portal, CdkPortal} from '@metaclinic/cdk/portal';
+import {Component, QueryList, ViewChildren} from '@angular/core';
 
 
 @Component({
@@ -13,7 +9,7 @@ import {
   styleUrls: ['portal-demo.css'],
 })
 export class PortalDemo {
-  @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
+  @ViewChildren(CdkPortal) templatePortals: QueryList<Portal<any>>;
 
   selectedPortal: Portal<any>;
 

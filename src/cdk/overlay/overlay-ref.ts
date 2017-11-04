@@ -1,36 +1,42 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NgZone} from '@angular/core';
-import {PortalHost, Portal} from '@metaclinic/cdk/portal';
-import {OverlayState} from './overlay-state';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import { NgZone } from '@angular/core';
+import { PortalOutlet, Portal } from '@metaclinic/cdk/portal';
+import { OverlayConfig } from './overlay-config';
+import { OverlayKeyboardDispatcher } from './keyboard/overlay-keyboard-dispatcher';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { first } from 'rxjs/operators';
 
 
 /**
  * Reference to an overlay that has been created with the Overlay service.
  * Used to manipulate or dispose of said overlay.
  */
-export class OverlayRef implements PortalHost {
+export class OverlayRef implements PortalOutlet {
   private _backdropElement: HTMLElement | null = null;
   private _backdropClick: Subject<any> = new Subject();
   private _attachments = new Subject<void>();
   private _detachments = new Subject<void>();
 
-  constructor(
-      private _portalHost: PortalHost,
-      private _pane: HTMLElement,
-      private _state: OverlayState,
-      private _ngZone: NgZone) {
+  /** Stream of keydown events dispatched to this overlay. */
+  _keydownEvents = new Subject<KeyboardEvent>();
 
-    if (_state.scrollStrategy) {
-      _state.scrollStrategy.attach(this);
+  constructor(
+    private _portalOutlet: PortalOutlet,
+    private _pane: HTMLElement,
+    private _config: OverlayConfig,
+    private _ngZone: NgZone,
+    private _keyboardDispatcher: OverlayKeyboardDispatcher) {
+
+    if (_config.scrollStrategy) {
+      _config.scrollStrategy.attach(this);
     }
   }
 
@@ -45,49 +51,58 @@ export class OverlayRef implements PortalHost {
    * @returns The portal attachment result.
    */
   attach(portal: Portal<any>): any {
-    let attachResult = this._portalHost.attach(portal);
+    let attachResult = this._portalOutlet.attach(portal);
 
-    if (this._state.positionStrategy) {
-      this._state.positionStrategy.attach(this);
+    if (this._config.positionStrategy) {
+      this._config.positionStrategy.attach(this);
     }
 
-    // Update the pane element with the given state configuration.
+    // Update the pane element with the given configuration.
     this._updateStackingOrder();
     this.updateSize();
     this.updateDirection();
-    this.updatePosition();
 
-    if (this._state.scrollStrategy) {
-      this._state.scrollStrategy.enable();
+    if (this._config.scrollStrategy) {
+      this._config.scrollStrategy.enable();
     }
+
+    // Update the position once the zone is stable so that the overlay will be fully rendered
+    // before attempting to position it, as the position may depend on the size of the rendered
+    // content.
+    this._ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+      this.updatePosition();
+    });
 
     // Enable pointer events for the overlay pane element.
     this._togglePointerEvents(true);
 
-    if (this._state.hasBackdrop) {
+    if (this._config.hasBackdrop) {
       this._attachBackdrop();
     }
 
-    if (this._state.panelClass) {
+    if (this._config.panelClass) {
       // We can't do a spread here, because IE doesn't support setting multiple classes.
-      if (Array.isArray(this._state.panelClass)) {
-        this._state.panelClass.forEach(cls => this._pane.classList.add(cls));
+      if (Array.isArray(this._config.panelClass)) {
+        this._config.panelClass.forEach(cls => this._pane.classList.add(cls));
       } else {
-        this._pane.classList.add(this._state.panelClass);
+        this._pane.classList.add(this._config.panelClass);
       }
     }
 
     // Only emit the `attachments` event once all other setup is done.
     this._attachments.next();
 
+    // Track this overlay by the keyboard dispatcher
+    this._keyboardDispatcher.add(this);
+
     return attachResult;
   }
 
   /**
    * Detaches an overlay from a portal.
-   * @returns Resolves when the overlay has been detached.
+   * @returns The portal detachment result.
    */
-  detach(): Promise<any> {
+  detach(): any {
     this.detachBackdrop();
 
     // When the overlay is detached, the pane element should disable pointer events.
@@ -95,14 +110,21 @@ export class OverlayRef implements PortalHost {
     // pointer events therefore. Depends on the position strategy and the applied pane boundaries.
     this._togglePointerEvents(false);
 
-    if (this._state.scrollStrategy) {
-      this._state.scrollStrategy.disable();
+    if (this._config.positionStrategy && this._config.positionStrategy.detach) {
+      this._config.positionStrategy.detach();
     }
 
-    let detachmentResult = this._portalHost.detach();
+    if (this._config.scrollStrategy) {
+      this._config.scrollStrategy.disable();
+    }
+
+    const detachmentResult = this._portalOutlet.detach();
 
     // Only emit after everything is detached.
     this._detachments.next();
+
+    // Remove this overlay from keyboard dispatcher tracking
+    this._keyboardDispatcher.remove(this);
 
     return detachmentResult;
   }
@@ -111,16 +133,16 @@ export class OverlayRef implements PortalHost {
    * Cleans up the overlay from the DOM.
    */
   dispose(): void {
-    if (this._state.positionStrategy) {
-      this._state.positionStrategy.dispose();
+    if (this._config.positionStrategy) {
+      this._config.positionStrategy.dispose();
     }
 
-    if (this._state.scrollStrategy) {
-      this._state.scrollStrategy.disable();
+    if (this._config.scrollStrategy) {
+      this._config.scrollStrategy.disable();
     }
 
     this.detachBackdrop();
-    this._portalHost.dispose();
+    this._portalOutlet.dispose();
     this._attachments.complete();
     this._backdropClick.complete();
     this._detachments.next();
@@ -131,69 +153,74 @@ export class OverlayRef implements PortalHost {
    * Checks whether the overlay has been attached.
    */
   hasAttached(): boolean {
-    return this._portalHost.hasAttached();
+    return this._portalOutlet.hasAttached();
   }
 
   /**
-   * Returns an observable that emits when the backdrop has been clicked.
+   * Gets an observable that emits when the backdrop has been clicked.
    */
   backdropClick(): Observable<void> {
     return this._backdropClick.asObservable();
   }
 
-  /** Returns an observable that emits when the overlay has been attached. */
+  /** Gets an observable that emits when the overlay has been attached. */
   attachments(): Observable<void> {
     return this._attachments.asObservable();
   }
 
-  /** Returns an observable that emits when the overlay has been detached. */
+  /** Gets an observable that emits when the overlay has been detached. */
   detachments(): Observable<void> {
     return this._detachments.asObservable();
   }
 
+  /** Gets an observable of keydown events targeted to this overlay. */
+  keydownEvents(): Observable<KeyboardEvent> {
+    return this._keydownEvents.asObservable();
+  }
+
   /**
-   * Gets the current state config of the overlay.
+   * Gets the current config of the overlay.
    */
-  getState(): OverlayState {
-    return this._state;
+  getConfig(): OverlayConfig {
+    return this._config;
   }
 
   /** Updates the position of the overlay based on the position strategy. */
   updatePosition() {
-    if (this._state.positionStrategy) {
-      this._state.positionStrategy.apply();
+    if (this._config.positionStrategy) {
+      this._config.positionStrategy.apply();
     }
   }
 
   /** Updates the text direction of the overlay panel. */
   private updateDirection() {
-    this._pane.setAttribute('dir', this._state.direction!);
+    this._pane.setAttribute('dir', this._config.direction!);
   }
 
   /** Updates the size of the overlay based on the overlay config. */
   updateSize() {
-    if (this._state.width || this._state.width === 0) {
-      this._pane.style.width = formatCssUnit(this._state.width);
+    if (this._config.width || this._config.width === 0) {
+      this._pane.style.width = formatCssUnit(this._config.width);
     }
 
-    if (this._state.height || this._state.height === 0) {
-      this._pane.style.height = formatCssUnit(this._state.height);
+    if (this._config.height || this._config.height === 0) {
+      this._pane.style.height = formatCssUnit(this._config.height);
     }
 
-    if (this._state.minWidth || this._state.minWidth === 0) {
-      this._pane.style.minWidth = formatCssUnit(this._state.minWidth);
+    if (this._config.minWidth || this._config.minWidth === 0) {
+      this._pane.style.minWidth = formatCssUnit(this._config.minWidth);
     }
 
-    if (this._state.minHeight || this._state.minHeight === 0) {
-      this._pane.style.minHeight = formatCssUnit(this._state.minHeight);
+    if (this._config.minHeight || this._config.minHeight === 0) {
+      this._pane.style.minHeight = formatCssUnit(this._config.minHeight);
     }
 
-    if (this._state.maxWidth || this._state.maxWidth === 0) {
-      this._pane.style.maxWidth = formatCssUnit(this._state.maxWidth);
+    if (this._config.maxWidth || this._config.maxWidth === 0) {
+      this._pane.style.maxWidth = formatCssUnit(this._config.maxWidth);
     }
 
-    if (this._state.maxHeight || this._state.maxHeight === 0) {
-      this._pane.style.maxHeight = formatCssUnit(this._state.maxHeight);
+    if (this._config.maxHeight || this._config.maxHeight === 0) {
+      this._pane.style.maxHeight = formatCssUnit(this._config.maxHeight);
     }
   }
 
@@ -207,8 +234,8 @@ export class OverlayRef implements PortalHost {
     this._backdropElement = document.createElement('div');
     this._backdropElement.classList.add('cdk-overlay-backdrop');
 
-    if (this._state.backdropClass) {
-      this._backdropElement.classList.add(this._state.backdropClass);
+    if (this._config.backdropClass) {
+      this._backdropElement.classList.add(this._config.backdropClass);
     }
 
     // Insert the backdrop before the pane in the DOM order,
@@ -261,8 +288,8 @@ export class OverlayRef implements PortalHost {
 
       backdropToDetach.classList.remove('cdk-overlay-backdrop-showing');
 
-      if (this._state.backdropClass) {
-        backdropToDetach.classList.remove(this._state.backdropClass);
+      if (this._config.backdropClass) {
+        backdropToDetach.classList.remove(this._config.backdropClass);
       }
 
       backdropToDetach.addEventListener('transitionend', finishDetach);

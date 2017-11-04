@@ -2,27 +2,16 @@
 // IDEs and TSLint. For IDEs it ensures that `experimentalDecorator` warnings are not showing up.
 {
   "compilerOptions": {
-    // Needed for Moment.js since it doesn't have a default export.
-    "allowSyntheticDefaultImports": true,
-    "rootDir": ".",
+    "outDir": "./dist/packages/all",
     "experimentalDecorators": true,
     "module": "es2015",
     "moduleResolution": "node",
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
-    "outDir": "./dist/packages/all",
     "target": "es2015",
     "lib": ["es5", "es2015", "dom"],
-    "types": ["jasmine"],
-    "baseUrl": ".",
-    "paths": {
-      "@metaclinic/material": ["./src/lib/public_api.ts"],
-      "@metaclinic/cdk/*": ["./src/cdk/*"],
-      "@metaclinic/material-moment-adapter": ["./src/material-moment-adapter"],
-      "@metaclinic/material-examples": ["./src/material-examples"],
-      "material2-build-tools": ["./tools/package-tools"]
-    }
+    "types": ["jasmine"]
   },
   "include": [
     "src/**/*.ts",

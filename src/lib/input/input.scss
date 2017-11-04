@@ -3,27 +3,26 @@
 // The Input element proper.
 .mat-input-element {
   // Font needs to be inherited, because by default <input> has a system font.
-  // font: inherit;
-  font-family: sf_ui_text;
-  font-weight: 300;
-  font-size: 13px;
-  &:not(textarea) {
-    height: 32px !important;
-  }
-  height: 32px;
-  line-height: 30px;
-  color: currentColor;
-  background: transparent; // color: currentColor; // By default, <input> has a padding, border, outline and a default width.
+  font: inherit; // The Material input should match whatever background it is above.
+  background: transparent; // If background matches current background then so should the color for proper contrast
+  color: currentColor; // By default, <input> has a padding, border, outline and a default width.
   border: none;
   outline: none;
   padding: 0;
   margin: 0;
   width: 100%; // Prevent textareas from being resized outside the form field.
   max-width: 100%; // Needed to make last line of the textarea line up with the baseline.
+  height: 19px;
   vertical-align: bottom; // Undo the red box-shadow glow added by Firefox on invalid inputs.
   // See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid
+  &.mat-dark {
+    color: #ffffff;
+  }
   &:-moz-ui-invalid {
     box-shadow: none;
+  } // Remove IE's default clear icon.
+  &::-ms-clear {
+    display: none;
   } // Note that we can't use something like visibility: hidden or
   // display: none, because IE ends up preventing the user from
   // focusing the input altogether.

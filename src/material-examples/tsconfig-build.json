@@ -2,6 +2,8 @@
 // ES2015 since the build process will create FESM bundles using rollup.
 {
   "compilerOptions": {
+    // Needed for Moment.js since it doesn't have a default export.
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "stripInternal": false,
     "experimentalDecorators": true,
@@ -20,12 +22,14 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@metaclinic/material": ["../../dist/packages/material/public_api"],
-      "@metaclinic/cdk/*": ["../../dist/packages/cdk/*/public_api"]
+      "@metaclinic/material/*": ["../../dist/packages/material/*/public-api"],
+      "@metaclinic/material": ["../../dist/packages/material/public-api"],
+      "@metaclinic/material-moment-adapter": ["../../dist/packages/material-moment-adapter/public-api"],
+      "@metaclinic/cdk/*": ["../../dist/packages/cdk/*/public-api"]
     }
   },
   "files": [
-    "public_api.ts"
+    "public-api.ts"
   ],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,

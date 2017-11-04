@@ -1,54 +1,54 @@
-<div>
+<div class="demoTableMargin">
 
-  <md-table-header [selectedRowCount]="selectedRows.length" (delete)="deleteSelected()"></md-table-header>
+  <mat-table-header [selectedRowCount]="selectedRows.length" (delete)="deleteSelected()"></mat-table-header>
 
-  <md-table [dataSource]="dataSource" mdSort>
+  <mat-table [dataSource]="dataSource" matSort>
 
     <!-- need to move to module for selectable table rows -->
-    <ng-container mdColumnDef="id">
-      <md-header-cell *mdHeaderCellDef class="mat-table-select-header">
-        <md-checkbox name="mat-select-all-in-table" (change)="toggleAllRowsInTable()" [ngModel]="allRowsSelected"></md-checkbox>
-      </md-header-cell>
-      <md-cell *mdCellDef="let row" class="mat-table-select-column">
-        <md-checkbox (change)="toggleRowInTable(row)" [ngModel]="getRowSelectedState(row)"></md-checkbox>
-      </md-cell>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef class="mat-table-select-header">
+        <mat-checkbox name="mat-select-all-in-table" (change)="toggleAllRowsInTable()" [ngModel]="allRowsSelected"></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="mat-table-select-column">
+        <mat-checkbox (change)="toggleRowInTable(row)" [ngModel]="getRowSelectedState(row)"></mat-checkbox>
+      </mat-cell>
     </ng-container>
 
-    <ng-container mdColumnDef="orderNumber">
-      <md-header-cell *mdHeaderCellDef md-sort-header> Order # </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.orderNumber}} </md-cell>
+    <ng-container matColumnDef="orderNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Order # </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.orderNumber}} </mat-cell>
     </ng-container>
-    <ng-container mdColumnDef="patientName">
-      <md-header-cell *mdHeaderCellDef md-sort-header> Patient Name </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </md-cell>
+    <ng-container matColumnDef="patientName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.patientFirstName}} {{row.patientLastName}} </mat-cell>
     </ng-container>
-    <ng-container mdColumnDef="location">
-      <md-header-cell *mdHeaderCellDef md-sort-header> Location </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.address}} </md-cell>
+    <ng-container matColumnDef="location">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.address}} </mat-cell>
     </ng-container>
-    <ng-container mdColumnDef="caseStatus">
-      <md-header-cell *mdHeaderCellDef md-sort-header> Case Status </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </md-cell>
+    <ng-container matColumnDef="caseStatus">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Case Status </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{getCaseStatusText(row.caseStatusId)}} </mat-cell>
     </ng-container>
-    <ng-container mdColumnDef="assignedPathologist">
-      <md-header-cell *mdHeaderCellDef md-sort-header> Assigned Pathologist </md-header-cell>
-      <md-cell *mdCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </md-cell>
+    <ng-container matColumnDef="assignedPathologist">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Assigned Pathologist </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.assignedPathologistFirstName}} {{row.assignedPathologistLastName}} </mat-cell>
     </ng-container>
-    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *mdRowDef="let row; columns: displayedColumns; let even = even; let odd = odd;let first = first; let last = last;"
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let even = even; let odd = odd;let first = first; let last = last;"
       [ngClass]="{'mat-row-highlight-even': even,'mat-row-highlight-odd': odd, 
                 'mat-row-first': first, 'mat-row-last': last,
-                'mat-elevation-z25': even || odd }"></md-row>
-  </md-table>
+                'mat-elevation-z25': even || odd }"></mat-row>
+  </mat-table>
 
-  <md-paginator #paginator [length]="_orderDatabase.data.length" [pageSizeOptions]="[5, 10, 25, 100]">
-  </md-paginator>
+  <mat-paginator #paginator [length]="_orderDatabase.data.length" [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>
 
 <div class="demo-data-source-actions">
   <div>
-    <button md-raised-button (click)="connect()">Connect New Data Source</button>
-    <button md-raised-button (click)="disconnect()" [disabled]="!dataSource">Disconnect Data Source</button>
-    <button md-raised-button (click)="_orderDatabase.shuffle(changeReferences)">Randomize Data</button>
+    <button mat-raised-button (click)="connect()">Connect New Data Source</button>
+    <button mat-raised-button (click)="disconnect()" [disabled]="!dataSource">Disconnect Data Source</button>
+    <button mat-raised-button (click)="_orderDatabase.shuffle(changeReferences)">Randomize Data</button>
   </div>
 </div>

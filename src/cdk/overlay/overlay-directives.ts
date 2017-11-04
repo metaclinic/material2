@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -28,7 +28,7 @@ import {ESCAPE} from '@metaclinic/cdk/keycodes';
 import {TemplatePortal} from '@metaclinic/cdk/portal';
 import {Overlay} from './overlay';
 import {OverlayRef} from './overlay-ref';
-import {OverlayState} from './overlay-state';
+import {OverlayConfig} from './overlay-config';
 import {
   // This import is only used to define a generic type. The current TypeScript version incorrectly
   // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
@@ -52,22 +52,21 @@ const defaultPositionList = [
 ];
 
 /** Injection token that determines the scroll handling while the connected overlay is open. */
-export const MD_CONNECTED_OVERLAY_SCROLL_STRATEGY =
-    new InjectionToken<() => ScrollStrategy>('md-connected-overlay-scroll-strategy');
+export const CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY =
+    new InjectionToken<() => ScrollStrategy>('cdk-connected-overlay-scroll-strategy');
 
 /** @docs-private */
-export function MD_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay):
+export function CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY(overlay: Overlay):
     () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
 }
 
 /** @docs-private */
-export const MD_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER = {
-  provide: MD_CONNECTED_OVERLAY_SCROLL_STRATEGY,
+export const CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER = {
+  provide: CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY,
   deps: [Overlay],
-  useFactory: MD_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY,
+  useFactory: CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY,
 };
-
 
 
 /**
@@ -78,10 +77,11 @@ export const MD_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER = {
   selector: '[cdk-overlay-origin], [overlay-origin], [cdkOverlayOrigin]',
   exportAs: 'cdkOverlayOrigin',
 })
-export class OverlayOrigin {
-  constructor(public elementRef: ElementRef) { }
+export class CdkOverlayOrigin {
+  constructor(
+      /** Reference to the element on which the directive is applied. */
+      public elementRef: ElementRef) { }
 }
-
 
 
 /**
@@ -91,7 +91,7 @@ export class OverlayOrigin {
   selector: '[cdk-connected-overlay], [connected-overlay], [cdkConnectedOverlay]',
   exportAs: 'cdkConnectedOverlay'
 })
-export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
+export class CdkConnectedOverlay implements OnDestroy, OnChanges {
   private _overlayRef: OverlayRef;
   private _templatePortal: TemplatePortal<any>;
   private _hasBackdrop = false;
@@ -103,7 +103,7 @@ export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
   private _escapeListener = () => {};
 
   /** Origin for the connected overlay. */
-  @Input('cdkConnectedOverlayOrigin') origin: OverlayOrigin;
+  @Input('cdkConnectedOverlayOrigin') origin: CdkOverlayOrigin;
 
   /** Registered connected position pairs. */
   @Input('cdkConnectedOverlayPositions') positions: ConnectionPositionPair[];
@@ -157,8 +157,8 @@ export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
 
   /** @deprecated */
   @Input('origin')
-  get _deprecatedOrigin(): OverlayOrigin { return this.origin; }
-  set _deprecatedOrigin(_origin: OverlayOrigin) { this.origin = _origin; }
+  get _deprecatedOrigin(): CdkOverlayOrigin { return this.origin; }
+  set _deprecatedOrigin(_origin: CdkOverlayOrigin) { this.origin = _origin; }
 
   /** @deprecated */
   @Input('positions')
@@ -236,7 +236,7 @@ export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
       private _renderer: Renderer2,
       templateRef: TemplateRef<any>,
       viewContainerRef: ViewContainerRef,
-      @Inject(MD_CONNECTED_OVERLAY_SCROLL_STRATEGY) private _scrollStrategy,
+      @Inject(CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY) private _scrollStrategy,
       @Optional() private _dir: Directionality) {
     this._templatePortal = new TemplatePortal(templateRef, viewContainerRef);
   }
@@ -271,9 +271,9 @@ export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
   }
 
   /** Builds the overlay config based on the directive's inputs */
-  private _buildConfig(): OverlayState {
+  private _buildConfig(): OverlayConfig {
     const positionStrategy = this._position = this._createPositionStrategy();
-    const overlayConfig = new OverlayState({
+    const overlayConfig = new OverlayConfig({
       positionStrategy,
       scrollStrategy: this.scrollStrategy,
       hasBackdrop: this.hasBackdrop
@@ -337,7 +337,7 @@ export class ConnectedOverlayDirective implements OnDestroy, OnChanges {
     }
 
     this._position.withDirection(this.dir);
-    this._overlayRef.getState().direction = this.dir;
+    this._overlayRef.getConfig().direction = this.dir;
     this._initEscapeListener();
 
     if (!this._overlayRef.hasAttached()) {

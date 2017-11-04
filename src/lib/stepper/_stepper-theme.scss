@@ -8,7 +8,8 @@
   $primary: map-get($theme, primary);
 
   .mat-step-header {
-    &:focus,
+    &.cdk-keyboard-focused,
+    &.cdk-program-focused,
     &:hover {
       background-color: mat-color($background, hover);
     }
@@ -66,5 +67,19 @@
   .mat-stepper-vertical, .mat-stepper-horizontal {
     font-family: mat-font-family($config);
     font-size: mat-font-size($config, input);
+  }
+
+  .mat-step-label {
+    font: {
+      size: mat-font-size($config, body-1);
+      weight: mat-font-weight($config, body-1);
+    };
+  }
+
+  .mat-step-label-selected {
+    font: {
+      size: mat-font-size($config, body-2);
+      weight: mat-font-weight($config, body-2);
+    };
   }
 }

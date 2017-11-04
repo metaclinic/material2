@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdSnackBar} from '@metaclinic/material';
+import {MatSnackBar} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +10,7 @@ import {MdSnackBar} from '@metaclinic/material';
 export class CardAccessibilityDemo {
   showProgress: boolean = false;
 
-  constructor(private snackBar: MdSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {}
 
   openSnackbar(message: string) {
     this.snackBar.open(message, '', {duration: 2000});

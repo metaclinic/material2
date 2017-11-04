@@ -1,9 +1,9 @@
-<md-toolbar color="dark-trans">
+<mat-toolbar color="dark-trans">
   <div *ngIf="selectedRowCount > 0" class="mat-selected-row-data-container">
     <div>
       <span class="mat-selected-row-count">{{getSelectedRowCount()}}</span>
       <span>items selected</span>
     </div>
-    <md-icon color="warn" (click)="delete.next()">delete</md-icon>
+    <mat-icon color="warn" (click)="delete.next()">delete</mat-icon>
   </div>
-</md-toolbar>
+</mat-toolbar>

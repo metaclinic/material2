@@ -19,7 +19,7 @@ import {
   DialogNeptuneIFrameDialog,
   DialogWelcomeExampleDialog
 } from './dialog/dialog-a11y';
-
+import {ExpansionPanelAccessibilityDemo} from './expansion/expansion-a11y';
 import {GridListAccessibilityDemo} from './grid-list/grid-list-a11y';
 import {RadioAccessibilityDemo} from './radio/radio-a11y';
 import {ToolbarAccessibilityDemo} from './toolbar/toolbar-a11y';
@@ -33,13 +33,18 @@ import {SliderAccessibilityDemo} from './slider/slider-a11y';
 import {SlideToggleAccessibilityDemo} from './slide-toggle/slide-toggle-a11y';
 import {SnackBarAccessibilityDemo} from './snack-bar/snack-bar-a11y';
 import {SelectAccessibilityDemo} from './select/select-a11y';
+import {TableAccessibilityDemo} from './table/table-a11y';
 import {
   TabsAccessibilityDemo,
   SunnyTabContent,
   RainyTabContent,
   FoggyTabContent,
 } from './tabs/tabs-a11y';
-
+import {TooltipAccessibilityDemo} from './tooltip/tooltip-a11y';
+import {SidenavAccessibilityDemo} from './sidenav/sidenav-a11y';
+import {SidenavBasicAccessibilityDemo} from './sidenav/basic-sidenav-a11y';
+import {SidenavDualAccessibilityDemo} from './sidenav/dual-sidenav-a11y';
+import {SidenavMobileAccessibilityDemo} from './sidenav/mobile-sidenav-a11y';
 
 @NgModule({
   imports: [
@@ -75,6 +80,8 @@ export class AccessibilityRoutingModule {}
     DialogNeptuneExampleDialog,
     DialogNeptuneIFrameDialog,
     DialogWelcomeExampleDialog,
+    ExpansionPanelAccessibilityDemo,
+    FoggyTabContent,
     GridListAccessibilityDemo,
     IconAccessibilityDemo,
     InputAccessibilityDemo,
@@ -82,15 +89,20 @@ export class AccessibilityRoutingModule {}
     ProgressBarAccessibilityDemo,
     ProgressSpinnerAccessibilityDemo,
     RadioAccessibilityDemo,
-    ToolbarAccessibilityDemo,
+    RainyTabContent,
+    SelectAccessibilityDemo,
+    SidenavAccessibilityDemo,
+    SidenavBasicAccessibilityDemo,
+    SidenavDualAccessibilityDemo,
+    SidenavMobileAccessibilityDemo,
     SliderAccessibilityDemo,
     SlideToggleAccessibilityDemo,
     SnackBarAccessibilityDemo,
-    SelectAccessibilityDemo,
-    TabsAccessibilityDemo,
+    TableAccessibilityDemo,
     SunnyTabContent,
-    RainyTabContent,
-    FoggyTabContent,
+    TabsAccessibilityDemo,
+    ToolbarAccessibilityDemo,
+    TooltipAccessibilityDemo,
   ],
   entryComponents: [
     DialogAccessibilityDemo,
@@ -99,9 +111,9 @@ export class AccessibilityRoutingModule {}
     DialogNeptuneExampleDialog,
     DialogNeptuneIFrameDialog,
     DialogWelcomeExampleDialog,
-    SunnyTabContent,
-    RainyTabContent,
     FoggyTabContent,
+    RainyTabContent,
+    SunnyTabContent,
   ]
 })
 export class AccessibilityDemoModule {}

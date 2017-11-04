@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {ScrollStrategy, getMdScrollStrategyAlreadyAttachedError} from './scroll-strategy';
+import {ScrollStrategy, getMatScrollStrategyAlreadyAttachedError} from './scroll-strategy';
 import {OverlayRef} from '../overlay-ref';
 import {Subscription} from 'rxjs/Subscription';
 import {ScrollDispatcher} from '@metaclinic/cdk/scrolling';
@@ -21,17 +21,19 @@ export class CloseScrollStrategy implements ScrollStrategy {
 
   constructor(private _scrollDispatcher: ScrollDispatcher) { }
 
+  /** Attaches this scroll strategy to an overlay. */
   attach(overlayRef: OverlayRef) {
     if (this._overlayRef) {
-      throw getMdScrollStrategyAlreadyAttachedError();
+      throw getMatScrollStrategyAlreadyAttachedError();
     }
 
     this._overlayRef = overlayRef;
   }
 
+  /** Enables the closing of the attached on scroll. */
   enable() {
     if (!this._scrollSubscription) {
-      this._scrollSubscription = this._scrollDispatcher.scrolled(0, () => {
+      this._scrollSubscription = this._scrollDispatcher.scrolled(0).subscribe(() => {
         if (this._overlayRef.hasAttached()) {
           this._overlayRef.detach();
         }
@@ -41,6 +43,7 @@ export class CloseScrollStrategy implements ScrollStrategy {
     }
   }
 
+  /** Disables the closing the attached overlay on scroll. */
   disable() {
     if (this._scrollSubscription) {
       this._scrollSubscription.unsubscribe();

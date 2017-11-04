@@ -1,20 +1,18 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {QueryList} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {Subscription} from 'rxjs/Subscription';
-import {UP_ARROW, DOWN_ARROW, TAB, A, Z, ZERO, NINE} from '@metaclinic/cdk/keycodes';
-import {RxChain, debounceTime, filter, map, doOperator} from '@metaclinic/cdk/rxjs';
+import { QueryList } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import { UP_ARROW, DOWN_ARROW, TAB, A, Z, ZERO, NINE } from '@metaclinic/cdk/keycodes';
+import { debounceTime, filter, map, tap } from 'rxjs/operators';
 
-/**
- * This interface is for items that can be passed to a ListKeyManager.
- */
+/** This interface is for items that can be passed to a ListKeyManager. */
 export interface ListKeyManagerOption {
   disabled?: boolean;
   getLabel?(): string;
@@ -42,6 +40,9 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
    */
   tabOut: Subject<void> = new Subject<void>();
 
+  /** Stream that emits whenever the active item of the list manager changes. */
+  change = new Subject<number>();
+
   /**
    * Turns on wrapping mode, which ensures that the active item will wrap to
    * the other end of list when there are no more items in the given direction.
@@ -55,7 +56,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
    * Turns on typeahead mode which allows users to set the active item by typing.
    * @param debounceInterval Time to wait after the last keystroke before setting the active item.
    */
-  withTypeAhead(debounceInterval = 200): this {
+  withTypeAhead(debounceInterval: number = 200): this {
     if (this._items.length && this._items.some(item => typeof item.getLabel !== 'function')) {
       throw Error('ListKeyManager items in typeahead mode must implement the `getLabel` method.');
     }
@@ -65,23 +66,28 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     // Debounce the presses of non-navigational keys, collect the ones that correspond to letters
     // and convert those letters back into a string. Afterwards find the first item that starts
     // with that string and select it.
-    this._typeaheadSubscription = RxChain.from(this._letterKeyStream)
-      .call(doOperator, keyCode => this._pressedLetters.push(keyCode))
-      .call(debounceTime, debounceInterval)
-      .call(filter, () => this._pressedLetters.length > 0)
-      .call(map, () => this._pressedLetters.join(''))
-      .subscribe(inputString => {
-        const items = this._items.toArray();
+    this._typeaheadSubscription = this._letterKeyStream.pipe(
+      tap(keyCode => this._pressedLetters.push(keyCode)),
+      debounceTime(debounceInterval),
+      filter(() => this._pressedLetters.length > 0),
+      map(() => this._pressedLetters.join(''))
+    ).subscribe(inputString => {
+      const items = this._items.toArray();
 
-        for (let i = 0; i < items.length; i++) {
-          if (items[i].getLabel!().toUpperCase().trim().indexOf(inputString) === 0) {
-            this.setActiveItem(i);
-            break;
-          }
+      // Start at 1 because we want to start searching at the item immediately
+      // following the current active item.
+      for (let i = 1; i < items.length + 1; i++) {
+        const index = (this._activeItemIndex + i) % items.length;
+        const item = items[index];
+
+        if (!item.disabled && item.getLabel!().toUpperCase().trim().indexOf(inputString) === 0) {
+          this.setActiveItem(index);
+          break;
         }
+      }
 
-        this._pressedLetters = [];
-      });
+      this._pressedLetters = [];
+    });
 
     return this;
   }
@@ -93,6 +99,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
   setActiveItem(index: number): void {
     this._activeItemIndex = index;
     this._activeItem = this._items.toArray()[index];
+    this.change.next(index);
   }
 
   /**
@@ -152,7 +159,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
   /** Sets the active item to a previous enabled item in the list. */
   setPreviousItemActive(): void {
     this._activeItemIndex < 0 && this._wrap ? this.setLastItemActive()
-                                            : this._setActiveItemByDelta(-1);
+      : this._setActiveItemByDelta(-1);
   }
 
   /**
@@ -170,7 +177,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
    */
   private _setActiveItemByDelta(delta: number, items = this._items.toArray()): void {
     this._wrap ? this._setActiveInWrapMode(delta, items)
-               : this._setActiveInDefaultMode(delta, items);
+      : this._setActiveInDefaultMode(delta, items);
   }
 
   /**
@@ -206,7 +213,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
    * finds an enabled item or encounters the end of the list.
    */
   private _setActiveItemByIndex(index: number, fallbackDelta: number,
-                                  items = this._items.toArray()): void {
+    items = this._items.toArray()): void {
     if (!items[index]) { return; }
     while (items[index].disabled) {
       index += fallbackDelta;

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -14,7 +14,7 @@ import {
   SkipSelf,
   OnDestroy,
 } from '@angular/core';
-import {Platform} from '@metaclinic/cdk/platform';
+import { Platform } from '@metaclinic/cdk/platform';
 
 
 export const LIVE_ANNOUNCER_ELEMENT_TOKEN = new InjectionToken<HTMLElement>('liveAnnouncerElement');
@@ -27,8 +27,8 @@ export class LiveAnnouncer implements OnDestroy {
   private _liveElement: Element;
 
   constructor(
-      @Optional() @Inject(LIVE_ANNOUNCER_ELEMENT_TOKEN) elementToken: any,
-      platform: Platform) {
+    @Optional() @Inject(LIVE_ANNOUNCER_ELEMENT_TOKEN) elementToken: any,
+    platform: Platform) {
     // Only do anything if we're on the browser platform.
     if (platform.isBrowser) {
       // We inject the live element as `any` because the constructor signature cannot reference
@@ -79,7 +79,7 @@ export class LiveAnnouncer implements OnDestroy {
 
 /** @docs-private */
 export function LIVE_ANNOUNCER_PROVIDER_FACTORY(
-    parentDispatcher: LiveAnnouncer, liveElement: any, platform: Platform) {
+  parentDispatcher: LiveAnnouncer, liveElement: any, platform: Platform) {
   return parentDispatcher || new LiveAnnouncer(liveElement, platform);
 }
 

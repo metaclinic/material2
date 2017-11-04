@@ -1,6 +1,6 @@
 @import '../core/style/elevation';
 @import '../core/style/vendor-prefixes';
-@import '../core/a11y/a11y';
+// @import '../core/a11y/a11y';
 $mat-dialog-padding: 24px !default;
 $mat-dialog-border-radius: 14px !default;
 $mat-dialog-max-width: 80vw !default;
@@ -18,9 +18,9 @@ $mat-dialog-button-margin: 8px !default;
   width: 100%;
   height: 100%;
   text-align: center;
-  @include cdk-high-contrast {
-    outline: solid 1px;
-  }
+  // @include cdk-high-contrast {
+  //   outline: solid 1px;
+  // }
 }
 
 .mat-dialog-content {

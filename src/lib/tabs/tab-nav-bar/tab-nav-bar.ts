@@ -1,51 +1,58 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-
+import { Directionality } from '@metaclinic/cdk/bidi';
+import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
+import { Platform } from '@metaclinic/cdk/platform';
+import { takeUntil } from 'rxjs/operators';
+import { ViewportRuler } from '@metaclinic/cdk/scrolling';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   Directive,
   ElementRef,
+  forwardRef,
   Inject,
   Input,
   NgZone,
   OnDestroy,
   Optional,
+  QueryList,
   Renderer2,
   ViewChild,
   ViewEncapsulation,
-  ContentChildren,
-  QueryList,
-  forwardRef,
 } from '@angular/core';
-import {ViewportRuler} from '@metaclinic/cdk/scrolling';
-import {Directionality} from '@metaclinic/cdk/bidi';
-import {Platform} from '@metaclinic/cdk/platform';
-import {takeUntil} from '@metaclinic/cdk/rxjs';
-import {Subject} from 'rxjs/Subject';
-import {of as observableOf} from 'rxjs/observable/of';
-import {merge} from 'rxjs/observable/merge';
-import {CanDisableRipple, mixinDisableRipple} from '../../core/common-behaviors/disable-ripple';
-import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
-import {CanDisable, mixinDisabled} from '../../core/common-behaviors/disabled';
-import {MD_RIPPLE_GLOBAL_OPTIONS, MdRipple, RippleGlobalOptions} from '../../core';
-import {CanColor, mixinColor, ThemePalette} from '../../core/common-behaviors/color';
-import {MdInkBar} from '../ink-bar';
+import {
+  CanColor,
+  CanDisable,
+  CanDisableRipple,
+  MAT_RIPPLE_GLOBAL_OPTIONS,
+  MatRipple,
+  mixinColor,
+  mixinDisabled,
+  mixinDisableRipple,
+  RippleGlobalOptions,
+  ThemePalette,
+} from '@metaclinic/material/core';
+import { merge } from 'rxjs/observable/merge';
+import { of as observableOf } from 'rxjs/observable/of';
+import { Subject } from 'rxjs/Subject';
+import { MatInkBar } from '../ink-bar';
 
 
-// Boilerplate for applying mixins to MdTabNav.
+// Boilerplate for applying mixins to MatTabNav.
 /** @docs-private */
-export class MdTabNavBase {
-  constructor(public _renderer: Renderer2, public _elementRef: ElementRef) {}
+export class MatTabNavBase {
+  constructor(public _renderer: Renderer2, public _elementRef: ElementRef) { }
 }
-export const _MdTabNavMixinBase = mixinDisableRipple(mixinColor(MdTabNavBase, 'primary'));
+export const _MatTabNavMixinBase = mixinDisableRipple(mixinColor(MatTabNavBase, 'primary'));
 
 /**
  * Navigation component matching the styles of the tab group header.
@@ -53,16 +60,18 @@ export const _MdTabNavMixinBase = mixinDisableRipple(mixinColor(MdTabNavBase, 'p
  */
 @Component({
   moduleId: module.id,
-  selector: '[md-tab-nav-bar], [mat-tab-nav-bar]',
+  selector: '[mat-tab-nav-bar]',
+  exportAs: 'matTabNavBar, matTabNav',
   inputs: ['color', 'disableRipple'],
   templateUrl: 'tab-nav-bar.html',
   styleUrls: ['tab-nav-bar.css'],
-  host: {'class': 'mat-tab-nav-bar'},
+  host: { 'class': 'mat-tab-nav-bar' },
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdTabNav extends _MdTabNavMixinBase implements AfterContentInit, CanColor,
-    CanDisableRipple, OnDestroy {
+export class MatTabNav extends _MatTabNavMixinBase implements AfterContentInit, CanColor,
+  CanDisableRipple, OnDestroy {
 
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
@@ -70,11 +79,11 @@ export class MdTabNav extends _MdTabNavMixinBase implements AfterContentInit, Ca
   _activeLinkChanged: boolean;
   _activeLinkElement: ElementRef;
 
-  @ViewChild(MdInkBar) _inkBar: MdInkBar;
+  @ViewChild(MatInkBar) _inkBar: MatInkBar;
 
   /** Query list of all tab links of the tab navigation. */
-  @ContentChildren(forwardRef(() => MdTabLink), {descendants: true})
-  _tabLinks: QueryList<MdTabLink>;
+  @ContentChildren(forwardRef(() => MatTabLink), { descendants: true })
+  _tabLinks: QueryList<MatTabLink>;
 
   /** Background color of the tab nav. */
   @Input()
@@ -101,11 +110,11 @@ export class MdTabNav extends _MdTabNavMixinBase implements AfterContentInit, Ca
   private _disableRipple: boolean = false;
 
   constructor(renderer: Renderer2,
-              elementRef: ElementRef,
-              @Optional() private _dir: Directionality,
-              private _ngZone: NgZone,
-              private _changeDetectorRef: ChangeDetectorRef,
-              private _viewportRuler: ViewportRuler) {
+    elementRef: ElementRef,
+    @Optional() private _dir: Directionality,
+    private _ngZone: NgZone,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _viewportRuler: ViewportRuler) {
     super(renderer, elementRef);
   }
 
@@ -123,8 +132,8 @@ export class MdTabNav extends _MdTabNavMixinBase implements AfterContentInit, Ca
     this._ngZone.runOutsideAngular(() => {
       const dirChange = this._dir ? this._dir.change : observableOf(null);
 
-      return takeUntil.call(merge(dirChange, this._viewportRuler.change(10)), this._onDestroy)
-          .subscribe(() => this._alignInkBar());
+      return merge(dirChange, this._viewportRuler.change(10)).pipe(takeUntil(this._onDestroy))
+        .subscribe(() => this._alignInkBar());
     });
 
     this._setLinkDisableRipple();
@@ -159,24 +168,26 @@ export class MdTabNav extends _MdTabNavMixinBase implements AfterContentInit, Ca
 }
 
 
-// Boilerplate for applying mixins to MdTabLink.
-export class MdTabLinkBase {}
-export const _MdTabLinkMixinBase = mixinDisabled(MdTabLinkBase);
+// Boilerplate for applying mixins to MatTabLink.
+export class MatTabLinkBase { }
+export const _MatTabLinkMixinBase = mixinDisabled(MatTabLinkBase);
 
 /**
- * Link inside of a `md-tab-nav-bar`.
+ * Link inside of a `mat-tab-nav-bar`.
  */
 @Directive({
-  selector: '[md-tab-link], [mat-tab-link], [mdTabLink], [matTabLink]',
+  selector: '[mat-tab-link], [matTabLink]',
+  exportAs: 'matTabLink',
   inputs: ['disabled'],
   host: {
     'class': 'mat-tab-link',
     '[attr.aria-disabled]': 'disabled.toString()',
-    '[attr.tabindex]': 'tabIndex',
-    '[class.mat-tab-disabled]': 'disabled'
+    '[attr.tabIndex]': 'tabIndex',
+    '[class.mat-tab-disabled]': 'disabled',
+    '[class.mat-tab-label-active]': 'active',
   }
 })
-export class MdTabLink extends _MdTabLinkMixinBase implements OnDestroy, CanDisable {
+export class MatTabLink extends _MatTabLinkMixinBase implements OnDestroy, CanDisable {
   /** Whether the tab link is active or not. */
   private _isActive: boolean = false;
 
@@ -184,7 +195,7 @@ export class MdTabLink extends _MdTabLinkMixinBase implements OnDestroy, CanDisa
   private _disableRipple: boolean = false;
 
   /** Reference to the instance of the ripple for the tab link. */
-  private _tabLinkRipple: MdRipple;
+  private _tabLinkRipple: MatRipple;
 
   /** Whether the link is active. */
   @Input()
@@ -192,12 +203,12 @@ export class MdTabLink extends _MdTabLinkMixinBase implements OnDestroy, CanDisa
   set active(value: boolean) {
     this._isActive = value;
     if (value) {
-      this._mdTabNavBar.updateActiveLink(this._elementRef);
+      this._tabNavBar.updateActiveLink(this._elementRef);
     }
   }
 
   /** Whether ripples should be disabled or not. */
-  get disableRipple(): boolean { return this._disableRipple; }
+  get disableRipple(): boolean { return this.disabled || this._disableRipple; }
   set disableRipple(value: boolean) {
     this._disableRipple = value;
     this._tabLinkRipple.disabled = this.disableRipple;
@@ -205,21 +216,20 @@ export class MdTabLink extends _MdTabLinkMixinBase implements OnDestroy, CanDisa
   }
 
   /** @docs-private */
-  get tabIndex(): number {
-    return this.disabled ? -1 : 0;
+  get tabIndex(): number | null {
+    return this.disabled ? null : 0;
   }
 
-  constructor(private _mdTabNavBar: MdTabNav,
-              private _elementRef: ElementRef,
-              ngZone: NgZone,
-              ruler: ViewportRuler,
-              platform: Platform,
-              @Optional() @Inject(MD_RIPPLE_GLOBAL_OPTIONS) globalOptions: RippleGlobalOptions) {
+  constructor(private _tabNavBar: MatTabNav,
+    private _elementRef: ElementRef,
+    ngZone: NgZone,
+    platform: Platform,
+    @Optional() @Inject(MAT_RIPPLE_GLOBAL_OPTIONS) globalOptions: RippleGlobalOptions) {
     super();
 
     // Manually create a ripple instance that uses the tab link element as trigger element.
     // Notice that the lifecycle hooks for the ripple config won't be called anymore.
-    this._tabLinkRipple = new MdRipple(_elementRef, ngZone, ruler, platform, globalOptions);
+    this._tabLinkRipple = new MatRipple(_elementRef, ngZone, platform, globalOptions);
   }
 
   ngOnDestroy() {

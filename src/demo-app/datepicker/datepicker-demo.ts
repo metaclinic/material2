@@ -6,10 +6,9 @@ import {
   Renderer2,
   OnInit
 } from '@angular/core';
-import {
-  OverlayContainer,
-  MdDatepickerInputEvent
-} from '@metaclinic/material';
+import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@metaclinic/material/datepicker';
+
 
 @Component({
   moduleId: module.id,
@@ -20,8 +19,8 @@ import {
 })
 export class DatepickerDemo implements OnInit {
   constructor(private _element: ElementRef,
-    private _renderer: Renderer2,
-    private _overlayContainer: OverlayContainer) {
+    private _renderer: Renderer2
+  ) {
   }
   touch: boolean;
   filterOdd: boolean;
@@ -41,12 +40,8 @@ export class DatepickerDemo implements OnInit {
 
   dateFilter = (date: Date) => date.getMonth() % 2 == 1 && date.getDate() % 2 == 0;
 
-  onDateInput = (e: MdDatepickerInputEvent<Date>) => this.lastDateInput = e.value;
-  onDateChange = (e: MdDatepickerInputEvent<Date>) => this.lastDateChange = e.value;
+  onDateInput = (e: MatDatepickerInputEvent<Date>) => this.lastDateInput = e.value;
+  onDateChange = (e: MatDatepickerInputEvent<Date>) => this.lastDateChange = e.value;
 
-  toggleTheme() {
-    const darkThemeClass = 'unicorn-dark-theme';
-    this._renderer.addClass(this._element.nativeElement, darkThemeClass);
-    this._overlayContainer.themeClass = darkThemeClass;
-  }
+  dateCtrl = new FormControl();
 }

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -29,7 +29,7 @@ export type Direction = 'ltr' | 'rtl';
  * We also can't re-provide the DOCUMENT token from platform-brower because the unit tests
  * themselves use things like `querySelector` in test code.
  */
-export const DIR_DOCUMENT = new InjectionToken<Document>('md-dir-doc');
+export const DIR_DOCUMENT = new InjectionToken<Document>('cdk-dir-doc');
 
 /**
  * The directionality (LTR / RTL) context for the application (or a subtree of it).
@@ -37,7 +37,10 @@ export const DIR_DOCUMENT = new InjectionToken<Document>('md-dir-doc');
  */
 @Injectable()
 export class Directionality {
+  /** The current 'ltr' or 'rtl' value. */
   readonly value: Direction = 'ltr';
+
+  /** Stream that emits whenever the 'ltr' / 'rtl' state changes. */
   readonly change = new EventEmitter<void>();
 
   constructor(@Optional() @Inject(DIR_DOCUMENT) _document?: any) {

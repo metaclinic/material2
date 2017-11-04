@@ -1,0 +1,14 @@
+// Configuration for IDEs only.
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "baseUrl": ".",
+    "paths": {
+      "@metaclinic/cdk/*": ["../cdk/*"],
+      "@metaclinic/material/*": ["../lib/*"],
+      "@metaclinic/material": ["../lib/public_api"]
+    }
+  },
+  "include": ["./**/*.ts"]
+}

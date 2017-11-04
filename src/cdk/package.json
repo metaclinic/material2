@@ -1,15 +1,15 @@
 {
   "name": "@metaclinic/cdk",
   "version": "0.0.0-PLACEHOLDER",
-  "description": "Angular Material Component Development Kit",
+  "description": "Metaclinic Material Component Development Kit",
   "main": "./bundles/cdk.umd.js",
-  "module": "./@metaclinic/cdk.es5.js",
-  "es2015": "./@metaclinic/cdk.js",
+  "module": "./esm5/cdk.es5.js",
+  "es2015": "./esm2015/cdk.js",
   "typings": "./cdk.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "^4.3.5",
-    "@angular/common": "^4.3.5"
+    "@angular/core": "0.0.0-NG",
+    "@angular/common": "0.0.0-NG"
   },
   "dependencies": {
     "tslib": "^1.7.1"

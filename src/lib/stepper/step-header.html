@@ -6,8 +6,8 @@
 
   <div [class.mat-step-icon-completed]="icon !== 'number'" [class.mat-step-icon]="selected" [class.mat-step-icon-not-touched]="icon === 'number' && !selected">
     <!-- <span *ngSwitchCase="'number'">{{index + 1}}</span>
-    <md-icon *ngSwitchCase="'edit'">create</md-icon>
-    <md-icon *ngSwitchCase="'done'">done</md-icon> -->
+    <mat-icon *ngSwitchCase="'edit'">create</mat-icon>
+    <mat-icon *ngSwitchCase="'done'">done</mat-icon> -->
   </div>
 
 </div>
@@ -19,5 +19,5 @@
   <!-- It there is no label template, fall back to the text label. -->
   <div class="mat-step-text-label" *ngIf="_stringLabel()">{{label}}</div>
 
-  <div class="mat-step-optional" *ngIf="optional">Optional</div>
+  <div class="mat-step-optional" *ngIf="optional">{{_intl.optionalLabel}}</div>
 </div>

@@ -1,10 +1,5 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ElementRef,
-  Renderer2,
-} from '@angular/core';
-import { OverlayContainer } from '@metaclinic/material';
+import { OverlayContainer } from '@metaclinic/cdk/overlay';
+import { Component, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
 
 /**
  * The entry app for demo site. Routes under `accessibility` will use AccessibilityDemo component,
@@ -17,6 +12,7 @@ import { OverlayContainer } from '@metaclinic/material';
   selector: 'entry-app',
   template: '<router-outlet></router-outlet>',
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class EntryApp { }
 
@@ -30,7 +26,8 @@ export class EntryApp { }
     <p>Open the sidenav to select a demo.</p>
   `
 })
-export class Home { }
+export class Home {
+}
 
 /**
  * DemoApp with toolbar and sidenav.
@@ -41,6 +38,7 @@ export class Home { }
   templateUrl: 'demo-app.html',
   styleUrls: ['demo-app.css'],
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class DemoApp {
   dark = false;
@@ -91,10 +89,10 @@ export class DemoApp {
     this.dark = !this.dark;
     if (this.dark) {
       this._renderer.addClass(this._element.nativeElement, darkThemeClass);
-      this._overlayContainer.themeClass = darkThemeClass;
+      this._overlayContainer.getContainerElement().classList.add(darkThemeClass);
     } else {
       this._renderer.removeClass(this._element.nativeElement, darkThemeClass);
-      this._overlayContainer.themeClass = '';
+      this._overlayContainer.getContainerElement().classList.remove(darkThemeClass);
     }
   }
 }

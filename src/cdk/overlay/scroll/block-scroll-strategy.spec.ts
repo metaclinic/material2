@@ -1,9 +1,9 @@
-import {Component, NgModule} from '@angular/core';
-import {async, inject, TestBed} from '@angular/core/testing';
-import {ComponentPortal, PortalModule} from '@metaclinic/cdk/portal';
-import {Platform} from '@metaclinic/cdk/platform';
-import {ViewportRuler} from '@metaclinic/cdk/scrolling';
-import {Overlay, OverlayContainer, OverlayModule, OverlayRef, OverlayState} from '../index';
+import { Component, NgModule } from '@angular/core';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { ComponentPortal, PortalModule } from '@metaclinic/cdk/portal';
+import { Platform } from '@metaclinic/cdk/platform';
+import { ViewportRuler } from '@metaclinic/cdk/scrolling';
+import { Overlay, OverlayContainer, OverlayModule, OverlayRef, OverlayConfig } from '../index';
 
 
 describe('BlockScrollStrategy', () => {
@@ -23,9 +23,9 @@ describe('BlockScrollStrategy', () => {
   }));
 
   beforeEach(inject([Overlay, ViewportRuler], (overlay: Overlay, viewportRuler: ViewportRuler) => {
-    let overlayState = new OverlayState({scrollStrategy: overlay.scrollStrategies.block()});
+    let overlayConfig = new OverlayConfig({ scrollStrategy: overlay.scrollStrategies.block() });
 
-    overlayRef = overlay.create(overlayState);
+    overlayRef = overlay.create(overlayConfig);
     componentPortal = new ComponentPortal(FocacciaMsg);
 
     viewport = viewportRuler;
@@ -46,23 +46,23 @@ describe('BlockScrollStrategy', () => {
   it('should toggle scroll blocking along the y axis', skipIOS(() => {
     setScrollPosition(0, 100);
     expect(viewport.getViewportScrollPosition().top)
-        .toBe(100, 'Expected viewport to be scrollable initially.');
+      .toBe(100, 'Expected viewport to be scrollable initially.');
 
     overlayRef.attach(componentPortal);
     expect(document.documentElement.style.top)
-        .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
+      .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
 
     setScrollPosition(0, 300);
     expect(viewport.getViewportScrollPosition().top)
-        .toBe(100, 'Expected the viewport not to scroll.');
+      .toBe(100, 'Expected the viewport not to scroll.');
 
     overlayRef.detach();
     expect(viewport.getViewportScrollPosition().top)
-        .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
+      .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
 
     setScrollPosition(0, 300);
     expect(viewport.getViewportScrollPosition().top)
-        .toBe(300, 'Expected user to be able to scroll after disabling.');
+      .toBe(300, 'Expected user to be able to scroll after disabling.');
   }));
 
 
@@ -72,23 +72,23 @@ describe('BlockScrollStrategy', () => {
 
     setScrollPosition(100, 0);
     expect(viewport.getViewportScrollPosition().left)
-        .toBe(100, 'Expected viewport to be scrollable initially.');
+      .toBe(100, 'Expected viewport to be scrollable initially.');
 
     overlayRef.attach(componentPortal);
     expect(document.documentElement.style.left)
-        .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
+      .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
 
     setScrollPosition(300, 0);
     expect(viewport.getViewportScrollPosition().left)
-        .toBe(100, 'Expected the viewport not to scroll.');
+      .toBe(100, 'Expected the viewport not to scroll.');
 
     overlayRef.detach();
     expect(viewport.getViewportScrollPosition().left)
-        .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
+      .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
 
     setScrollPosition(300, 0);
     expect(viewport.getViewportScrollPosition().left)
-        .toBe(300, 'Expected user to be able to scroll after disabling.');
+      .toBe(300, 'Expected user to be able to scroll after disabling.');
   }));
 
 
@@ -169,7 +169,7 @@ describe('BlockScrollStrategy', () => {
 
 
 /** Simple component that we can attach to the overlay. */
-@Component({template: '<p>Focaccia</p>'})
+@Component({ template: '<p>Focaccia</p>' })
 class FocacciaMsg { }
 
 
