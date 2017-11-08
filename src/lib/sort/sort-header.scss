@@ -30,10 +30,11 @@ $mat-sort-header-arrow-thickness: 2px;
   width: 0;
   position: relative;
   margin: $mat-sort-header-arrow-top-margin 0 0 $mat-sort-header-arrow-margin;
-  transform: rotate(90deg);
+  // transform: rotate(90deg);
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid $deep-sky-blue;
+  // transition: $mat-sort-header-arrow-transition;
   .mat-sort-header-position-before & {
     margin: 0 $mat-sort-header-arrow-margin 0 0;
   }

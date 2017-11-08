@@ -6,10 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatCommonModule, MatRippleModule} from '@metaclinic/material/core';
-import {A11yModule} from '@metaclinic/cdk/a11y';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCommonModule, MatRippleModule } from '@metaclinic/material/core';
+import { A11yModule } from '@metaclinic/cdk/a11y';
 import {
   MatAnchor,
   MatButton,
@@ -17,7 +17,8 @@ import {
   MatButtonCssMatStyler,
   MatFab,
   MatIconButtonCssMatStyler,
-  MatRaisedButtonCssMatStyler
+  MatRaisedButtonCssMatStyler,
+  MatOutlineButtonCssMatStyler
 } from './button';
 
 
@@ -37,6 +38,7 @@ import {
     MatButtonCssMatStyler,
     MatRaisedButtonCssMatStyler,
     MatIconButtonCssMatStyler,
+    MatOutlineButtonCssMatStyler
   ],
   declarations: [
     MatButton,
@@ -46,6 +48,7 @@ import {
     MatButtonCssMatStyler,
     MatRaisedButtonCssMatStyler,
     MatIconButtonCssMatStyler,
+    MatOutlineButtonCssMatStyler
   ],
 })
-export class MatButtonModule {}
+export class MatButtonModule { }

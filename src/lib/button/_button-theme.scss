@@ -1,6 +1,5 @@
 @import '../core/theming/theming';
 @import '../core/typography/typography-utils';
-
 // Applies a focus style to an mat-button element for each of the supported palettes.
 @mixin _mat-button-focus-color($theme) {
   $primary: map-get($theme, primary);
@@ -74,6 +73,15 @@
     @include _mat-button-focus-color($theme);
     @include _mat-button-theme-color($theme, 'color');
   }
+  .mat-outline-button {
+    background: transparent;
+    border-width: 1px !important;
+    border-style: solid !important;
+    color: mat-color($background, raised-button);
+    @include _mat-button-focus-color($theme);
+    @include _mat-button-theme-color($theme, 'color');
+    @include _mat-button-theme-color($theme, 'border-color'); // Add ripple effect with contrast color to buttons that don't have a focus overlay.
+  }
   .mat-raised-button,
   .mat-fab,
   .mat-mini-fab {
@@ -96,6 +104,7 @@
 @mixin mat-button-typography($config) {
   .mat-button,
   .mat-raised-button,
+  .mat-outline-button,
   .mat-icon-button,
   .mat-fab,
   .mat-mini-fab {

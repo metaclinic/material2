@@ -58,9 +58,8 @@ const SORT_ANIMATION_TRANSITION =
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('indicator', [
-      state('asc', style({ transform: 'translateY(0px)' })),
-      // 10px is the height of the sort indicator, minus the width of the pointers
-      state('desc', style({ transform: 'translateY(10px)' })),
+      state('asc', style({ transform: 'rotate(0deg)' })),
+      state('desc', style({ transform: 'rotate(180deg)' })),
       transition('asc <=> desc', animate(SORT_ANIMATION_TRANSITION))
     ]),
     trigger('leftPointer', [
