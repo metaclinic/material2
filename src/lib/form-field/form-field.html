@@ -9,21 +9,22 @@
     </label>
   </span>
 
-  <div class="mat-input-flex mat-form-field-flex" #connectionContainer (click)="_control.onContainerClick && _control.onContainerClick($event)" [class.mat-dark]="color == 'dark'">
+  <div class="mat-input-flex mat-form-field-flex" #connectionContainer (click)="_control.onContainerClick && _control.onContainerClick($event)"
+    [class.mat-dark]="color == 'dark'" [class.mat-alt-input-style]="inputStyle == 'alt'">
     <div class="mat-input-prefix mat-form-field-prefix" *ngIf="_prefixChildren.length">
       <ng-content select="[matPrefix]"></ng-content>
     </div>
 
-    <div class="mat-input-infix mat-form-field-infix" [class.mat-large]="mod == 'large'">
+    <div class="mat-input-infix mat-form-field-infix" [class.mat-large]="mod == 'large'" [class.mat-alt-input-style]="inputStyle == 'alt'">
       <ng-content></ng-content>
 
-      <span class="mat-input-placeholder-wrapper mat-form-field-placeholder-wrapper" [class.mat-large]="mod == 'large'">
+      <span class="mat-input-placeholder-wrapper mat-form-field-placeholder-wrapper" [class.mat-large]="mod == 'large'" [class.mat-alt-input-style]="inputStyle == 'alt'">
         <!-- We add aria-owns as a workaround for an issue in JAWS & NVDA where the label isn't
              read if it comes before the control in the DOM. -->
         <label class="mat-input-placeholder mat-form-field-placeholder" [attr.for]="_control.id" [attr.aria-owns]="_control.id" [class.mat-empty]="_control.empty && !_shouldAlwaysFloat"
           [class.mat-form-field-empty]="_control.empty && !_shouldAlwaysFloat" [class.mat-float]="_canPlaceholderFloat" [class.mat-form-field-float]="_canPlaceholderFloat"
-          [class.mat-accent]="color == 'accent'" [class.mat-warn]="color == 'warn'" [class.mat-dark]="color == 'dark'" [class.mat-large]="mod == 'large'"
-          #placeholder *ngIf="_hasPlaceholder()">
+          [class.mat-accent]="color == 'accent'" [class.mat-warn]="color == 'warn'" [class.mat-dark]="color == 'dark'" [class.mat-alt-input-style]="inputStyle == 'alt'"
+          [class.mat-large]="mod == 'large'" #placeholder *ngIf="_hasPlaceholder()">
           <ng-content select="mat-placeholder"></ng-content>
           {{_control.placeholder}}
           <span class="mat-placeholder-required mat-form-field-required-marker" aria-hidden="true" *ngIf="!hideRequiredMarker && _control.required">*</span>
@@ -32,12 +33,13 @@
 
     </div>
 
-    <div class="mat-input-suffix mat-form-field-suffix" *ngIf="_suffixChildren.length">
+    <div class="mat-input-suffix mat-form-field-suffix" *ngIf="_suffixChildren.length" [class.mat-large-suffix]="suffix == 'large'"
+      [class.mat-dark]="color == 'dark'" [class.mat-alt-input-style]="inputStyle == 'alt'">
       <ng-content select="[matSuffix]"></ng-content>
     </div>
   </div>
 
-  <div class="mat-input-underline mat-form-field-underline" #underline>
+  <div class="mat-input-underline mat-form-field-underline" #underline [class.mat-alt-input-style]="inputStyle == 'alt'">
     <span class="mat-input-ripple mat-form-field-ripple" [class.mat-accent]="color == 'accent'" [class.mat-warn]="color == 'warn'"></span>
   </div>
 

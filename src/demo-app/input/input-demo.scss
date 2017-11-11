@@ -1,9 +1,11 @@
 .demo-basic {
   padding: 0;
 }
+
 .demo-basic .mat-card-content {
   padding: 16px;
 }
+
 .demo-full-width {
   width: 100%;
 }
@@ -22,4 +24,14 @@
   overflow: auto;
   padding: 0;
   background: lightblue;
+}
+
+.order-number-search-bar {
+  padding-left: 35px;
+  width: 230px;
+  height: 59px;
+  background-color: #232e37;
+  mat-form-field {
+    width: 167px;
+  }
 }

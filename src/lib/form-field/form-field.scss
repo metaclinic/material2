@@ -206,8 +206,7 @@ $mat-form-field-label-font-size: 13px !default;
     transform-origin: 50%;
     transform: scaleX(0.5);
     visibility: hidden;
-    transition: background-color $swift-ease-in-duration $swift-ease-in-timing-function;
-    // .mat-focused & {
+    transition: background-color $swift-ease-in-duration $swift-ease-in-timing-function; // .mat-focused & {
     //   height: $mat-form-field-underline-height * 2;
     // }
     .mat-focused &,

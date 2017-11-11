@@ -105,9 +105,12 @@
       <table style="width: 100%" cellspacing="0">
         <tr>
           <td>
-            <mat-form-field class="demo-full-width" color="dark">
-              <input matInput placeholder="Last, First" label="What is the patient's name?" color="dark">
-            </mat-form-field>
+            <div class="order-number-search-bar">
+              <mat-form-field suffix="large" color="dark" inputStyle='alt'>
+                <input matInput placeholder="SEARCH" color="dark">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
           </td>
           <td>
             <mat-form-field class="demo-full-width" color="dark">
@@ -240,10 +243,10 @@
     </mat-form-field>
 
     <h4>Icons</h4>
-    <mat-form-field>
+    <mat-form-field suffix="large">
       <input matInput placeholder="amount">
       <mat-icon matPrefix>attach_money</mat-icon>
-      <mat-icon matSuffix>mode_edit</mat-icon>
+      <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
     <h4>Icon buttons</h4>

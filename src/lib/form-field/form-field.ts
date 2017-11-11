@@ -106,6 +106,10 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
 
   @Input() mod: 'normal' | 'large' = 'normal';
 
+  @Input() suffix: 'normal' | 'large' = 'normal';
+
+  @Input() inputStyle: 'normal' | 'alt' = 'normal';
+
   /** @deprecated Use `color` instead. */
   @Input()
   get dividerColor(): 'primary' | 'accent' | 'warn' { return this.color; }

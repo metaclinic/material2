@@ -26,7 +26,6 @@
       text-align: center;
     }
   }
-
   .mat-form-field-placeholder {
     color: $placeholder-color;
     &.mat-large {
@@ -36,8 +35,11 @@
     &.mat-dark {
       color: #ffffff;
     }
+    &.mat-alt-input-style {
+      color: #4c6377;
+      top: 1.8em;
+    }
   }
-
   .mat-form-field-label {
     color: $label-color;
     &.mat-large {
@@ -50,7 +52,14 @@
       color: #4b6377;
     }
   }
-
+  .mat-form-field-suffix {
+    &.mat-dark {
+      color: #4b6377;
+    }
+    &.mat-alt-input-style {
+      color: #4c6377;
+    }
+  }
   .mat-hint {
     color: mat-color($foreground, secondary-text);
   }
@@ -75,14 +84,15 @@
       color: $underline-color-warn;
     }
   }
-
   .mat-focused .mat-form-field-required-marker {
     color: $required-placeholder-color;
   }
   .mat-form-field-underline {
     background-color: $underline-color;
+    &.mat-alt-input-style {
+      background-color: unset;
+    }
   }
-
   .mat-form-field-disabled .mat-form-field-underline {
     @include mat-control-disabled-underline($underline-color);
   }
@@ -152,13 +162,11 @@
   // absolutely positioned. This is a combination of the subscript's margin and line-height, but we
   // need to multiply by the subscript font scale factor since the wrapper has a larger font size.
   $wrapper-padding-bottom: ($subscript-margin-top + $line-height) * $subscript-font-scale;
-
   .mat-form-field {
     font-family: mat-font-family($config);
     font-size: inherit;
     font-weight: mat-font-weight($config, input); // line-height: mat-line-height($config, input);
   }
-
   .mat-form-field-wrapper {
     padding-bottom: $wrapper-padding-bottom;
   }
@@ -172,6 +180,18 @@
       line-height: mat-line-height($config, input);
       width: 1em;
     } // Allow icon buttons in a prefix or suffix to adapt to the correct size.
+    &.mat-large-suffix {
+      .mat-icon {
+        font-size: 19px;
+        line-height: 1.175;
+        width: 1em;
+        height: 1em;
+        margin-top: 1em;
+        vertical-align: sub; // font-size: 16px;
+        // line-height: mat-line-height($config, input);
+        // width: 1em;
+      }
+    }
     .mat-icon-button {
       font-size: $prefix-suffix-icon-font-size;
       line-height: $prefix-suffix-icon-font-size;
@@ -207,17 +227,12 @@
       }
     }
   }
-
   .mat-form-field-can-float {
     &.mat-form-field-should-float .mat-form-field-placeholder {
-      @include _mat-form-field-placeholder-floating(
-          $subscript-font-scale, $infix-padding, $infix-margin-top);
+      @include _mat-form-field-placeholder-floating( $subscript-font-scale, $infix-padding, $infix-margin-top);
     }
-
-    .mat-form-field-autofill-control:-webkit-autofill + .mat-form-field-placeholder-wrapper
-        .mat-form-field-placeholder {
-      @include _mat-form-field-placeholder-floating(
-              $subscript-font-scale, $infix-padding, $infix-margin-top);
+    .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-placeholder-wrapper .mat-form-field-placeholder {
+      @include _mat-form-field-placeholder-floating( $subscript-font-scale, $infix-padding, $infix-margin-top);
     }
   }
   .mat-form-field-placeholder-wrapper {
@@ -227,6 +242,12 @@
       top: -3.7em;
       padding-top: 6em;
       line-height: 42px;
+    }
+    &.mat-alt-input-style {
+      font-family: Montserrat;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
     }
   }
   .mat-form-field-placeholder {
