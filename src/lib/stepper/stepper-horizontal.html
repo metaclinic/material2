@@ -1,7 +1,6 @@
 <div class="mat-horizontal-stepper-header-container">
   <ng-container *ngFor="let step of _steps; let i = index; let isLast = last; let isFirst = first;">
-    
-    <md-step-header  class="mat-horizontal-stepper-header"
+    <mat-step-header  class="mat-horizontal-stepper-header"
                      (click)="step.select()"
                      (keydown)="_onKeydown($event)"
                      [tabIndex]="_focusIndex === i ? 0 : -1"
@@ -16,7 +15,7 @@
                      [optional]="step.optional"
                      [isFirst]="isFirst"
                      [isLast]="isLast">
-    </md-step-header>
+    </mat-step-header>
     <!-- <div *ngIf="!isLast" class="mat-stepper-horizontal-line"></div> -->
   </ng-container>
 </div>

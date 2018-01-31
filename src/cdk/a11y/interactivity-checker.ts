@@ -1,19 +1,18 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Injectable} from '@angular/core';
-import {Platform} from '@metaclinic/cdk/platform';
+import { Injectable } from '@angular/core';
+import { Platform } from '@metaclinic/cdk/platform';
 
-/**
- * The InteractivityChecker leans heavily on the ally.js accessibility utilities.
- * Methods like `isTabbable` are only covering specific edge-cases for the browsers which are
- * supported.
- */
+
+// The InteractivityChecker leans heavily on the ally.js accessibility utilities.
+// Methods like `isTabbable` are only covering specific edge-cases for the browsers which are
+// supported.
 
 /**
  * Utility for checking the interactivity of an element, such as whether is is focusable or
@@ -22,7 +21,7 @@ import {Platform} from '@metaclinic/cdk/platform';
 @Injectable()
 export class InteractivityChecker {
 
-  constructor(private _platform: Platform) {}
+  constructor(private _platform: Platform) { }
 
   /**
    * Gets whether an element is disabled.
@@ -148,16 +147,17 @@ export class InteractivityChecker {
 function hasGeometry(element: HTMLElement): boolean {
   // Use logic from jQuery to check for an invisible element.
   // See https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js#L12
-  return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+  return !!(element.offsetWidth || element.offsetHeight ||
+    (typeof element.getClientRects === 'function' && element.getClientRects().length));
 }
 
 /** Gets whether an element's  */
 function isNativeFormElement(element: Node) {
   let nodeName = element.nodeName.toLowerCase();
   return nodeName === 'input' ||
-      nodeName === 'select' ||
-      nodeName === 'button' ||
-      nodeName === 'textarea';
+    nodeName === 'select' ||
+    nodeName === 'button' ||
+    nodeName === 'textarea';
 }
 
 /** Gets whether an element is an <input type="hidden">. */
@@ -217,9 +217,9 @@ function isPotentiallyTabbableIOS(element: HTMLElement): boolean {
   let inputType = nodeName === 'input' && (element as HTMLInputElement).type;
 
   return inputType === 'text'
-      || inputType === 'password'
-      || nodeName === 'select'
-      || nodeName === 'textarea';
+    || inputType === 'password'
+    || nodeName === 'select'
+    || nodeName === 'textarea';
 }
 
 /**
@@ -233,9 +233,9 @@ function isPotentiallyFocusable(element: HTMLElement): boolean {
   }
 
   return isNativeFormElement(element) ||
-      isAnchorWithHref(element) ||
-      element.hasAttribute('contenteditable') ||
-      hasValidTabIndex(element);
+    isAnchorWithHref(element) ||
+    element.hasAttribute('contenteditable') ||
+    hasValidTabIndex(element);
 }
 
 /** Gets the parent window of a DOM node with regards of being inside of an iframe. */

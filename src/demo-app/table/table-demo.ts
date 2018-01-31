@@ -1,8 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OrderDatabase, OrderData } from './order-database';
 import { OrderDataSource } from './order-data-source';
-import { MdPaginator, MdSort } from '@metaclinic/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@metaclinic/material';
 import { CASESTATUS } from '../dataset/caseStatus';
+// import {DetailRow, PersonDetailDataSource} from './person-detail-data-source';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormControl } from '@angular/forms';
+import { SelectionModel } from '@metaclinic/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/observable/fromEvent';
+
 export type OrderProperties = 'id' | 'orderNumber' | 'patientName' | 'location' | 'caseStatus' | 'assignedPathologist';
 
 const properties = ['id', 'orderNumber', 'patientId', 'patientFirstName', 'patientLastName',
@@ -14,31 +23,67 @@ const properties = ['id', 'orderNumber', 'patientId', 'patientFirstName', 'patie
   selector: 'table-demo',
   templateUrl: 'table-demo.html',
   styleUrls: ['table-demo.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class TableDemo {
-
   dataSource: OrderDataSource | null;
-
+  // dataSourceWithDetails: PersonDetailDataSource | null;
+  // matTableDataSource = new MatTableDataSource<OrderData>();
   displayedColumns: OrderProperties[] = [];
+  // trackByStrategy: TrackByStrategy = 'reference';
+  changeReferences = false;
+  highlights = new Set<string>();
+  wasExpanded = new Set<OrderData>();
+
+  filter = new FormControl();
 
   selectedRows: any[] = [];
 
   allRowsSelected: boolean = false;
 
-  @ViewChild(MdPaginator) _paginator: MdPaginator;
+  // expandedPerson: UserData;
 
-  @ViewChild(MdSort) sort: MdSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public _orderDatabase: OrderDatabase) { }
+
+  // @ViewChild('paginatorForDataSource') paginatorForDataSource: MatPaginator;
+  // @ViewChild('sortForDataSource') sortForDataSource: MatSort;
+
+  constructor(public _orderDatabase: OrderDatabase) {
+    // this.matTableDataSource.filterPredicate = (data: OrderData, filter: string) => data.patientLastName.indexOf(filter) != -1;
+    // this.filter.valueChanges.subscribe(filter => this.matTableDataSource!.filter = filter);
+  }
+
+  // ngAfterViewInit() {
+  //   // Needs to be set up after the view is initialized since the data source will look at the sort
+  //   // and paginator's initial values to know what data should be rendered.
+  //   this.matTableDataSource!.paginator = this.paginatorForDataSource;
+  //   this.matTableDataSource!.sort = this.sortForDataSource;
+  // }
 
   ngOnInit() {
     this.connect();
+    // Observable.fromEvent(this.filter.nativeElement, 'keyup')
+    //   .debounceTime(150)
+    //   .distinctUntilChanged()
+    //   .subscribe(() => {
+    //     this.paginatorForDataSource.pageIndex = 0;
+    //     this.matTableDataSource.filter = this.filter.nativeElement.value;
+    //   });
   }
 
   connect() {
     this.displayedColumns = ['id', 'orderNumber', 'patientName', 'location', 'caseStatus', 'assignedPathologist'];
-    this.dataSource = new OrderDataSource(this._orderDatabase, this._paginator, this.sort);
+    this.dataSource = new OrderDataSource(this._orderDatabase, this.paginator, this.sort);
     this._orderDatabase.initialize();
+    // this.matTableDataSource!.data = this._orderDatabase.data.slice();
   }
 
   disconnect() {

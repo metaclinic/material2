@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -17,25 +17,26 @@ import {
   ChangeDetectorRef,
   ViewChild,
   ViewEncapsulation,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 import {DOCUMENT} from '@angular/platform-browser';
 import {
-  BasePortalHost,
+  BasePortalOutlet,
   ComponentPortal,
-  PortalHostDirective,
+  CdkPortalOutlet,
   TemplatePortal
 } from '@metaclinic/cdk/portal';
 import {FocusTrap, FocusTrapFactory} from '@metaclinic/cdk/a11y';
-import {MdDialogConfig} from './dialog-config';
+import {MatDialogConfig} from './dialog-config';
 
 
 /**
  * Throws an exception for the case when a ComponentPortal is
- * attached to a DomPortalHost without an origin.
+ * attached to a DomPortalOutlet without an origin.
  * @docs-private
  */
-export function throwMdDialogContentAlreadyAttachedError() {
+export function throwMatDialogContentAlreadyAttachedError() {
   throw Error('Attempting to attach dialog content after content is already attached');
 }
 
@@ -46,10 +47,14 @@ export function throwMdDialogContentAlreadyAttachedError() {
  */
 @Component({
   moduleId: module.id,
-  selector: 'md-dialog-container, mat-dialog-container',
+  selector: 'mat-dialog-container',
   templateUrl: 'dialog-container.html',
   styleUrls: ['dialog.css'],
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
+  // Using OnPush for dialogs caused some G3 sync issues. Disabled until we can track them down.
+  // tslint:disable-next-line:validate-decorators
+  changeDetection: ChangeDetectionStrategy.Default,
   animations: [
     trigger('slideDialog', [
       // Note: The `enter` animation doesn't transition to something like `translate3d(0, 0, 0)
@@ -73,9 +78,9 @@ export function throwMdDialogContentAlreadyAttachedError() {
     '(@slideDialog.done)': '_onAnimationDone($event)',
   },
 })
-export class MdDialogContainer extends BasePortalHost {
-  /** The portal host inside of this container into which the dialog content will be loaded. */
-  @ViewChild(PortalHostDirective) _portalHost: PortalHostDirective;
+export class MatDialogContainer extends BasePortalOutlet {
+  /** The portal outlet inside of this container into which the dialog content will be loaded. */
+  @ViewChild(CdkPortalOutlet) _portalOutlet: CdkPortalOutlet;
 
   /** The class that traps and manages focus within the dialog. */
   private _focusTrap: FocusTrap;
@@ -84,7 +89,7 @@ export class MdDialogContainer extends BasePortalHost {
   private _elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
 
   /** The dialog configuration. */
-  _config: MdDialogConfig;
+  _config: MatDialogConfig;
 
   /** State of the dialog animation. */
   _state: 'void' | 'enter' | 'exit' = 'enter';
@@ -112,12 +117,12 @@ export class MdDialogContainer extends BasePortalHost {
    * @param portal Portal to be attached as the dialog content.
    */
   attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T> {
-    if (this._portalHost.hasAttached()) {
-      throwMdDialogContentAlreadyAttachedError();
+    if (this._portalOutlet.hasAttached()) {
+      throwMatDialogContentAlreadyAttachedError();
     }
 
     this._savePreviouslyFocusedElement();
-    return this._portalHost.attachComponentPortal(portal);
+    return this._portalOutlet.attachComponentPortal(portal);
   }
 
   /**
@@ -125,12 +130,12 @@ export class MdDialogContainer extends BasePortalHost {
    * @param portal Portal to be attached as the dialog content.
    */
   attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C> {
-    if (this._portalHost.hasAttached()) {
-      throwMdDialogContentAlreadyAttachedError();
+    if (this._portalOutlet.hasAttached()) {
+      throwMatDialogContentAlreadyAttachedError();
     }
 
     this._savePreviouslyFocusedElement();
-    return this._portalHost.attachTemplatePortal(portal);
+    return this._portalOutlet.attachTemplatePortal(portal);
   }
 
   /** Moves the focus inside the focus trap. */

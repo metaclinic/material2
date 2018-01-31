@@ -1,39 +1,41 @@
-<md-sidenav-container class="demo-root" fullscreen>
+<mat-sidenav-container class="demo-root" fullscreen>
 
-  <md-sidenav #start opened mode="side">
+  <mat-sidenav #start opened mode="side">
 
-    <md-toolbar color="primary">
-      <span class="centered-content logo-lg"><img src="icon/assets/logo-metaclinic.svg"></span>
-    </md-toolbar>
+    <mat-toolbar color="primary">
+      <span class="centered-content logo-lg">
+        <img src="icon/assets/logo-metaclinic.svg">
+      </span>
+    </mat-toolbar>
 
-    <md-nav-list>
-      <a *ngFor="let navItem of navItems" md-list-item routerLinkActive #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+    <mat-nav-list>
+      <a *ngFor="let navItem of navItems" mat-list-item routerLinkActive #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
         [routerLink]="[navItem.route]">
         {{navItem.name}}
       </a>
-      <!-- <a md-list-item
+      <!-- <a mat-list-item
          tabindex="-1"
          (click)="start.close()"
          [routerLink]="['/baseline']">
         Baseline
       </a> -->
-    </md-nav-list>
+    </mat-nav-list>
 
-    <button md-raised-button color="primary" tabindex="-1" (click)="start.close()">JOIN THE MARKETPLACE</button>
+    <button mat-raised-button color="primary" tabindex="-1" (click)="start.close()">JOIN THE MARKETPLACE</button>
 
-  </md-sidenav>
+  </mat-sidenav>
 
   <div>
 
-    <md-toolbar>
-      <md-icon class="mat-toolbar-icon" (click)="start.open()">menu</md-icon>
+    <mat-toolbar>
+      <mat-icon class="mat-toolbar-icon" (click)="start.open()">menu</mat-icon>
       <span>Metaclinic Material</span>
       <span class="mat-fill-remaining"></span>
-      <md-icon (click)="toggleTheme()">code</md-icon>
-    </md-toolbar>
+      <mat-icon (click)="toggleTheme()">code</mat-icon>
+    </mat-toolbar>
 
     <div #root="dir" dir="ltr" class="demo-content">
       <router-outlet></router-outlet>
     </div>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>

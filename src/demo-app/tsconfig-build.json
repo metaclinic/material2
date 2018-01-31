@@ -2,12 +2,15 @@
 // since the demo-app will be served in the browser.
 {
   "compilerOptions": {
+    // Needed for Moment.js since it doesn't have a default export.
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "lib": ["es6", "es2015", "dom"],
+    "skipLibCheck": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -21,8 +24,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@metaclinic/material": ["../../dist/packages/material/public_api"],
+      "@metaclinic/material": ["../../dist/packages/material/public-api"],
       "@metaclinic/cdk/*": ["../../dist/packages/cdk/*"],
+      "@metaclinic/material/*": ["../../dist/packages/material/*"],
       "@metaclinic/material-moment-adapter": ["../../dist/packages/material-moment-adapter"]
     }
   },

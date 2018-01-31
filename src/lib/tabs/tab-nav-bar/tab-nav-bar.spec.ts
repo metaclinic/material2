@@ -4,16 +4,16 @@ import {By} from '@angular/platform-browser';
 import {dispatchFakeEvent, dispatchMouseEvent} from '@metaclinic/cdk/testing';
 import {Direction, Directionality} from '@metaclinic/cdk/bidi';
 import {Subject} from 'rxjs/Subject';
-import {MdTabNav, MdTabsModule, MdTabLink} from '../index';
+import {MatTabNav, MatTabsModule, MatTabLink} from '../index';
 
 
-describe('MdTabNavBar', () => {
+describe('MatTabNavBar', () => {
   let dir: Direction = 'ltr';
   let dirChange = new Subject();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MdTabsModule],
+      imports: [MatTabsModule],
       declarations: [
         SimpleTabNavBarTestApp,
         TabLinkWithNgIf,
@@ -22,7 +22,7 @@ describe('MdTabNavBar', () => {
         {provide: Directionality, useFactory: () => ({
           value: dir,
           change: dirChange.asObservable()
-        })}
+        })},
       ]
     });
 
@@ -47,6 +47,24 @@ describe('MdTabNavBar', () => {
       tabLink = fixture.debugElement.queryAll(By.css('a'))[2];
       tabLink.nativeElement.click();
       expect(fixture.componentInstance.activeIndex).toBe(2);
+    });
+
+    it('should add the active class if active', () => {
+      let tabLink1 = fixture.debugElement.queryAll(By.css('a'))[0];
+      let tabLink2 = fixture.debugElement.queryAll(By.css('a'))[1];
+      const tabLinkElements = fixture.debugElement.queryAll(By.css('a'))
+        .map(tabLinkDebugEl => tabLinkDebugEl.nativeElement);
+
+      tabLink1.nativeElement.click();
+      fixture.detectChanges();
+      expect(tabLinkElements[0].classList.contains('mat-tab-label-active')).toBeTruthy();
+      expect(tabLinkElements[1].classList.contains('mat-tab-label-active')).toBeFalsy();
+
+      tabLink2.nativeElement.click();
+      fixture.detectChanges();
+      expect(tabLinkElements[0].classList.contains('mat-tab-label-active')).toBeFalsy();
+      expect(tabLinkElements[1].classList.contains('mat-tab-label-active')).toBeTruthy();
+
     });
 
     it('should add the disabled class if disabled', () => {
@@ -78,8 +96,8 @@ describe('MdTabNavBar', () => {
     });
 
     it('should update the disableRipple property on each tab link', () => {
-      const tabLinkElements = fixture.debugElement.queryAll(By.directive(MdTabLink))
-        .map(tabLinkDebug => tabLinkDebug.componentInstance) as MdTabLink[];
+      const tabLinkElements = fixture.debugElement.queryAll(By.directive(MatTabLink))
+        .map(tabLinkDebug => tabLinkDebug.componentInstance) as MatTabLink[];
 
       expect(tabLinkElements.every(tabLink => !tabLink.disableRipple))
         .toBe(true, 'Expected every tab link to have ripples enabled');
@@ -101,7 +119,9 @@ describe('MdTabNavBar', () => {
       fixture.componentInstance.disabled = true;
       fixture.detectChanges();
 
-      expect(tabLinkElements.every(tabLink => tabLink.tabIndex === -1))
+      expect(tabLinkElements.every(tabLink => {
+        return tabLink.getAttribute('tabIndex') === null;
+      }))
         .toBe(true, 'Expected element to no longer be keyboard focusable if disabled.');
     });
 
@@ -118,7 +138,7 @@ describe('MdTabNavBar', () => {
     it('should be able to disable ripples on a tab link', () => {
       const tabLinkDebug = fixture.debugElement.query(By.css('a'));
       const tabLinkElement = tabLinkDebug.nativeElement;
-      const tabLinkInstance = tabLinkDebug.injector.get(MdTabLink);
+      const tabLinkInstance = tabLinkDebug.injector.get(MatTabLink);
 
       tabLinkInstance.disableRipple = true;
 
@@ -197,8 +217,8 @@ describe('MdTabNavBar', () => {
 @Component({
   selector: 'test-app',
   template: `
-    <nav md-tab-nav-bar [disableRipple]="disableRipple">
-      <a md-tab-link
+    <nav mat-tab-nav-bar [disableRipple]="disableRipple">
+      <a mat-tab-link
          *ngFor="let tab of tabs; let index = index"
          [active]="activeIndex === index"
          [disabled]="disabled"
@@ -209,7 +229,7 @@ describe('MdTabNavBar', () => {
   `
 })
 class SimpleTabNavBarTestApp {
-  @ViewChild(MdTabNav) tabNavBar: MdTabNav;
+  @ViewChild(MatTabNav) tabNavBar: MatTabNav;
 
   label = '';
   disabled: boolean = false;
@@ -221,8 +241,8 @@ class SimpleTabNavBarTestApp {
 
 @Component({
   template: `
-    <nav md-tab-nav-bar>
-      <a md-tab-link *ngIf="!isDestroyed">Link</a>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngIf="!isDestroyed">Link</a>
     </nav>
   `
 })

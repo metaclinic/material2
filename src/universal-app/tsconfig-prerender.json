@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "@metaclinic/material": ["./material"],
-      "@metaclinic/cdk/*": ["./cdk/*"]
+      "@metaclinic/cdk/*": ["./cdk/*"],
+      "@metaclinic/material/*": ["./material/*"]
     }
   },
   "files": [

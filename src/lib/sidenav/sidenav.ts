@@ -1,25 +1,49 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
 import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChildren,
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component, ContentChild,
+  ContentChildren, forwardRef, Inject, Input,
   ViewEncapsulation
 } from '@angular/core';
-import {MdDrawer, MdDrawerContainer} from './drawer';
+import {MatDrawer, MatDrawerContainer, MatDrawerContent} from './drawer';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {coerceBooleanProperty, coerceNumberProperty} from '@metaclinic/cdk/coercion';
 
 
 @Component({
   moduleId: module.id,
-  selector: 'md-sidenav, mat-sidenav',
-  templateUrl: 'drawer.html',
+  selector: 'mat-sidenav-content',
+  template: '<ng-content></ng-content>',
+  host: {
+    'class': 'mat-drawer-content mat-sidenav-content',
+    '[style.marginLeft.px]': '_margins.left',
+    '[style.marginRight.px]': '_margins.right',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
+})
+export class MatSidenavContent extends MatDrawerContent {
+  constructor(
+      changeDetectorRef: ChangeDetectorRef,
+      @Inject(forwardRef(() => MatSidenavContainer)) container: MatSidenavContainer) {
+    super(changeDetectorRef, container);
+  }
+}
+
+
+@Component({
+  moduleId: module.id,
+  selector: 'mat-sidenav',
+  exportAs: 'matSidenav',
+  template: '<ng-content></ng-content>',
   animations: [
     trigger('transform', [
       state('open, open-instant', style({
@@ -36,8 +60,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
   host: {
     'class': 'mat-drawer mat-sidenav',
+    'tabIndex': '-1',
     '[@transform]': '_animationState',
-    '(@transform.start)': '_onAnimationStart()',
+    '(@transform.start)': '_onAnimationStart($event)',
     '(@transform.done)': '_onAnimationEnd($event)',
     '(keydown)': 'handleKeydown($event)',
     // must prevent the browser from aligning text based on value
@@ -46,28 +71,56 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     '[class.mat-drawer-over]': 'mode === "over"',
     '[class.mat-drawer-push]': 'mode === "push"',
     '[class.mat-drawer-side]': 'mode === "side"',
-    'tabIndex': '-1',
+    '[class.mat-sidenav-fixed]': 'fixedInViewport',
+    '[style.top.px]': 'fixedInViewport ? fixedTopGap : null',
+    '[style.bottom.px]': 'fixedInViewport ? fixedBottomGap : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
-export class MdSidenav extends MdDrawer {}
+export class MatSidenav extends MatDrawer {
+  /** Whether the sidenav is fixed in the viewport. */
+  @Input()
+  get fixedInViewport(): boolean { return this._fixedInViewport; }
+  set fixedInViewport(value) { this._fixedInViewport = coerceBooleanProperty(value); }
+  private _fixedInViewport = false;
+
+  /**
+   * The gap between the top of the sidenav and the top of the viewport when the sidenav is in fixed
+   * mode.
+   */
+  @Input()
+  get fixedTopGap(): number { return this._fixedTopGap; }
+  set fixedTopGap(value) { this._fixedTopGap = coerceNumberProperty(value); }
+  private _fixedTopGap = 0;
+
+  /**
+   * The gap between the bottom of the sidenav and the bottom of the viewport when the sidenav is in
+   * fixed mode.
+   */
+  @Input()
+  get fixedBottomGap(): number { return this._fixedBottomGap; }
+  set fixedBottomGap(value) { this._fixedBottomGap = coerceNumberProperty(value); }
+  private _fixedBottomGap = 0;
+}
 
 
 @Component({
   moduleId: module.id,
-  selector: 'md-sidenav-container, mat-sidenav-container',
-  templateUrl: 'drawer-container.html',
-  styleUrls: [
-    'drawer.css',
-    'drawer-transitions.css',
-  ],
+  selector: 'mat-sidenav-container',
+  exportAs: 'matSidenavContainer',
+  templateUrl: 'sidenav-container.html',
+  styleUrls: ['drawer.css'],
   host: {
     'class': 'mat-drawer-container mat-sidenav-container',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
-export class MdSidenavContainer extends MdDrawerContainer {
-  @ContentChildren(MdSidenav) _drawers;
+export class MatSidenavContainer extends MatDrawerContainer {
+  @ContentChildren(MatSidenav) _drawers;
+
+  @ContentChild(MatSidenavContent) _content;
 }

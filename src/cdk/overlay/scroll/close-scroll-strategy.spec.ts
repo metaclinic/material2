@@ -5,7 +5,7 @@ import {ComponentPortal, PortalModule} from '@metaclinic/cdk/portal';
 import {ScrollDispatcher} from '@metaclinic/cdk/scrolling';
 import {
   Overlay,
-  OverlayState,
+  OverlayConfig,
   OverlayRef,
   OverlayModule,
   OverlayContainer,
@@ -21,11 +21,9 @@ describe('CloseScrollStrategy', () => {
     TestBed.configureTestingModule({
       imports: [OverlayModule, PortalModule, OverlayTestModule],
       providers: [
-        {provide: ScrollDispatcher, useFactory: () => {
-          return {scrolled: (_delay: number, callback: () => any) => {
-            return scrolledSubject.asObservable().subscribe(callback);
-          }};
-        }}
+        {provide: ScrollDispatcher, useFactory: () => ({
+          scrolled: () => scrolledSubject.asObservable()
+        })}
       ]
     });
 
@@ -33,8 +31,8 @@ describe('CloseScrollStrategy', () => {
   }));
 
   beforeEach(inject([Overlay], (overlay: Overlay) => {
-    let overlayState = new OverlayState({scrollStrategy: overlay.scrollStrategies.close()});
-    overlayRef = overlay.create(overlayState);
+    let overlayConfig = new OverlayConfig({scrollStrategy: overlay.scrollStrategies.close()});
+    overlayRef = overlay.create(overlayConfig);
     componentPortal = new ComponentPortal(MozarellaMsg);
   }));
 

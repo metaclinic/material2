@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'md-table-header',
+  selector: 'mat-table-header',
   templateUrl: 'table-header-demo.html',
   styleUrls: ['table-header-demo.css'],
 })

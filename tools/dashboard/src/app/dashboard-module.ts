@@ -1,23 +1,23 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
-import {NgModule} from '@angular/core';
-import {DashboardApp} from './dashboard-app';
-import {environment} from '../environments/environment';
-import {MdCardModule, MdProgressSpinnerModule, MdToolbarModule} from '@metaclinic/material';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {PayloadChart} from './payload-chart/payload-chart';
-import {CoverageChart} from './coverage-chart/coverage-chart';
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { NgModule } from '@angular/core';
+import { DashboardApp } from './dashboard-app';
+import { environment } from '../environments/environment';
+import { MatCardModule, MatProgressSpinnerModule, MatToolbarModule } from '@metaclinic/material';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PayloadChart } from './payload-chart/payload-chart';
+import { CoverageChart } from './coverage-chart/coverage-chart';
 
 @NgModule({
   exports: [
-    MdCardModule,
-    MdToolbarModule,
-    MdProgressSpinnerModule
+    MatCardModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ]
 })
-export class DashboardMaterialModule {}
+export class DashboardMaterialModule { }
 
 @NgModule({
   declarations: [
@@ -36,4 +36,4 @@ export class DashboardMaterialModule {}
   providers: [],
   bootstrap: [DashboardApp]
 })
-export class DashboardModule {}
+export class DashboardModule { }

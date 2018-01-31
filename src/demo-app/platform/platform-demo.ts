@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, getSupportedInputTypes} from '@metaclinic/material';
+import {Platform, getSupportedInputTypes} from '@metaclinic/cdk/platform';
 
 
 @Component({

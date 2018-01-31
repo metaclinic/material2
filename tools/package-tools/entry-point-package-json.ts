@@ -8,8 +8,8 @@ export function createEntryPointPackageJson(destDir: string, packageName: string
     name: `@metaclinic/${packageName}/${entryPointName}`,
     typings: `../${entryPointName}.d.ts`,
     main: `../bundles/${packageName}-${entryPointName}.umd.js`,
-    module: `../@metaclinic/${packageName}/${entryPointName}.es5.js`,
-    es2015: `../@metaclinic/${packageName}/${entryPointName}.js`,
+    module: `../esm5/${entryPointName}.es5.js`,
+    es2015: `../esm2015/${entryPointName}.js`,
   };
 
   writeFileSync(join(destDir, 'package.json'), JSON.stringify(content, null, 2), 'utf-8');

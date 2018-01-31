@@ -1,19 +1,31 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Component, Input, ViewEncapsulation} from '@angular/core';
-import {coerceBooleanProperty, coerceNumberProperty} from '@metaclinic/cdk/coercion';
-import {MdStepLabel} from './step-label';
-import {MATERIAL_COMPATIBILITY_MODE} from '../core/compatibility/compatibility';
+import { FocusMonitor } from '@metaclinic/cdk/a11y';
+import { coerceBooleanProperty, coerceNumberProperty } from '@metaclinic/cdk/coercion';
+import {
+  Component,
+  Input,
+  ViewEncapsulation,
+  ChangeDetectorRef,
+  OnDestroy,
+  ElementRef,
+  Renderer2,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { MatStepLabel } from './step-label';
+import { MatStepperIntl } from './stepper-intl';
+import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   moduleId: module.id,
-  selector: 'md-step-header, mat-step-header',
+  selector: 'mat-step-header',
   templateUrl: 'step-header.html',
   styleUrls: ['step-header.css'],
   host: {
@@ -21,9 +33,12 @@ import {MATERIAL_COMPATIBILITY_MODE} from '../core/compatibility/compatibility';
     'role': 'tab',
   },
   encapsulation: ViewEncapsulation.None,
-  providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: false}],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdStepHeader {
+export class MatStepHeader implements OnDestroy {
+  private _intlSubscription: Subscription;
+
   /** Icon for the given step. */
   @Input() icon: string;
 
@@ -31,7 +46,7 @@ export class MdStepHeader {
   @Input() isLast: boolean;
 
   /** Label of the given step. */
-  @Input() label: MdStepLabel | string;
+  @Input() label: MatStepLabel | string;
 
   /** Index of the given step. */
   @Input()
@@ -65,13 +80,33 @@ export class MdStepHeader {
   }
   private _optional: boolean;
 
-  /** Returns string label of given step if it is a text label. */
-  _stringLabel(): string | null {
-    return this.label instanceof MdStepLabel ? null : this.label;
+  constructor(
+    public _intl: MatStepperIntl,
+    private _focusMonitor: FocusMonitor,
+    private _element: ElementRef,
+    renderer: Renderer2,
+    changeDetectorRef: ChangeDetectorRef) {
+    _focusMonitor.monitor(_element.nativeElement, renderer, true);
+    this._intlSubscription = _intl.changes.subscribe(() => changeDetectorRef.markForCheck());
   }
 
-  /** Returns MdStepLabel if the label of given step is a template label. */
-  _templateLabel(): MdStepLabel | null {
-    return this.label instanceof MdStepLabel ? this.label : null;
+  ngOnDestroy() {
+    this._intlSubscription.unsubscribe();
+    this._focusMonitor.stopMonitoring(this._element.nativeElement);
+  }
+
+  /** Returns string label of given step if it is a text label. */
+  _stringLabel(): string | null {
+    return this.label instanceof MatStepLabel ? null : this.label;
+  }
+
+  /** Returns MatStepLabel if the label of given step is a template label. */
+  _templateLabel(): MatStepLabel | null {
+    return this.label instanceof MatStepLabel ? this.label : null;
+  }
+
+  /** Returns the host HTML element. */
+  _getHostElement() {
+    return this._element.nativeElement;
   }
 }

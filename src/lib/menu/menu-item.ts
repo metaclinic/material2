@@ -1,34 +1,35 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
+import {FocusableOption} from '@metaclinic/cdk/a11y';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
-  ChangeDetectionStrategy,
   ViewEncapsulation,
 } from '@angular/core';
-import {FocusableOption} from '../core/a11y/focus-key-manager';
-import {CanDisable, mixinDisabled} from '../core/common-behaviors/disabled';
+import {CanDisable, mixinDisabled} from '@metaclinic/material/core';
 import {Subject} from 'rxjs/Subject';
 
-// Boilerplate for applying mixins to MdMenuItem.
+// Boilerplate for applying mixins to MatMenuItem.
 /** @docs-private */
-export class MdMenuItemBase {}
-export const _MdMenuItemMixinBase = mixinDisabled(MdMenuItemBase);
+export class MatMenuItemBase {}
+export const _MatMenuItemMixinBase = mixinDisabled(MatMenuItemBase);
 
 /**
- * This directive is intended to be used inside an md-menu tag.
+ * This directive is intended to be used inside an mat-menu tag.
  * It exists mostly to set the role attribute.
  */
 @Component({
   moduleId: module.id,
-  selector: '[md-menu-item], [mat-menu-item]',
+  selector: '[mat-menu-item]',
+  exportAs: 'matMenuItem',
   inputs: ['disabled'],
   host: {
     'role': 'menuitem',
@@ -43,14 +44,14 @@ export const _MdMenuItemMixinBase = mixinDisabled(MdMenuItemBase);
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
   templateUrl: 'menu-item.html',
-  exportAs: 'mdMenuItem',
 })
-export class MdMenuItem extends _MdMenuItemMixinBase implements FocusableOption, CanDisable,
+export class MatMenuItem extends _MatMenuItemMixinBase implements FocusableOption, CanDisable,
   OnDestroy {
 
   /** Stream that emits when the menu item is hovered. */
-  hover: Subject<MdMenuItem> = new Subject();
+  _hovered: Subject<MatMenuItem> = new Subject();
 
   /** Whether the menu item is highlighted. */
   _highlighted: boolean = false;
@@ -68,7 +69,7 @@ export class MdMenuItem extends _MdMenuItemMixinBase implements FocusableOption,
   }
 
   ngOnDestroy() {
-    this.hover.complete();
+    this._hovered.complete();
   }
 
   /** Used to set the `tabindex`. */
@@ -92,8 +93,29 @@ export class MdMenuItem extends _MdMenuItemMixinBase implements FocusableOption,
   /** Emits to the hover stream. */
   _emitHoverEvent() {
     if (!this.disabled) {
-      this.hover.next(this);
+      this._hovered.next(this);
     }
+  }
+
+  /** Gets the label to be used when determining whether the option should be focused. */
+  getLabel(): string {
+    const element: HTMLElement = this._elementRef.nativeElement;
+    let output = '';
+
+    if (element.childNodes) {
+      const length = element.childNodes.length;
+
+      // Go through all the top-level text nodes and extract their text.
+      // We skip anything that's not a text node to prevent the text from
+      // being thrown off by something like an icon.
+      for (let i = 0; i < length; i++) {
+        if (element.childNodes[i].nodeType === Node.TEXT_NODE) {
+          output += element.childNodes[i].textContent;
+        }
+      }
+    }
+
+    return output.trim();
   }
 
 }

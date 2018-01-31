@@ -3,13 +3,13 @@
   "version": "0.0.0-PLACEHOLDER",
   "description": "Angular Material Moment Adapter",
   "main": "./bundles/material-moment-adapter.umd.js",
-  "module": "./@metaclinic/material-moment-adapter.es5.js",
-  "es2015": "./@metaclinic/material-moment-adapter.js",
+  "module": "./esm5/material-moment-adapter.es5.js",
+  "es2015": "./esm2015/material-moment-adapter.js",
   "typings": "./material-moment-adapter.d.ts",
   "license": "MIT",
   "peerDependencies": {
     "@metaclinic/material": "0.0.0-PLACEHOLDER",
-    "@angular/core": "^4.3.5",
+    "@angular/core": "0.0.0-NG",
     "moment": "^2.18.1"
   },
   "dependencies": {

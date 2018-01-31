@@ -7,9 +7,6 @@
   $is-dark-theme: map-get($theme, is-dark);
   .mat-input-element {
     color: mat-color($foreground, text);
-    &.mat-dark {
-      color: #ffffff;
-    }
   }
   .mat-input-element:disabled {
     color: mat-color($foreground, secondary-text, if($is-dark-theme, 0.7, 0.42));

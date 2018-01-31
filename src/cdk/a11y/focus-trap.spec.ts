@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+import {Platform} from '@metaclinic/cdk/platform';
 import {Component, ViewChild} from '@angular/core';
-import {FocusTrapFactory, FocusTrapDirective, FocusTrap} from './focus-trap';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FocusTrap, FocusTrapDirective, FocusTrapFactory} from './focus-trap';
 import {InteractivityChecker} from './interactivity-checker';
-import {Platform} from '../platform/platform';
 
 
 describe('FocusTrap', () => {
@@ -103,7 +103,7 @@ describe('FocusTrap', () => {
 
       expect(anchors.every(current => current.getAttribute('tabindex') === '0')).toBe(true);
 
-      fixture.componentInstance.isFocusTrapEnabled = false;
+      fixture.componentInstance._isFocusTrapEnabled = false;
       fixture.detectChanges();
 
       expect(anchors.every(current => current.getAttribute('tabindex') === '-1')).toBe(true);
@@ -172,7 +172,7 @@ class SimpleFocusTrap {
 
 @Component({
   template: `
-    <div *ngIf="renderFocusTrap" [cdkTrapFocus]="isFocusTrapEnabled">
+    <div *ngIf="renderFocusTrap" [cdkTrapFocus]="_isFocusTrapEnabled">
       <input>
       <button>SAVE</button>
     </div>
@@ -181,7 +181,7 @@ class SimpleFocusTrap {
 class FocusTrapWithBindings {
   @ViewChild(FocusTrapDirective) focusTrapDirective: FocusTrapDirective;
   renderFocusTrap = true;
-  isFocusTrapEnabled = true;
+  _isFocusTrapEnabled = true;
 }
 
 
@@ -190,9 +190,9 @@ class FocusTrapWithBindings {
     <div cdkTrapFocus>
       <input>
       <button>before</button>
-      <button id="first" cdk-focus-region-start></button>
-      <button id="middle" cdk-focus-initial></button>
-      <button id="last" cdk-focus-region-end></button>
+      <button id="first" cdkFocusRegionStart></button>
+      <button id="middle" cdkFocusInitial></button>
+      <button id="last" cdkFocusRegionEnd></button>
       <button>after</button>
       <input>
     </div>

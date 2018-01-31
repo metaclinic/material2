@@ -24,8 +24,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@metaclinic/material": ["./material"],
       "@metaclinic/cdk/*": ["./cdk/*"],
+      "@metaclinic/material": ["./material"],
+      "@metaclinic/material/*": ["./material/*"],
+      "@metaclinic/material-moment-adapter": ["./material-moment-adapter"],
       "@metaclinic/material-examples": ["./material-examples"]
     }
   },

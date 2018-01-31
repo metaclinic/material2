@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdDialog} from '@metaclinic/material';
+import {MatDialog} from '@metaclinic/material';
 
 /**
  * @title Dialog elements
@@ -9,7 +9,7 @@ import {MdDialog} from '@metaclinic/material';
   templateUrl: 'dialog-elements-example.html',
 })
 export class DialogElementsExample {
-  constructor(public dialog: MdDialog) { }
+  constructor(public dialog: MatDialog) { }
 
   openDialog() {
     this.dialog.open(DialogElementsExampleDialog);

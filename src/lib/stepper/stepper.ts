@@ -1,94 +1,83 @@
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {CdkStep, CdkStepper} from '@metaclinic/cdk/stepper';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CdkStep, CdkStepper } from '@metaclinic/cdk/stepper';
 import {
   Component,
   ContentChild,
-  ContentChildren, Directive,
-  // This import is only used to define a generic type. The current TypeScript version incorrectly
-  // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
-  // tslint:disable-next-line:no-unused-variable
+  ContentChildren,
+  Directive,
   ElementRef,
   forwardRef,
   Inject,
-  Optional,
   QueryList,
   SkipSelf,
   ViewChildren,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import {MdStepLabel} from './step-label';
-import {
-  defaultErrorStateMatcher,
-  ErrorOptions,
-  MD_ERROR_GLOBAL_OPTIONS,
-  ErrorStateMatcher
-} from '../core/error/error-options';
-import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
-import {MdStepHeader} from './step-header';
-import {state, style, transition, trigger, animate} from '@angular/animations';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@metaclinic/material/core';
+import { MatStepHeader } from './step-header';
+import { MatStepLabel } from './step-label';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
-export const _MdStep = CdkStep;
-export const _MdStepper = CdkStepper;
+export const _MatStep = CdkStep;
+export const _MatStepper = CdkStepper;
 
 @Component({
   moduleId: module.id,
-  selector: 'md-step, mat-step',
+  selector: 'mat-step',
   templateUrl: 'step.html',
-  providers: [{provide: MD_ERROR_GLOBAL_OPTIONS, useExisting: MdStep}],
-  encapsulation: ViewEncapsulation.None
+  providers: [{ provide: ErrorStateMatcher, useExisting: MatStep }],
+  encapsulation: ViewEncapsulation.None,
+  exportAs: 'matStep',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdStep extends _MdStep implements ErrorOptions {
-  /** Content for step label given by <ng-template matStepLabel> or <ng-template mdStepLabel>. */
-  @ContentChild(MdStepLabel) stepLabel: MdStepLabel;
+export class MatStep extends _MatStep implements ErrorStateMatcher {
+  /** Content for step label given by <ng-template matStepLabel>. */
+  @ContentChild(MatStepLabel) stepLabel: MatStepLabel;
 
-  /** Original ErrorStateMatcher that checks the validity of form control. */
-  private _originalErrorStateMatcher: ErrorStateMatcher;
-
-  constructor(@Inject(forwardRef(() => MdStepper)) mdStepper: MdStepper,
-              @Optional() @SkipSelf() @Inject(MD_ERROR_GLOBAL_OPTIONS) errorOptions: ErrorOptions) {
-    super(mdStepper);
-    if (errorOptions && errorOptions.errorStateMatcher) {
-      this._originalErrorStateMatcher = errorOptions.errorStateMatcher;
-    } else {
-      this._originalErrorStateMatcher = defaultErrorStateMatcher;
-    }
+  constructor( @Inject(forwardRef(() => MatStepper)) stepper: MatStepper,
+    @SkipSelf() private _errorStateMatcher: ErrorStateMatcher) {
+    super(stepper);
   }
 
   /** Custom error state matcher that additionally checks for validity of interacted form. */
-  errorStateMatcher = (control: FormControl, form: FormGroupDirective | NgForm) => {
-    let originalErrorState = this._originalErrorStateMatcher(control, form);
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const originalErrorState = this._errorStateMatcher.isErrorState(control, form);
 
     // Custom error state checks for the validity of form that is not submitted or touched
     // since user can trigger a form change by calling for another step without directly
     // interacting with the current form.
-    let customErrorState =  control.invalid && this.interacted;
+    const customErrorState = !!(control && control.invalid && this.interacted);
 
     return originalErrorState || customErrorState;
   }
 }
 
 @Directive({
-  selector: '[mdStepper]'
+  selector: '[matStepper]'
 })
-export class MdStepper extends _MdStepper {
+export class MatStepper extends _MatStepper {
   /** The list of step headers of the steps in the stepper. */
-  @ViewChildren(MdStepHeader, {read: ElementRef}) _stepHeader: QueryList<ElementRef>;
+  @ViewChildren(MatStepHeader, { read: ElementRef }) _stepHeader: QueryList<ElementRef>;
 
   /** Steps that the stepper holds. */
-  @ContentChildren(MdStep) _steps: QueryList<MdStep>;
+  @ContentChildren(MatStep) _steps: QueryList<MatStep>;
 }
 
 @Component({
   moduleId: module.id,
-  selector: 'md-horizontal-stepper, mat-horizontal-stepper',
+  selector: 'mat-horizontal-stepper',
+  exportAs: 'matHorizontalStepper',
   templateUrl: 'stepper-horizontal.html',
   styleUrls: ['stepper.css'],
   inputs: ['selectedIndex'],
@@ -98,21 +87,23 @@ export class MdStepper extends _MdStepper {
   },
   animations: [
     trigger('stepTransition', [
-      state('previous', style({transform: 'translate3d(-100%, 0, 0)', visibility: 'hidden'})),
-      state('current', style({transform: 'translate3d(0%, 0, 0)', visibility: 'visible'})),
-      state('next', style({transform: 'translate3d(100%, 0, 0)', visibility: 'hidden'})),
-      transition('* => *',
-          animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
+      state('previous', style({ transform: 'translate3d(-100%, 0, 0)', visibility: 'hidden' })),
+      state('current', style({ transform: 'none', visibility: 'visible' })),
+      state('next', style({ transform: 'translate3d(100%, 0, 0)', visibility: 'hidden' })),
+      transition('* => *', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
     ])
   ],
-  providers: [{provide: MdStepper, useExisting: MdHorizontalStepper}],
-  encapsulation: ViewEncapsulation.None
+  providers: [{ provide: MatStepper, useExisting: MatHorizontalStepper }],
+  encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdHorizontalStepper extends MdStepper { }
+export class MatHorizontalStepper extends MatStepper { }
 
 @Component({
   moduleId: module.id,
-  selector: 'md-vertical-stepper, mat-vertical-stepper',
+  selector: 'mat-vertical-stepper',
+  exportAs: 'matVerticalStepper',
   templateUrl: 'stepper-vertical.html',
   styleUrls: ['stepper.css'],
   inputs: ['selectedIndex'],
@@ -122,13 +113,15 @@ export class MdHorizontalStepper extends MdStepper { }
   },
   animations: [
     trigger('stepTransition', [
-      state('previous', style({height: '0px', visibility: 'hidden'})),
-      state('next', style({height: '0px', visibility: 'hidden'})),
-      state('current', style({height: '*', visibility: 'visible'})),
+      state('previous', style({ height: '0px', visibility: 'hidden' })),
+      state('next', style({ height: '0px', visibility: 'hidden' })),
+      state('current', style({ height: '*', visibility: 'visible' })),
       transition('* <=> current', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ])
   ],
-  providers: [{provide: MdStepper, useExisting: MdVerticalStepper}],
-  encapsulation: ViewEncapsulation.None
+  providers: [{ provide: MatStepper, useExisting: MatVerticalStepper }],
+  encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdVerticalStepper extends MdStepper { }
+export class MatVerticalStepper extends MatStepper { }

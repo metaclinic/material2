@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MdSnackBar} from '@metaclinic/material';
+import {MatSnackBar} from '@metaclinic/material';
 import {FirebaseService} from '../firebase.service';
 
 /**
@@ -38,7 +38,7 @@ export class ViewerComponent {
   }
 
   constructor(private _service: FirebaseService,
-              public snackBar: MdSnackBar,
+              public snackBar: MatSnackBar,
               activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(p => {
       this._service.prNumber = p['id'];

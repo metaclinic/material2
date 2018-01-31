@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MdSnackBar} from '@metaclinic/material';
+import {MatSnackBar} from '@metaclinic/material';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +10,7 @@ import {MdSnackBar} from '@metaclinic/material';
 export class ButtonAccessibilityDemo {
   counter: number = 0;
 
-  constructor(public snackBar: MdSnackBar) {}
+  constructor(public snackBar: MatSnackBar) {}
 
   openSnackBar(message: string) {
     this.snackBar.open(message,  '',  {

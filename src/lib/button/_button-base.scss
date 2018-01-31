@@ -38,7 +38,8 @@ $mat-mini-fab-padding: 8px !default;
   &[disabled] {
     cursor: default;
   }
-  &.cdk-keyboard-focused {
+  &.cdk-keyboard-focused,
+  &.cdk-program-focused {
     .mat-button-focus-overlay {
       opacity: 1;
     }
@@ -50,8 +51,7 @@ $mat-mini-fab-padding: 8px !default;
 
 // Applies styles to buttons with backgrounds: raised, fab, and mini-fab
 %mat-raised-button {
-  @extend %mat-button-base;
-  @include mat-elevation(.5);
+  @extend %mat-button-base; // @include mat-elevation(.5);
   font-size: 9px !important;
   line-height: 35px !important; // line-height: normal !important;
   font-weight: 400 !important;
@@ -63,18 +63,33 @@ $mat-mini-fab-padding: 8px !default;
     display: block;
     margin-bottom: -2px;
   }
+  @include mat-overridable-elevation(.5); // Force hardware acceleration.
   &:not([disabled]):active {
-    @include mat-elevation(8);
+    @include mat-overridable-elevation(8);
   }
   &[disabled] {
     box-shadow: none;
   }
 }
 
+// Applies styles to buttons with backgrounds: raised, fab, and mini-fab
+%mat-outline-button {
+  @extend %mat-button-base; // @include mat-elevation(.5);
+  font-size: 9px !important;
+  line-height: 35px !important; // line-height: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: 1.2px !important; // Force hardware acceleration.
+  font-family: 'Montserrat';
+  .mat-button-wrapper {
+    display: block;
+    margin-bottom: -2px;
+  }
+}
+
 // Applies styles to fab and mini-fab button types only
 @mixin mat-fab($size, $padding) {
   @extend %mat-raised-button;
-  @include mat-elevation(6); // Reset the min-width from the button base.
+  @include mat-overridable-elevation(6); // Reset the min-width from the button base.
   min-width: 0;
   border-radius: $mat-fab-border-radius;
   width: $size;
@@ -82,7 +97,7 @@ $mat-mini-fab-padding: 8px !default;
   padding: 0;
   flex-shrink: 0;
   &:not([disabled]):active {
-    @include mat-elevation(12);
+    @include mat-overridable-elevation(12);
   }
   .mat-button-wrapper {
     padding: $padding 0;
