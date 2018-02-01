@@ -7,144 +7,144 @@ $mat-stepper-line-width: 2px !default;
 $mat-stepper-line-gap: 2px !default;
 .mat-stepper-vertical,
 .mat-stepper-horizontal {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 .mat-step-header {
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
 .mat-horizontal-stepper-header-container {
-  white-space: nowrap;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .mat-stepper-horizontal-line {
-  border-top-width: $mat-stepper-line-width;
-  border-top-style: solid;
-  flex: auto;
-  height: 0;
-  margin: 0 $mat-stepper-line-gap - $mat-stepper-side-gap;
-  min-width: $mat-stepper-line-gap + $mat-stepper-side-gap;
+    border-top-width: $mat-stepper-line-width;
+    border-top-style: solid;
+    flex: auto;
+    height: 0;
+    margin: 0 $mat-stepper-line-gap - $mat-stepper-side-gap;
+    min-width: $mat-stepper-line-gap + $mat-stepper-side-gap;
 }
 
 .mat-horizontal-stepper-header {
-  display: block;
-  height: $mat-horizontal-stepper-header-height + 20;
-  overflow: hidden;
-  align-items: center;
-  text-align: center;
-  text-align: center;
-  margin: auto;
-  width: 100%;
-  padding-top: 24px;
-  .mat-stepper-top-container {
-    .mat-stepper-line-container {
-      width: 100%;
-      .mat-stepper-line {
-        border-top-width: $mat-stepper-line-width;
-        border-top-style: solid;
-        height: 0;
-        width: 100%;
-        padding-top: 2px;
-      }
-      .mat-stepper-line-first {
-        width: 50%;
-        text-align: right;
-        margin-left: 50%;
-      }
-      .mat-stepper-line-last {
-        width: 50%;
-        text-align: left;
-        margin-right: 50%;
-      }
-    }
-  }
-  .mat-step-label {
-    margin-top: 12px;
-  }
-  .mat-step-icon,
-  .mat-step-icon-completed,
-  .mat-step-icon-not-touched {
+    display: block;
+    height: $mat-horizontal-stepper-header-height + 30;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
     text-align: center;
     margin: auto;
-    flex: none;
-    margin-top: -(($mat-stepper-label-header-height + 8) / 2);
-  }
+    width: 100%;
+    padding-top: 37px;
+    .mat-stepper-top-container {
+        .mat-stepper-line-container {
+            width: 100%;
+            .mat-stepper-line {
+                border-top-width: $mat-stepper-line-width;
+                border-top-style: solid;
+                height: 0;
+                width: 100%;
+                padding-top: 2px;
+            }
+            .mat-stepper-line-first {
+                width: 50%;
+                text-align: right;
+                margin-left: 50%;
+            }
+            .mat-stepper-line-last {
+                width: 50%;
+                text-align: left;
+                margin-right: 50%;
+            }
+        }
+    }
+    .mat-step-label {
+        margin-top: 12px;
+    }
+    .mat-step-icon,
+    .mat-step-icon-completed,
+    .mat-step-icon-not-touched {
+        text-align: center;
+        margin: auto;
+        flex: none;
+        margin-top: -(($mat-stepper-label-header-height + 8) / 2);
+    }
 }
 
 .mat-vertical-stepper-header {
-  display: flex;
-  align-items: center;
-  padding: $mat-stepper-side-gap;
-  max-height: $mat-stepper-label-header-height;
-  .mat-step-icon,
-  .mat-step-icon-completed,
-  .mat-step-icon-not-touched {
-    z-index: 1;
-    position: relative;
-    margin-right: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
-    [dir='rtl'] & {
-      margin-right: 0;
-      margin-left: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
+    display: flex;
+    align-items: center;
+    padding: $mat-stepper-side-gap;
+    max-height: $mat-stepper-label-header-height;
+    .mat-step-icon,
+    .mat-step-icon-completed,
+    .mat-step-icon-not-touched {
+        z-index: 1;
+        position: relative;
+        margin-right: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
+        [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: $mat-vertical-stepper-content-margin - $mat-stepper-side-gap;
+        }
     }
-  }
 }
 
 .mat-horizontal-stepper-content {
-  overflow: hidden;
-  &[aria-expanded='false'] {
-    height: 0;
-  }
+    overflow: hidden;
+    &[aria-expanded='false'] {
+        height: 0;
+    }
 }
 
 .mat-horizontal-content-container {
-  overflow: hidden;
-  padding: 0 $mat-stepper-side-gap $mat-stepper-side-gap $mat-stepper-side-gap;
+    overflow: hidden;
+    padding: 0 $mat-stepper-side-gap $mat-stepper-side-gap $mat-stepper-side-gap;
 }
 
 .mat-vertical-content-container {
-  margin-left: $mat-vertical-stepper-content-margin;
-  border: 0;
-  position: relative;
-  [dir='rtl'] & {
-    margin-left: 0;
-    margin-right: $mat-vertical-stepper-content-margin;
-  }
+    margin-left: $mat-vertical-stepper-content-margin;
+    border: 0;
+    position: relative;
+    [dir='rtl'] & {
+        margin-left: 0;
+        margin-right: $mat-vertical-stepper-content-margin;
+    }
 }
 
 .mat-stepper-vertical-line::before {
-  content: '';
-  position: absolute;
-  top: $mat-stepper-line-gap - $mat-stepper-side-gap;
-  bottom: $mat-stepper-line-gap - $mat-stepper-side-gap;
-  left: 0;
-  border-left-width: $mat-stepper-line-width;
-  border-left-style: solid;
-  [dir='rtl'] & {
-    left: auto;
-    right: 0;
-  }
+    content: '';
+    position: absolute;
+    top: $mat-stepper-line-gap - $mat-stepper-side-gap;
+    bottom: $mat-stepper-line-gap - $mat-stepper-side-gap;
+    left: 0;
+    border-left-width: $mat-stepper-line-width;
+    border-left-style: solid;
+    [dir='rtl'] & {
+        left: auto;
+        right: 0;
+    }
 }
 
 .mat-vertical-stepper-content {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .mat-vertical-content {
-  padding: 0 $mat-stepper-side-gap $mat-stepper-side-gap $mat-stepper-side-gap;
+    padding: 0 $mat-stepper-side-gap $mat-stepper-side-gap $mat-stepper-side-gap;
 }
 
 .mat-step:last-child {
-  .mat-vertical-content-container {
-    border: none;
-  }
+    .mat-vertical-content-container {
+        border: none;
+    }
 }

@@ -17,7 +17,9 @@
   <ng-container *ngIf="_templateLabel()" [ngTemplateOutlet]="label.template">
   </ng-container>
   <!-- It there is no label template, fall back to the text label. -->
-  <div class="mat-step-text-label" *ngIf="_stringLabel()">{{label}}</div>
-
-  <div class="mat-step-optional" *ngIf="optional">{{_intl.optionalLabel}}</div>
+  <div class="mat-step-text-label" *ngIf="_stringLabel()">
+    <span>{{label}}</span>
+  </div>
+  <span *ngIf="optional">&nbsp;|&nbsp;</span>
+  <span class="mat-step-optional" *ngIf="optional">{{_intl.optionalLabel}}</span>
 </div>

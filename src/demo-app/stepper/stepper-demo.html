@@ -3,20 +3,22 @@
 <h3>Linear Horizontal Stepper Demo using a different form for each step</h3>
 <mat-horizontal-stepper [linear]="!isNonLinear">
   <mat-step [stepControl]="nameFormGroup">
-    <form [formGroup]="nameFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="First Name" formControlName="firstNameCtrl" label="First Name" required>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Last Name" formControlName="lastNameCtrl" label="Last Name" required>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+    <mat-card>
+      <form [formGroup]="nameFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="First Name" formControlName="firstNameCtrl" label="First Name" required>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="lastNameCtrl" label="Last Name" required>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-card>
   </mat-step>
 
   <mat-step [stepControl]="emailFormGroup" optional>

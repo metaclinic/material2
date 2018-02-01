@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { ActiveDescendantKeyManager } from '@metaclinic/cdk/a11y';
 import { Directionality } from '@metaclinic/cdk/bidi';
 import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
@@ -150,7 +142,8 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(MatSelectBase));
 @Directive({
   selector: 'mat-select-trigger'
 })
-export class MatSelectTrigger { }
+export class MatSelectTrigger {
+}
 
 
 @Component({

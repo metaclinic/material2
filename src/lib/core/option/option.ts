@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {coerceBooleanProperty} from '@metaclinic/cdk/coercion';
-import {ENTER, SPACE} from '@metaclinic/cdk/keycodes';
+import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
+import { ENTER, SPACE } from '@metaclinic/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -22,7 +22,7 @@ import {
   InjectionToken,
   Inject,
 } from '@angular/core';
-import {MatOptgroup} from './optgroup';
+import { MatOptgroup } from './optgroup';
 
 /**
  * Option IDs need to be unique across components, so this counter exists outside of
@@ -43,13 +43,13 @@ export class MatOptionSelectionChange {
 export interface MatOptionParentComponent {
   disableRipple?: boolean;
   multiple?: boolean;
+  color?: string;
 }
 
 /**
  * Injection token used to provide the parent component to options.
  */
-export const MAT_OPTION_PARENT_COMPONENT =
-    new InjectionToken<MatOptionParentComponent>('MAT_OPTION_PARENT_COMPONENT');
+export const MAT_OPTION_PARENT_COMPONENT = new InjectionToken<MatOptionParentComponent>('MAT_OPTION_PARENT_COMPONENT');
 
 /**
  * Single option inside of a `<mat-select>` element.
@@ -64,6 +64,10 @@ export const MAT_OPTION_PARENT_COMPONENT =
     '[class.mat-selected]': 'selected',
     '[class.mat-option-multiple]': 'multiple',
     '[class.mat-active]': 'active',
+    '[class.mat-dark]': 'color == "dark"',
+    '[class.mat-primary]': 'color == "primary"',
+    '[class.mat-accent]': 'color == "accent"',
+    '[class.mat-warn]': 'color == "warn"',
     '[id]': 'id',
     '[attr.aria-selected]': 'selected.toString()',
     '[attr.aria-disabled]': 'disabled.toString()',
@@ -85,6 +89,10 @@ export class MatOption {
 
   /** Whether the wrapping component is in multiple selection mode. */
   get multiple() { return this._parent && this._parent.multiple; }
+
+  get color() {
+    if (this._parent && this._parent.color) { return this._parent.color; } else { return null; }
+  }
 
   /** The unique ID of the option. */
   get id(): string { return this._id; }
@@ -110,7 +118,7 @@ export class MatOption {
     private _element: ElementRef,
     private _changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(MAT_OPTION_PARENT_COMPONENT) private _parent: MatOptionParentComponent,
-    @Optional() readonly group: MatOptgroup) {}
+    @Optional() readonly group: MatOptgroup) { }
 
   /**
    * Whether or not the option is currently active and ready to be selected.

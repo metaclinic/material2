@@ -71,8 +71,7 @@
     ],
     // Bans jasmine helper functions that will prevent the CI from properly running tests.
     "ban": [
-      true,
-      ["fit"],
+      true, ["fit"],
       ["fdescribe"],
       ["xit"],
       ["xdescribe"]
@@ -98,10 +97,6 @@
         "changeDetection": "\\.OnPush$"
       }
     }, "src/+(lib|cdk)/**/!(*.spec).ts"],
-    "require-license-banner": [
-      true,
-      "src/+(lib|cdk)/**/!(*.spec).ts"
-    ],
     "no-rxjs-patch-imports": [
       true,
       "src/+(lib|cdk)/**/*.ts"

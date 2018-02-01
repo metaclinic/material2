@@ -1,9 +1,4 @@
-<div cdk-overlay-origin
-     class="mat-select-trigger"
-     aria-hidden="true"
-     (click)="toggle()"
-     #origin="cdkOverlayOrigin"
-     #trigger>
+<div cdk-overlay-origin class="mat-select-trigger" aria-hidden="true" (click)="toggle()" #origin="cdkOverlayOrigin" #trigger>
   <div class="mat-select-value" [class.mat-dark]="color == 'dark'">
     <!--
       TODO(mmalerba): &nbsp; is currently broken in components with preserveWhitespace: false, so we
@@ -16,37 +11,20 @@
     </span>
   </div>
 
-  <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+  <div class="mat-select-arrow-wrapper">
+    <div class="mat-select-arrow"></div>
+  </div>
 </div>
 
-<ng-template
-  cdk-connected-overlay
-  hasBackdrop
-  backdropClass="cdk-overlay-transparent-backdrop"
-  [scrollStrategy]="_scrollStrategy"
-  [origin]="origin"
-  [open]="panelOpen"
-  [positions]="_positions"
-  [minWidth]="_triggerRect?.width"
-  [offsetY]="_offsetY"
-  (backdropClick)="close()"
-  (attach)="_onAttached()"
-  (detach)="close()">
+<ng-template cdk-connected-overlay hasBackdrop backdropClass="cdk-overlay-transparent-backdrop" [scrollStrategy]="_scrollStrategy"
+  [origin]="origin" [open]="panelOpen" [positions]="_positions" [minWidth]="_triggerRect?.width" [offsetY]="_offsetY" (backdropClick)="close()"
+  (attach)="_onAttached()" (detach)="close()">
 
-  <div
-    #panel
-    class="mat-select-panel {{ _getPanelTheme() }}"
-    [ngClass]="panelClass"
-    [@transformPanel]="multiple ? 'showing-multiple' : 'showing'"
-    (@transformPanel.done)="_onPanelDone()"
-    [style.transformOrigin]="_transformOrigin"
-    [class.mat-select-panel-done-animating]="_panelDoneAnimating"
+  <div #panel class="mat-select-panel {{ _getPanelTheme() }}" [ngClass]="panelClass" [@transformPanel]="multiple ? 'showing-multiple' : 'showing'"
+    (@transformPanel.done)="_onPanelDone()" [style.transformOrigin]="_transformOrigin" [class.mat-select-panel-done-animating]="_panelDoneAnimating"
     [style.font-size.px]="_triggerFontSize">
 
-    <div
-      class="mat-select-content"
-      [@fadeInContent]="'showing'"
-      (@fadeInContent.done)="_onFadeInDone()">
+    <div class="mat-select-content" [@fadeInContent]="'showing'" (@fadeInContent.done)="_onFadeInDone()" [class.mat-dark]="color == 'dark'">
       <ng-content></ng-content>
     </div>
 

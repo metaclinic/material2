@@ -1,56 +1,55 @@
 @import '../theming/palette';
 @import '../theming/theming';
 @import '../typography/typography-utils';
-
 @mixin mat-option-theme($theme) {
-  $foreground: map-get($theme, foreground);
-  $background: map-get($theme, background);
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-
-  .mat-option {
-    color: mat-color($foreground, text);
-
-    &:hover:not(.mat-option-disabled),
-    &:focus:not(.mat-option-disabled) {
-      background: mat-color($background, hover);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    .mat-option {
+        color: mat-color($foreground, text);
+        &.mat-dark {
+            color: #ffffff;
+        }
+        &:hover:not(.mat-option-disabled),
+        &:focus:not(.mat-option-disabled) {
+            background: mat-color($background, hover);
+        }
+        .mat-primary &.mat-selected:not(.mat-option-disabled) {
+            color: mat-color($primary);
+        }
+        .mat-accent &.mat-selected:not(.mat-option-disabled) {
+            color: mat-color($accent);
+        }
+        .mat-warn &.mat-selected:not(.mat-option-disabled) {
+            color: mat-color($warn);
+        }
+        .mat-dark &.mat-selected:not(.mat-option-disabled) {
+            color: mat-color($primary);
+        } // In multiple mode there is a checkbox to show that the option is selected.
+        &.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+            background: mat-color($background, hover);
+        }
+        &.mat-active {
+            background: mat-color($background, hover);
+            color: mat-color($foreground, text);
+            &.mat-dark {
+                color: #ffffff;
+            }
+        }
+        &.mat-option-disabled {
+            color: mat-color($foreground, hint-text);
+        }
     }
-
-    .mat-primary &.mat-selected:not(.mat-option-disabled) {
-      color: mat-color($primary);
-    }
-
-    .mat-accent &.mat-selected:not(.mat-option-disabled) {
-      color: mat-color($accent);
-    }
-
-    .mat-warn &.mat-selected:not(.mat-option-disabled) {
-      color: mat-color($warn);
-    }
-
-    // In multiple mode there is a checkbox to show that the option is selected.
-    &.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
-      background: mat-color($background, hover);
-    }
-
-    &.mat-active {
-      background: mat-color($background, hover);
-      color: mat-color($foreground, text);
-    }
-
-    &.mat-option-disabled {
-      color: mat-color($foreground, hint-text);
-    }
-  }
 }
 
 @mixin mat-option-typography($config) {
-  .mat-option {
-    font: {
-      family: mat-font-family($config, body-1);
-      size: mat-font-size($config, body-1);
-      line-height: mat-line-height($config, body-1);
+    .mat-option {
+        font: {
+            family: mat-font-family($config, body-1);
+            size: mat-font-size($config, body-1);
+            line-height: mat-line-height($config, body-1);
+        }
     }
-  }
 }
