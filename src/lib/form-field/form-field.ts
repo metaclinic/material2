@@ -43,6 +43,7 @@ import {
 } from './form-field-errors';
 import { MatHint } from './hint';
 import { MatPlaceholder } from './placeholder';
+import { MatLabel } from './label';
 import { MatPrefix } from './prefix';
 import { MatSuffix } from './suffix';
 
@@ -166,6 +167,7 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
   @ViewChild('label') private _label: ElementRef;
   @ContentChild(MatFormFieldControl) _control: MatFormFieldControl<any>;
   @ContentChild(MatPlaceholder) _placeholderChild: MatPlaceholder;
+  @ContentChild(MatLabel) _labelChild: MatLabel;
   @ContentChildren(MatError) _errorChildren: QueryList<MatError>;
   @ContentChildren(MatHint) _hintChildren: QueryList<MatHint>;
   @ContentChildren(MatPrefix) _prefixChildren: QueryList<MatPrefix>;
@@ -190,6 +192,7 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
     // Subscribe to changes in the child control state in order to update the form field UI.
     this._control.stateChanges.pipe(startWith(null!)).subscribe(() => {
       this._validatePlaceholders();
+      this._validateLabels();
       this._syncDescribedByIds();
       this._changeDetectorRef.markForCheck();
     });
@@ -239,6 +242,10 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
     return !!(this._control.placeholder || this._placeholderChild);
   }
 
+  _hasLabel() {
+    return !!(this._control.label || this._labelChild);
+  }
+
   /** Determines whether to display hints or errors. */
   _getDisplayedMessages(): 'error' | 'hint' {
     return (this._errorChildren && this._errorChildren.length > 0 &&
@@ -266,6 +273,12 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
   private _validatePlaceholders() {
     if (this._control.placeholder && this._placeholderChild) {
       throw getMatFormFieldPlaceholderConflictError();
+    }
+  }
+
+  private _validateLabels() {
+    if (this._control.label && this._labelChild) {
+      throw getMatFormFieldLabelConflictError();
     }
   }
 
