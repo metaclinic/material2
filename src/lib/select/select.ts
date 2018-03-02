@@ -299,10 +299,6 @@ export class MatSelect extends _MatSelectMixinBase implements AfterContentInit, 
   /** Overlay pane containing the options. */
   @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
 
-  /** The label displayed above the select. */
-  // @ViewChild('label') private _label: ElementRef;
-  // @ContentChild(MdSelectLabel) _labelChild: MdSelectLabel;
-
   /** All of the defined select options. */
   @ContentChildren(MatOption, { descendants: true }) options: QueryList<MatOption>;
 
