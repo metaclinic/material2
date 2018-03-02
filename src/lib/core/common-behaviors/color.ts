@@ -21,7 +21,7 @@ export interface HasRenderer {
 }
 
 /** Possible color palette values.  */
-export type ThemePalette = 'primary' | 'accent' | 'warn' | undefined;
+export type ThemePalette = 'primary' | 'accent' | 'warn' | 'dark' | undefined;
 
 /** Mixin to augment a directive with a `color` property. */
 export function mixinColor<T extends Constructor<HasRenderer>>(base: T, defaultColor?: ThemePalette)

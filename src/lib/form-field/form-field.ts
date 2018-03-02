@@ -102,7 +102,7 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
   private _placeholderOptions: PlaceholderOptions;
 
   /** Color of the form field underline, based on the theme. */
-  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
+  @Input() color: 'primary' | 'accent' | 'warn' | 'dark' = 'primary';
 
   @Input() mod: 'normal' | 'large' = 'normal';
 
@@ -112,7 +112,7 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
 
   /** @deprecated Use `color` instead. */
   @Input()
-  get dividerColor(): 'primary' | 'accent' | 'warn' { return this.color; }
+  get dividerColor(): 'primary' | 'accent' | 'warn' | 'dark' { return this.color; }
   set dividerColor(value) { this.color = value; }
 
   /** Whether the required marker should be hidden. */

@@ -38,7 +38,7 @@ import {Component, ChangeDetectionStrategy, Input, ViewEncapsulation} from '@ang
 })
 export class MatProgressBar {
   /** Color of the progress bar. */
-  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
+  @Input() color: 'primary' | 'accent' | 'warn' | 'dark' = 'primary';
 
   private _value: number = 0;
 
