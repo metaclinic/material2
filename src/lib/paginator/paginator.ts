@@ -54,7 +54,7 @@ export class MatPaginator implements OnInit, OnDestroy {
   private _initialized: boolean;
   private _intlChanges: Subscription;
   private _pageIndices: number[];
-  private _stepIndices: number[][];
+  _stepIndices: number[][];
   private _pageIndicesFocusRange: number = 9;
   private _lastPageIndex: number | null = null;
   private _lastStepIndex: number | null = null;
