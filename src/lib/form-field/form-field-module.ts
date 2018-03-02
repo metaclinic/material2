@@ -12,6 +12,7 @@ import {PlatformModule} from '@metaclinic/cdk/platform';
 import {MatError} from './error';
 import {MatFormField} from './form-field';
 import {MatHint} from './hint';
+import {MatLabel} from './label';
 import {MatPlaceholder} from './placeholder';
 import {MatPrefix} from './prefix';
 import {MatSuffix} from './suffix';
@@ -22,6 +23,7 @@ import {MatSuffix} from './suffix';
     MatError,
     MatHint,
     MatFormField,
+    MatLabel,
     MatPlaceholder,
     MatPrefix,
     MatSuffix,
@@ -34,6 +36,7 @@ import {MatSuffix} from './suffix';
     MatError,
     MatHint,
     MatFormField,
+    MatLabel,
     MatPlaceholder,
     MatPrefix,
     MatSuffix,
