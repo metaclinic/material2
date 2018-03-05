@@ -6,14 +6,17 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {OverlayModule} from '@metaclinic/cdk/overlay';
-import {PortalModule} from '@metaclinic/cdk/portal';
-import {A11yModule} from '@metaclinic/cdk/a11y';
-import {MatCommonModule} from '@metaclinic/material/core';
-import {MatDialog, MAT_DIALOG_SCROLL_STRATEGY_PROVIDER} from './dialog';
-import {MatDialogContainer} from './dialog-container';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@metaclinic/cdk/overlay';
+import { PortalModule } from '@metaclinic/cdk/portal';
+import { A11yModule } from '@metaclinic/cdk/a11y';
+import { MatCommonModule } from '@metaclinic/material/core';
+import {
+  MatDialog,
+  MAT_DIALOG_SCROLL_STRATEGY_PROVIDER
+} from './dialog';
+import { MatDialogContainer } from './dialog-container';
 import {
   MatDialogClose,
   MatDialogContent,
@@ -51,4 +54,4 @@ import {
   ],
   entryComponents: [MatDialogContainer],
 })
-export class MatDialogModule {}
+export class MatDialogModule { }

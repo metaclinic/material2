@@ -7,31 +7,31 @@
  */
 
 import {
-    TemplateRef,
-    ViewContainerRef,
-    ElementRef,
-    ComponentRef,
-    EmbeddedViewRef,
-    Injector
+  TemplateRef,
+  ViewContainerRef,
+  ElementRef,
+  ComponentRef,
+  EmbeddedViewRef,
+  Injector
 } from '@angular/core';
 import {
-    throwNullPortalOutletError,
-    throwPortalAlreadyAttachedError,
-    throwNoPortalAttachedError,
-    throwNullPortalError,
-    throwPortalOutletAlreadyDisposedError,
-    throwUnknownPortalTypeError
+  throwNullPortalOutletError,
+  throwPortalAlreadyAttachedError,
+  throwNoPortalAttachedError,
+  throwNullPortalError,
+  throwPortalOutletAlreadyDisposedError,
+  throwUnknownPortalTypeError
 } from './portal-errors';
 
-
+/** Interface that can be used to generically type a class. */
 export interface ComponentType<T> {
-  new (...args: any[]): T;
+  new(...args: any[]): T;
 }
 
 /**
- * A `Portal` is something that you want to render somewhere else.
- * It can be attach to / detached from a `PortalOutlet`.
- */
+* A `Portal` is something that you want to render somewhere else.
+* It can be attach to / detached from a `PortalOutlet`.
+*/
 export abstract class Portal<T> {
   private _attachedHost: PortalOutlet | null;
 
@@ -46,7 +46,7 @@ export abstract class Portal<T> {
     }
 
     this._attachedHost = host;
-    return <T> host.attach(this);
+    return <T>host.attach(this);
   }
 
   /** Detach this portal from its host */
@@ -77,8 +77,8 @@ export abstract class Portal<T> {
 
 
 /**
- * A `ComponentPortal` is a portal that instantiates some Component upon attachment.
- */
+* A `ComponentPortal` is a portal that instantiates some Component upon attachment.
+*/
 export class ComponentPortal<T> extends Portal<ComponentRef<T>> {
   /** The type of the component that will be instantiated for attachment. */
   component: ComponentType<T>;
@@ -94,9 +94,9 @@ export class ComponentPortal<T> extends Portal<ComponentRef<T>> {
   injector?: Injector | null;
 
   constructor(
-      component: ComponentType<T>,
-      viewContainerRef?: ViewContainerRef | null,
-      injector?: Injector | null) {
+    component: ComponentType<T>,
+    viewContainerRef?: ViewContainerRef | null,
+    injector?: Injector | null) {
     super();
     this.component = component;
     this.viewContainerRef = viewContainerRef;
@@ -105,24 +105,23 @@ export class ComponentPortal<T> extends Portal<ComponentRef<T>> {
 }
 
 /**
- * A `TemplatePortal` is a portal that represents some embedded template (TemplateRef).
- */
-export class TemplatePortal<C> extends Portal<C> {
+* A `TemplatePortal` is a portal that represents some embedded template (TemplateRef).
+*/
+export class TemplatePortal<C = any> extends Portal<C> {
   /** The embedded template that will be used to instantiate an embedded View in the host. */
   templateRef: TemplateRef<C>;
 
   /** Reference to the ViewContainer into which the template will be stamped out. */
   viewContainerRef: ViewContainerRef;
 
+  /** Contextual data to be passed in to the embedded view. */
   context: C | undefined;
 
-  constructor(template: TemplateRef<any>, viewContainerRef: ViewContainerRef, context?: C) {
+  constructor(template: TemplateRef<C>, viewContainerRef: ViewContainerRef, context?: C) {
     super();
     this.templateRef = template;
     this.viewContainerRef = viewContainerRef;
-    if (context) {
-      this.context = context;
-    }
+    this.context = context;
   }
 
   get origin(): ElementRef {
@@ -146,27 +145,29 @@ export class TemplatePortal<C> extends Portal<C> {
 }
 
 
-/**
- * A `PortalOutlet` is an space that can contain a single `Portal`.
- */
+/** A `PortalOutlet` is an space that can contain a single `Portal`. */
 export interface PortalOutlet {
+  /** Attaches a portal to this outlet. */
   attach(portal: Portal<any>): any;
 
+  /** Detaches the currently attached portal from this outlet. */
   detach(): any;
 
+  /** Performs cleanup before the outlet is destroyed. */
   dispose(): void;
 
+  /** Whether there is currently a portal attached to this outlet. */
   hasAttached(): boolean;
 }
 
 
 /**
- * Partial implementation of PortalOutlet that handles attaching
- * ComponentPortal and TemplatePortal.
- */
+* Partial implementation of PortalOutlet that handles attaching
+* ComponentPortal and TemplatePortal.
+*/
 export abstract class BasePortalOutlet implements PortalOutlet {
   /** The portal currently attached to the host. */
-  private _attachedPortal: Portal<any> | null;
+  protected _attachedPortal: Portal<any> | null;
 
   /** A function that will permanently dispose this host. */
   private _disposeFn: (() => void) | null;
@@ -178,6 +179,10 @@ export abstract class BasePortalOutlet implements PortalOutlet {
   hasAttached(): boolean {
     return !!this._attachedPortal;
   }
+
+  attach<T>(portal: ComponentPortal<T>): ComponentRef<T>;
+  attach<T>(portal: TemplatePortal<T>): EmbeddedViewRef<T>;
+  attach(portal: any): any;
 
   /** Attaches a portal. */
   attach(portal: Portal<any>): any {

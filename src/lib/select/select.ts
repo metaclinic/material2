@@ -2,7 +2,7 @@ import { ActiveDescendantKeyManager } from '@metaclinic/cdk/a11y';
 import { Directionality } from '@metaclinic/cdk/bidi';
 import { coerceBooleanProperty } from '@metaclinic/cdk/coercion';
 import { SelectionModel } from '@metaclinic/cdk/collections';
-import { DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW } from '@metaclinic/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, HOME, SPACE, UP_ARROW, RIGHT_ARROW, LEFT_ARROW } from '@metaclinic/cdk/keycodes';
 import {
   CdkConnectedOverlay,
   Overlay,
@@ -57,6 +57,8 @@ import {
   mixinDisabled,
   mixinTabIndex,
   MAT_OPTION_PARENT_COMPONENT,
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition,
 } from '@metaclinic/material/core';
 import { MatFormField, MatFormFieldControl } from '@metaclinic/material/form-field';
 import { Observable } from 'rxjs/Observable';
@@ -641,27 +643,45 @@ export class MatSelect extends _MatSelectMixinBase implements AfterContentInit, 
 
   /** Handles keyboard events while the select is closed. */
   private _handleClosedKeydown(event: KeyboardEvent): void {
-    if (event.keyCode === ENTER || event.keyCode === SPACE) {
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
+      keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
+    const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+
+    // Open the select on ALT + arrow key to match the native <select>
+    if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
       event.preventDefault(); // prevents the page from scrolling down when pressing space
       this.open();
-    } else if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
-      this._handleClosedArrowKey(event);
+    } else if (!this.multiple) {
+      this._keyManager.onKeydown(event);
     }
   }
 
   /** Handles keyboard events when the selected is open. */
   private _handleOpenKeydown(event: KeyboardEvent): void {
     const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
+    const manager = this._keyManager;
 
     if (keyCode === HOME || keyCode === END) {
       event.preventDefault();
-      keyCode === HOME ? this._keyManager.setFirstItemActive() :
-        this._keyManager.setLastItemActive();
-    } else if ((keyCode === ENTER || keyCode === SPACE) && this._keyManager.activeItem) {
+      keyCode === HOME ? manager.setFirstItemActive() : manager.setLastItemActive();
+    } else if (isArrowKey && event.altKey) {
+      // Close the select on ALT + arrow key to match the native <select>
       event.preventDefault();
-      this._keyManager.activeItem._selectViaInteraction();
+      this.close();
+    } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
+      event.preventDefault();
+      manager.activeItem._selectViaInteraction();
     } else {
-      this._keyManager.onKeydown(event);
+      const previouslyFocusedIndex = manager.activeItemIndex;
+
+      manager.onKeydown(event);
+
+      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem &&
+        manager.activeItemIndex !== previouslyFocusedIndex) {
+        manager.activeItem._selectViaInteraction();
+      }
     }
   }
 
@@ -812,29 +832,70 @@ export class MatSelect extends _MatSelectMixinBase implements AfterContentInit, 
     this.stateChanges.next();
   }
 
-  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
-  private _initKeyManager() {
-    this._keyManager = new ActiveDescendantKeyManager<MatOption>(this.options).withTypeAhead();
-    this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => this.close());
+  // /** Sets up a key manager to listen to keyboard events on the overlay panel. */
+  // private _initKeyManager() {
+  //   this._keyManager = new ActiveDescendantKeyManager<MatOption>(this.options).withTypeAhead();
+  //   this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => this.close());
 
-    this._keyManager.change.pipe(
-      takeUntil(this._destroy),
-      filter(() => this._panelOpen && !!this.panel)
-    ).subscribe(() => this._scrollActiveOptionIntoView());
+  //   this._keyManager.change.pipe(
+  //     takeUntil(this._destroy),
+  //     filter(() => this._panelOpen && !!this.panel)
+  //   ).subscribe(() => this._scrollActiveOptionIntoView());
+  // }
+
+  private _initKeyManager() {
+    this._keyManager = new ActiveDescendantKeyManager<MatOption>(this.options)
+      .withTypeAhead()
+      .withVerticalOrientation()
+      .withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+
+    this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => this.close());
+    this._keyManager.change.pipe(takeUntil(this._destroy)).subscribe(() => {
+      if (this._panelOpen && this.panel) {
+        this._scrollActiveOptionIntoView();
+      } else if (!this._panelOpen && !this.multiple && this._keyManager.activeItem) {
+        this._keyManager.activeItem._selectViaInteraction();
+      }
+    });
   }
 
   /** Drops current option subscriptions and IDs and resets from scratch. */
-  private _resetOptions(): void {
-    this.optionSelectionChanges.pipe(
-      takeUntil(merge(this._destroy, this.options.changes)),
-      filter(event => event.isUserInput)
-    ).subscribe(event => {
-      this._onSelect(event.source);
+  // private _resetOptions(): void {
+  //   this.optionSelectionChanges.pipe(
+  //     takeUntil(merge(this._destroy, this.options.changes)),
+  //     filter(event => event.isUserInput)
+  //   ).subscribe(event => {
+  //     this._onSelect(event.source);
 
-      if (!this.multiple) {
-        this.close();
-      }
-    });
+  //     if (!this.multiple) {
+  //       this.close();
+  //     }
+  //   });
+
+  //   this._setOptionIds();
+  // }
+  private _resetOptions(): void {
+    const changedOrDestroyed = merge(this.options.changes, this._destroy);
+
+    this.optionSelectionChanges
+      .pipe(takeUntil(changedOrDestroyed), filter(event => event.isUserInput))
+      .subscribe(event => {
+        this._onSelect(event.source);
+
+        if (!this.multiple && this._panelOpen) {
+          this.close();
+          this.focus();
+        }
+      });
+
+    // Listen to changes in the internal state of the options and react accordingly.
+    // Handles cases like the labels of the selected options changing.
+    merge(...this.options.map(option => option._stateChanges))
+      .pipe(takeUntil(changedOrDestroyed))
+      .subscribe(() => {
+        this._changeDetectorRef.markForCheck();
+        this.stateChanges.next();
+      });
 
     this._setOptionIds();
   }
@@ -918,21 +979,17 @@ export class MatSelect extends _MatSelectMixinBase implements AfterContentInit, 
 
   /** Scrolls the active option into view. */
   private _scrollActiveOptionIntoView(): void {
-    const itemHeight = this._getItemHeight();
     const activeOptionIndex = this._keyManager.activeItemIndex || 0;
-    const labelCount = MatOption.countGroupLabelsBeforeOption(activeOptionIndex,
-      this.options, this.optionGroups);
-    const scrollOffset = (activeOptionIndex + labelCount) * itemHeight;
-    const panelTop = this.panel.nativeElement.scrollTop;
+    const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.options,
+      this.optionGroups);
 
-    if (scrollOffset < panelTop) {
-      this.panel.nativeElement.scrollTop = scrollOffset;
-    } else if (scrollOffset + itemHeight > panelTop + SELECT_PANEL_MAX_HEIGHT) {
-      this.panel.nativeElement.scrollTop =
-        Math.max(0, scrollOffset - SELECT_PANEL_MAX_HEIGHT + itemHeight);
-    }
+    this.panel.nativeElement.scrollTop = _getOptionScrollPosition(
+      activeOptionIndex + labelCount,
+      this._getItemHeight(),
+      this.panel.nativeElement.scrollTop,
+      SELECT_PANEL_MAX_HEIGHT
+    );
   }
-
   /** Focuses the select element. */
   focus(): void {
     this._elementRef.nativeElement.focus();
@@ -959,7 +1016,7 @@ export class MatSelect extends _MatSelectMixinBase implements AfterContentInit, 
     let selectedOptionOffset =
       this.empty ? 0 : this._getOptionIndex(this._selectionModel.selected[0])!;
 
-    selectedOptionOffset += MatOption.countGroupLabelsBeforeOption(selectedOptionOffset,
+    selectedOptionOffset += _countGroupLabelsBeforeOption(selectedOptionOffset,
       this.options, this.optionGroups);
 
     // We must maintain a scroll buffer so the selected option will be scrolled to the

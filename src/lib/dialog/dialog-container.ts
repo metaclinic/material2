@@ -19,16 +19,17 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
-import {DOCUMENT} from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+import { AnimationEvent } from '@angular/animations';
+import { matDialogAnimations } from './dialog-animations';
 import {
   BasePortalOutlet,
   ComponentPortal,
   CdkPortalOutlet,
   TemplatePortal
 } from '@metaclinic/cdk/portal';
-import {FocusTrap, FocusTrapFactory} from '@metaclinic/cdk/a11y';
-import {MatDialogConfig} from './dialog-config';
+import { FocusTrap, FocusTrapFactory } from '@metaclinic/cdk/a11y';
+import { MatDialogConfig } from './dialog-config';
 
 
 /**
@@ -55,23 +56,14 @@ export function throwMatDialogContentAlreadyAttachedError() {
   // Using OnPush for dialogs caused some G3 sync issues. Disabled until we can track them down.
   // tslint:disable-next-line:validate-decorators
   changeDetection: ChangeDetectionStrategy.Default,
-  animations: [
-    trigger('slideDialog', [
-      // Note: The `enter` animation doesn't transition to something like `translate3d(0, 0, 0)
-      // scale(1)`, because for some reason specifying the transform explicitly, causes IE both
-      // to blur the dialog content and decimate the animation performance. Leaving it as `none`
-      // solves both issues.
-      state('enter', style({ transform: 'none', opacity: 1 })),
-      state('void', style({ transform: 'translate3d(0, 25%, 0) scale(0.9)', opacity: 0 })),
-      state('exit', style({ transform: 'translate3d(0, 25%, 0)', opacity: 0 })),
-      transition('* => *', animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
-    ])
-  ],
+  animations: [matDialogAnimations.slideDialog],
   host: {
     'class': 'mat-dialog-container',
     'tabindex': '-1',
+    '[attr.id]': '_id',
     '[attr.role]': '_config?.role',
-    '[attr.aria-labelledby]': '_ariaLabelledBy',
+    '[attr.aria-labelledby]': '_config?.ariaLabel ? null : _ariaLabelledBy',
+    '[attr.aria-label]': '_config?.ariaLabel',
     '[attr.aria-describedby]': '_config?.ariaDescribedBy || null',
     '[@slideDialog]': '_state',
     '(@slideDialog.start)': '_onAnimationStart($event)',
@@ -100,8 +92,8 @@ export class MatDialogContainer extends BasePortalOutlet {
   /** ID of the element that should be considered as the dialog's label. */
   _ariaLabelledBy: string | null = null;
 
-  /** Whether the container is currently mid-animation. */
-  _isAnimating = false;
+  /** ID for the container DOM element. */
+  _id: string;
 
   constructor(
     private _elementRef: ElementRef,
@@ -147,13 +139,9 @@ export class MatDialogContainer extends BasePortalOutlet {
     // If were to attempt to focus immediately, then the content of the dialog would not yet be
     // ready in instances where change detection has to run first. To deal with this, we simply
     // wait for the microtask queue to be empty.
-    this._focusTrap.focusInitialElementWhenReady().then(hasMovedFocus => {
-      // If we didn't find any focusable elements inside the dialog, focus the
-      // container so the user can't tab into other elements behind it.
-      if (!hasMovedFocus) {
-        this._elementRef.nativeElement.focus();
-      }
-    });
+    if (this._config.autoFocus) {
+      this._focusTrap.focusInitialElementWhenReady();
+    }
   }
 
   /** Restores focus to the element that was focused before the dialog opened. */
@@ -174,6 +162,14 @@ export class MatDialogContainer extends BasePortalOutlet {
   private _savePreviouslyFocusedElement() {
     if (this._document) {
       this._elementFocusedBeforeDialogWasOpened = this._document.activeElement as HTMLElement;
+
+      // Note that there is no focus method when rendering on the server.
+      if (this._elementRef.nativeElement.focus) {
+        // Move focus onto the dialog immediately in order to prevent the user from accidentally
+        // opening multiple dialogs at the same time. Needs to be async, because the element
+        // may not be focusable immediately.
+        Promise.resolve().then(() => this._elementRef.nativeElement.focus());
+      }
     }
   }
 
@@ -186,12 +182,10 @@ export class MatDialogContainer extends BasePortalOutlet {
     }
 
     this._animationStateChanged.emit(event);
-    this._isAnimating = false;
   }
 
   /** Callback, invoked when an animation on the host starts. */
   _onAnimationStart(event: AnimationEvent) {
-    this._isAnimating = true;
     this._animationStateChanged.emit(event);
   }
 

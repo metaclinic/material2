@@ -233,6 +233,10 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
     return ngControl && (ngControl as any)[prop];
   }
 
+  getConnectedOverlayOrigin(): ElementRef {
+    return this._connectionContainerRef || this._elementRef;
+  }
+
   _isLargeMod(): boolean {
     return this.mod === 'large' ? true : false;
   }
@@ -350,3 +354,5 @@ export class MatFormField implements AfterViewInit, AfterContentInit, AfterConte
     }
   }
 }
+
+

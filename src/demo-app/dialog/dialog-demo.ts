@@ -1,6 +1,14 @@
-import {Component, Inject, ViewChild, TemplateRef} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@metaclinic/material';
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+import { Component, Inject, ViewChild, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@metaclinic/material';
 
 const defaultDialogConfig = new MatDialogConfig();
 
@@ -84,12 +92,13 @@ export class DialogDemo {
   <p>It's Jazz!</p>
 
   <mat-form-field>
-    <input matInput placeholder="How much?" #howMuch>
+    <mat-label>How much?</mat-label>
+    <input matInput #howMuch>
   </mat-form-field>
 
   <p> {{ data.message }} </p>
-  <button md-raised-button color="accent" type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
-  <button md-raised-button color="primary" (click)="togglePosition()">Change dimensions</button>`
+  <button type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
+  <button (click)="togglePosition()">Change dimensions</button>`
 })
 export class JazzDialog {
   private _dimesionToggle = false;
