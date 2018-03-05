@@ -49,6 +49,7 @@ export class MatOptionSelectionChange {
 export interface MatOptionParentComponent {
   disableRipple?: boolean;
   multiple?: boolean;
+  color?: string;
 }
 
 /**
@@ -70,6 +71,10 @@ export const MAT_OPTION_PARENT_COMPONENT =
     '[class.mat-selected]': 'selected',
     '[class.mat-option-multiple]': 'multiple',
     '[class.mat-active]': 'active',
+    '[class.mat-dark]': 'color == "dark"',
+    '[class.mat-primary]': 'color == "primary"',
+    '[class.mat-accent]': 'color == "accent"',
+    '[class.mat-warn]': 'color == "warn"',
     '[id]': 'id',
     '[attr.aria-selected]': 'selected.toString()',
     '[attr.aria-disabled]': 'disabled.toString()',
@@ -78,7 +83,6 @@ export const MAT_OPTION_PARENT_COMPONENT =
     '(keydown)': '_handleKeydown($event)',
     'class': 'mat-option',
   },
-  styleUrls: ['_option.scss'],
   templateUrl: 'option.html',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
@@ -93,6 +97,10 @@ export class MatOption implements AfterViewChecked {
 
   /** Whether the wrapping component is in multiple selection mode. */
   get multiple() { return this._parent && this._parent.multiple; }
+
+  get color() {
+    if (this._parent && this._parent.color) { return this._parent.color; } else { return null; }
+  }
 
   /** The unique ID of the option. */
   get id(): string { return this._id; }
